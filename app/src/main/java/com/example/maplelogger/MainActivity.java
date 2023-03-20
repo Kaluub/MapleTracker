@@ -18,6 +18,11 @@ import com.example.maplelogger.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -39,7 +44,48 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                URL url = null;
+                try {
+                    url = new URL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+                HttpURLConnection con = null;
+                try {
+                    con = (HttpURLConnection) url.openConnection();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    con.setRequestMethod("GET");
+                } catch (ProtocolException e) {
+                    throw new RuntimeException(e);
+                }
+
+                BufferedReader in = null;
+                try {
+                    in = new BufferedReader(
+                            new InputStreamReader(con.getInputStream()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                String inputLine;
+                StringBuffer content = new StringBuffer();
+                while (true) {
+                    try {
+                        if (!((inputLine = in.readLine()) != null)) break;
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    content.append(inputLine);
+                }
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Snackbar.make(view, content, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
