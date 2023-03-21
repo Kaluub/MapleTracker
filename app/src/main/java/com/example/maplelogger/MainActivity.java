@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
                 assert doc != null;
                 System.out.println(doc.getFirstChild().getNodeName());
-                System.out.println(doc.getFirstChild().getAttributes().item(5).getNodeName());
+                System.out.println(doc.getFirstChild().getChildNodes().item(5).getNodeName());
                 Snackbar.make(view, doc.getFirstChild().getNodeName(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
