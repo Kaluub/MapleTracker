@@ -24,6 +24,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = convertStringToXMLDocument(String.valueOf(content));
 
                 assert doc != null;
+                System.out.println(doc);
                 Snackbar.make(view, doc.getElementById("currentConditions").getAttribute("temperature"), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
