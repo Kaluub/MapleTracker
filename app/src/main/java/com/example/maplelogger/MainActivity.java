@@ -47,56 +47,53 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                URL url = null;
-                URL genericUrl = null;
-                try {
-                    url = new URL("https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000430_e.xml");
-                    genericUrl = new URL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-
-                HttpURLConnection con = null;
-                try {
-                    con = (HttpURLConnection) url.openConnection();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
-                    con.setRequestMethod("GET");
-                } catch (ProtocolException e) {
-                    throw new RuntimeException(e);
-                }
-
-                BufferedReader in = null;
-                try {
-                    in = new BufferedReader(
-                            new InputStreamReader(con.getInputStream()));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                String inputLine;
-                StringBuffer content = new StringBuffer();
-                while (true) {
-                    try {
-                        if ((inputLine = in.readLine()) == null) break;
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    content.append(inputLine);
-                }
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-                Snackbar.make(view, content, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        binding.fab.setOnClickListener(view -> {
+            URL url;
+            URL genericUrl;
+            try {
+                url = new URL("https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000430_e.xml");
+                genericUrl = new URL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
             }
+
+            HttpURLConnection con = null;
+            try {
+                con = (HttpURLConnection) url.openConnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                con.setRequestMethod("GET");
+            } catch (ProtocolException e) {
+                throw new RuntimeException(e);
+            }
+
+            BufferedReader in;
+            try {
+                in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String inputLine;
+            StringBuffer content = new StringBuffer();
+            while (true) {
+                try {
+                    if ((inputLine = in.readLine()) == null) break;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                content.append(inputLine);
+            }
+            try {
+                in.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            Snackbar.make(view, content, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         });
     }
 
