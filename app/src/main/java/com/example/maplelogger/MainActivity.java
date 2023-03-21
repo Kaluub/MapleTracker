@@ -20,11 +20,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -34,18 +36,14 @@ import javax.xml.parsers.ParserConfigurationException;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        com.example.maplelogger.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
@@ -57,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                URL url = null;
+                URL url;
                 URL genericUrl = null;
                 try {
                     url = new URL("https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000430_e.xml");
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 String inputLine;
-                StringBuffer content = new StringBuffer();
+                StringBuilder content = new StringBuilder();
                 while (true) {
                     try {
                         if ((inputLine = in.readLine()) == null) break;
@@ -100,25 +98,31 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                Document doc = convertStringToXMLDocument(String.valueOf(content));
 
-                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                DocumentBuilder db;
-                try {
-                    db = dbf.newDocumentBuilder();
-                } catch (ParserConfigurationException e) {
-                    throw new RuntimeException(e);
-                }
-                Document doc;
-                try {
-                    doc = db.parse(String.valueOf(content));
-                } catch (IOException | SAXException e) {
-                    throw new RuntimeException(e);
-                }
-
+                assert doc != null;
                 Snackbar.make(view, doc.getElementById("currentConditions").getAttribute("temperature"), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private static Document convertStringToXMLDocument(String xmlString) {
+        //Parser that produces DOM object trees from XML content
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+        //API to obtain DOM Document instance
+        DocumentBuilder builder = null;
+        try {
+            //Create DocumentBuilder with default configuration
+            builder = factory.newDocumentBuilder();
+
+            //Parse the content to Document object
+            return builder.parse(new InputSource(new StringReader(xmlString)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
