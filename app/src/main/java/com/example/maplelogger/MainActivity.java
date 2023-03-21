@@ -6,6 +6,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.StrictMode;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -31,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
                 }
+
                 HttpURLConnection con = null;
                 try {
                     con = (HttpURLConnection) url.openConnection();
@@ -73,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 StringBuffer content = new StringBuffer();
                 while (true) {
                     try {
-                        if (!((inputLine = in.readLine()) != null)) break;
+                        if ((inputLine = in.readLine()) == null) break;
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
