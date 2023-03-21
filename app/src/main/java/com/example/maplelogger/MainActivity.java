@@ -19,10 +19,17 @@ import com.example.maplelogger.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -94,7 +101,21 @@ public class MainActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
 
-                Snackbar.make(view, content, Snackbar.LENGTH_LONG)
+                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                DocumentBuilder db;
+                try {
+                    db = dbf.newDocumentBuilder();
+                } catch (ParserConfigurationException e) {
+                    throw new RuntimeException(e);
+                }
+                Document doc;
+                try {
+                    doc = db.parse(String.valueOf(content));
+                } catch (IOException | SAXException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Snackbar.make(view, doc.getElementById("currentConditions").getAttribute("temperature"), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
