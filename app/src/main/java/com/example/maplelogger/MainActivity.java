@@ -51,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 URL url = null;
+                URL genericUrl = null;
                 try {
-                    url = new URL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
+                    url = new URL("https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000430_e.xml");
+                    genericUrl = new URL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
                 }
