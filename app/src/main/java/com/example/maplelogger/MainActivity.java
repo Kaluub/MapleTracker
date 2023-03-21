@@ -102,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = convertStringToXMLDocument(String.valueOf(content));
 
                 assert doc != null;
-                System.out.println(doc);
+                System.out.println(doc.getFirstChild().getNodeName());
+                System.out.println(doc.getFirstChild().toString());
                 Snackbar.make(view, doc.getElementById("currentConditions").getAttribute("temperature"), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
