@@ -2,6 +2,7 @@ package com.example.maplelogger;
 
 import android.os.Bundle;
 
+import com.example.maplelogger.Web.API;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,24 +20,10 @@ import com.example.maplelogger.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.*;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
+    private API api = new API();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,76 +43,11 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                URL url;
-                URL genericUrl = null;
-                try {
-                    url = new URL("https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000430_e.xml");
-                    genericUrl = new URL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-
-                HttpURLConnection con = null;
-                try {
-                    con = (HttpURLConnection) url.openConnection();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
-                    con.setRequestMethod("GET");
-                } catch (ProtocolException e) {
-                    throw new RuntimeException(e);
-                }
-
-                BufferedReader in = null;
-                try {
-                    in = new BufferedReader(
-                            new InputStreamReader(con.getInputStream()));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                String inputLine;
-                StringBuilder content = new StringBuilder();
-                while (true) {
-                    try {
-                        if ((inputLine = in.readLine()) == null) break;
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    content.append(inputLine);
-                }
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                Document doc = convertStringToXMLDocument(String.valueOf(content));
-
-                assert doc != null;
-                System.out.println(doc.getFirstChild().getNodeName());
-                System.out.println(doc.getFirstChild().getChildNodes().item(5).getNodeName());
-                Snackbar.make(view, doc.getFirstChild().getNodeName(), Snackbar.LENGTH_LONG)
+                double temperature = api.GetStationTemperature("s0000430");
+                Snackbar.make(view, "temperature right now is " + temperature, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
-    }
-
-    private static Document convertStringToXMLDocument(String xmlString) {
-        //Parser that produces DOM object trees from XML content
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
-        //API to obtain DOM Document instance
-        DocumentBuilder builder = null;
-        try {
-            //Create DocumentBuilder with default configuration
-            builder = factory.newDocumentBuilder();
-
-            //Parse the content to Document object
-            return builder.parse(new InputSource(new StringReader(xmlString)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
