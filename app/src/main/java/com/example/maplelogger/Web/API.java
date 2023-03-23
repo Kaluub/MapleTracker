@@ -69,8 +69,7 @@ public class API {
 
         assert doc != null;
         System.out.println(doc.getFirstChild().getNodeName());
-        System.out.println(doc.getFirstChild().getChildNodes().item(5).getChildNodes().item(6).getNodeValue());
-        System.out.println(doc.getFirstChild());
+        System.out.println(doc.getFirstChild().getChildNodes().item(5).getChildNodes().item(6).getNodeName());
         return 4.0;
     }
 
