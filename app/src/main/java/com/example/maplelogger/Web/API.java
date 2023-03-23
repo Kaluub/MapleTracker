@@ -71,7 +71,9 @@ public class API {
 
         assert doc != null;
         String temperature = doc.getFirstChild().getChildNodes().item(11).getChildNodes().item(11).getNodeValue();
-        return Double.parseDouble(temperature);
+        System.out.println(temperature);
+        return 4005.5;
+        //return Double.parseDouble(temperature);
     }
 
     public Document convertStringToXMLDocument(String xmlString) {
