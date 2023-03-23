@@ -70,14 +70,8 @@ public class API {
         Document doc = convertStringToXMLDocument(String.valueOf(content));
 
         assert doc != null;
-        System.out.println(doc.getFirstChild().getNodeName());
-        System.out.println(doc.getFirstChild().getChildNodes().item(11).getNodeName());
-        NodeList nodeList = doc.getFirstChild().getChildNodes().item(11).getChildNodes();
-        for (int j = 0; j < nodeList.getLength(); j++) {
-            Node node = nodeList.item(j);
-            System.out.println(node.getNodeName() + ": index " + j);
-        }
-        return 4.0;
+        String temperature = doc.getFirstChild().getChildNodes().item(11).getChildNodes().item(11).getNodeValue();
+        return Double.parseDouble(temperature);
     }
 
     public Document convertStringToXMLDocument(String xmlString) {
