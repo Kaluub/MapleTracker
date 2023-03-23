@@ -1,6 +1,8 @@
 package com.example.maplelogger.Web;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import java.io.BufferedReader;
@@ -69,7 +71,12 @@ public class API {
 
         assert doc != null;
         System.out.println(doc.getFirstChild().getNodeName());
-        System.out.println(doc.getFirstChild().getChildNodes().item(5).getNodeName());
+        System.out.println(doc.getFirstChild().getChildNodes().item(6).getNodeName());
+        NodeList nodeList = doc.getFirstChild().getChildNodes();
+        for (int j = 0; j < nodeList.getLength(); j++) {
+            Node node = nodeList.item(j);
+            System.out.println(node.getNodeName() + ": index " + j);
+        }
         return 4.0;
     }
 
