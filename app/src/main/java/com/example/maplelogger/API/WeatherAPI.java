@@ -72,7 +72,7 @@ public class WeatherAPI {
         NodeList nodes = doc.getFirstChild().getChildNodes().item(11).getChildNodes();
         for (int i = 0; i < nodes.getLength(); i++) {
             Node node = nodes.item(i);
-            System.out.println(node.getNodeName() + ": " + node.getNodeValue());
+            System.out.println("(" + i + ") " + node.getNodeName() + ": " + node.getNodeValue());
         }
 
         String temperature = doc.getFirstChild().getChildNodes().item(11).getChildNodes().item(12).getNodeValue();
