@@ -1,6 +1,8 @@
-package com.example.maplelogger.Web;
+package com.example.maplelogger.API;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import java.io.BufferedReader;
@@ -15,12 +17,11 @@ import java.net.URL;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-public class API {
-    public API() {
+public class WeatherAPI {
+    public WeatherAPI() {
     }
 
     public double GetStationTemperature(String stationID) {
-        stationID.chars();
         URL url;
         try {
             url = new URL("https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000430_e.xml");
@@ -68,10 +69,16 @@ public class API {
         Document doc = convertStringToXMLDocument(String.valueOf(content));
 
         assert doc != null;
-        System.out.println(doc.getFirstChild().getNodeName());
-        System.out.println(doc.getFirstChild().getChildNodes().item(5).getChildNodes().item(6).getNodeValue());
-        System.out.println(doc.getFirstChild());
-        return 4.0;
+        NodeList nodes = doc.getFirstChild().getChildNodes().item(11).getChildNodes();
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Node node = nodes.item(i);
+            System.out.println("(" + i + ") " + node.getNodeName() + ": " + node.getNodeValue());
+        }
+
+        String temperature = doc.getFirstChild().getChildNodes().item(11).getChildNodes().item(12).getNodeValue();
+        System.out.println(temperature);
+        return 4005.5;
+        //return Double.parseDouble(temperature);
     }
 
     public Document convertStringToXMLDocument(String xmlString) {

@@ -2,7 +2,7 @@ package com.example.maplelogger;
 
 import android.os.Bundle;
 
-import com.example.maplelogger.Web.API;
+import com.example.maplelogger.API.WeatherAPI;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +23,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private API api = new API();
+    private final WeatherAPI weatherAPI = new WeatherAPI();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double temperature = api.GetStationTemperature("s0000430");
+                double temperature = weatherAPI.GetStationTemperature("s0000430");
                 Snackbar.make(view, "temperature right now is " + temperature, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
