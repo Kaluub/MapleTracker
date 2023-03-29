@@ -70,7 +70,7 @@ public class WeatherAPI {
         Document doc = convertStringToXMLDocument(String.valueOf(content));
 
         assert doc != null;
-        String temperature = doc.getFirstChild().getChildNodes().item(11).getChildNodes().item(12).getChildNodes().item(0).getNodeValue();
+        String temperature = doc.getFirstChild().getChildNodes().item(11).getChildNodes().item(11).getChildNodes().item(0).getNodeValue();
         return Double.parseDouble(temperature);
     }
 
