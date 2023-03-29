@@ -70,21 +70,8 @@ public class WeatherAPI {
         Document doc = convertStringToXMLDocument(String.valueOf(content));
 
         assert doc != null;
-        NodeList nodes = doc.getFirstChild().getChildNodes().item(11).getChildNodes();
-        for (int i = 0; i < nodes.getLength(); i++) {
-            Node node = nodes.item(i);
-            NodeList nodeList = node.getChildNodes();
-            System.out.println("(" + i + ") " + node.getNodeName() + ": " + node.getNodeValue());
-            for (int j = 0; j < nodeList.getLength(); j++) {
-                Node jNode = nodeList.item(j);
-                System.out.println("(" + j + ") " + jNode.getNodeName() + ": " + jNode.getNodeValue());
-            }
-        }
-
-        String temperature = doc.getFirstChild().getChildNodes().item(11).getChildNodes().item(12).getNodeValue();
-        System.out.println(temperature);
-        return 4005.5;
-        //return Double.parseDouble(temperature);
+        String temperature = doc.getFirstChild().getChildNodes().item(11).getChildNodes().item(12).getChildNodes().item(0).getNodeValue();
+        return Double.parseDouble(temperature);
     }
 
     private String getString(String tagName, Element element) {
