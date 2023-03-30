@@ -10,7 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://microsoftmaps.jfrog.io/artifactory/Maven/' }
+        maven { url 'https://native.virtualearth.net/sdk/android/1.2.0/maps-sdk-1.2.0.aar' }
     }
 }
 rootProject.name = "MapleLogger"
