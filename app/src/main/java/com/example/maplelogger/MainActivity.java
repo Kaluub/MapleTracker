@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double temperature = weatherAPI.GetStationTemperature("s0000430");
+                String stationID = weatherAPI.getClosestStationID();
+                double temperature = weatherAPI.getStationTemperature(stationID);
                 Snackbar.make(view, "temperature right now is " + temperature, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }

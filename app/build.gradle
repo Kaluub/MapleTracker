@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.maplelogger'
+    namespace 'com.zk.maplelogger'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.maplelogger"
+        applicationId "com.zk.maplelogger"
         minSdk 24
         targetSdk 33
         versionCode 1

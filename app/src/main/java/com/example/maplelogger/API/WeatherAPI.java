@@ -22,7 +22,11 @@ public class WeatherAPI {
     public WeatherAPI() {
     }
 
-    public double GetStationTemperature(String stationID) {
+    public String getClosestStationID() {
+        return "s0000430";
+    }
+
+    public double getStationTemperature(String stationID) {
         Document doc = getXMLFromURL("https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000430_e.xml");
         String temperature = doc.getFirstChild().getChildNodes().item(11).getChildNodes().item(11).getChildNodes().item(0).getNodeValue();
         return Double.parseDouble(temperature);
