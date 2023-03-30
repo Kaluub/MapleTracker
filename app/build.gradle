@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
 }
+apply from 'secrets.gradle' // allows use of Bing Maps API Key
 
 android {
     namespace 'com.example.maplelogger'
@@ -17,6 +18,9 @@ android {
     }
 
     buildTypes {
+        buildTypes.each { // Uses Bing Maps API Key
+            it.buildConfigField "String", "CREDENTIALS_KEY", "\"$credentialsKey\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -31,6 +35,12 @@ android {
     }
 }
 
+repositories {
+    maven { // repository for Bing Maps
+        url 'https://microsoftmaps.jfrog.io/artifactory/Maven/'
+    }
+}
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -38,6 +48,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment:2.4.1'
     implementation 'androidx.navigation:navigation-ui:2.4.1'
+    implementation 'com.microsoft.maps:maps-sdk:1.2.0' // Bing Maps API
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
