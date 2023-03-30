@@ -4,11 +4,11 @@ plugins {
 apply from: 'secrets.gradle' // allows use of Bing Maps API Key
 
 android {
-    namespace 'com.zk.maplelogger'
+    namespace 'com.example.maplelogger'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.zk.maplelogger"
+        applicationId "com.example.maplelogger"
         minSdk 24
         targetSdk 33
         versionCode 1
