@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
 }
-apply from 'secrets.gradle' // allows use of Bing Maps API Key
+apply from: 'secrets.gradle' // allows use of Bing Maps API Key
 
 android {
     namespace 'com.zk.maplelogger'
@@ -35,14 +35,7 @@ android {
     }
 }
 
-repositories {
-    maven { // repository for Bing Maps
-        url 'https://microsoftmaps.jfrog.io/artifactory/Maven/'
-    }
-}
-
 dependencies {
-
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://microsoftmaps.jfrog.io/artifactory/Maven/' }
     }
 }
 rootProject.name = "MapleLogger"
