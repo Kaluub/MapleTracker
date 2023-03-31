@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String stationID = weatherAPI.getClosestStationID();
                 double temperature = weatherAPI.getStationTemperature(stationID);
-                Snackbar.make(view, "temperature right now is " + temperature, Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Temperature right now is " + temperature, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
