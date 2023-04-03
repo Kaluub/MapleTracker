@@ -1,5 +1,6 @@
 package com.example.maplelogger.API;
 
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.w3c.dom.Document;
@@ -29,7 +30,7 @@ public class Parser {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-            // Read
+            // Read.
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(con.getInputStream())
             );
@@ -58,31 +59,20 @@ public class Parser {
         }
     }
 
-    public Object getJSONfromURL(String address) {
+    public JsonObject getJSONfromURL(String address) {
         try {
             // Open the connection.
             URL url = new URL(address);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-            // Read
+            // Read.
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(con.getInputStream())
             );
 
-            StringBuilder content = new StringBuilder();
-            while (true) {
-                String inputLine = reader.readLine();
-                if (inputLine == null)
-                    break;
-                content.append(inputLine);
-            }
-            reader.close();
-
             // Parse JSON.
-            JsonParser jsonParser = new JsonParser();
-            jsonParser.parse(String.valueOf(content));
-            return null;
+            return JsonParser.parseReader(reader).getAsJsonObject();
         } catch (IOException e) {
             // In case of any exceptions, we have nothing to return.
             return null;

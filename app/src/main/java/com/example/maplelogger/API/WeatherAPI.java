@@ -1,18 +1,41 @@
 package com.example.maplelogger.API;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import org.w3c.dom.Document;
 
 public class WeatherAPI {
     Parser parser;
+    LocationAPI locationAPI;
+
     public WeatherAPI() {
         parser = new Parser();
+        locationAPI = new LocationAPI();
     }
 
     public String getClosestStationID() {
-        // TODO: Use the station location endpoint instead of hardcoding Ottawa.
-        // This requires a (GEO)JSON parser.
-        // URL: https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson
-        return "s0000430";
+        JsonObject webData = parser.getJSONfromURL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
+        JsonArray featuresArray = webData.getAsJsonArray("features");
+        String bestFeatureId = "s0000430";
+        double closestDistance = 100000;
+        for (JsonElement element : featuresArray) {
+            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+            double elementLatitude = properties.get("Latitude").getAsDouble();
+            double elementLongitude = properties.get("Longitude").getAsDouble();
+
+            double distance = Math.sqrt(Math.pow(locationAPI.latitude - elementLatitude, 2) + Math.pow(locationAPI.longitude - elementLongitude, 2));
+            if (distance < closestDistance) {
+                bestFeatureId = properties.get("Codes").getAsString();
+                closestDistance = distance;
+            }
+        }
+
+        System.out.println(bestFeatureId);
+        System.out.println(closestDistance);
+
+        return bestFeatureId;
     }
 
     public double getStationTemperature(String stationID) {
