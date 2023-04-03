@@ -7,11 +7,18 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
+import com.example.maplelogger.databinding.ActivityTreeManagementBinding;
 import com.example.maplelogger.databinding.FragmentFirstBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.zip.Inflater;
 
 public class FirstFragment extends Fragment {
 
@@ -39,19 +46,19 @@ public class FirstFragment extends Fragment {
             }
         });
 
-            public boolean navButton BottomNavigationView.OnNavigationItemSelectedListener { item ->
-                    when(item.itemId) {
-                R.id.Home -> {
-                    // Respond to navigation item 1 click
-                    true
-                }
-                R.id.item2 -> {
-                    // Respond to navigation item 2 click
-                    true
-                }
-                else -> false
-                }
-            }
+        //Add functionality to bottom nav bar
+
+        binding = FragmentFirstBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_tree_management);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
 
         }
 
