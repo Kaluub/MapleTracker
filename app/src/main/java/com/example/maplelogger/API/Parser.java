@@ -1,5 +1,6 @@
 package com.example.maplelogger.API;
 
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.w3c.dom.Document;
@@ -58,7 +59,7 @@ public class Parser {
         }
     }
 
-    public Object getJSONfromURL(String address) {
+    public JsonObject getJSONfromURL(String address) {
         try {
             // Open the connection.
             URL url = new URL(address);
@@ -71,8 +72,7 @@ public class Parser {
             );
 
             // Parse JSON.
-            JsonParser.parseReader(reader).getAsJsonObject();
-            return null;
+            return JsonParser.parseReader(reader).getAsJsonObject();
         } catch (IOException e) {
             // In case of any exceptions, we have nothing to return.
             return null;
