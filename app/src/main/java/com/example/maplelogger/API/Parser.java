@@ -29,7 +29,7 @@ public class Parser {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-            // Read
+            // Read.
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(con.getInputStream())
             );
@@ -65,23 +65,13 @@ public class Parser {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-            // Read
+            // Read.
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(con.getInputStream())
             );
 
-            StringBuilder content = new StringBuilder();
-            while (true) {
-                String inputLine = reader.readLine();
-                if (inputLine == null)
-                    break;
-                content.append(inputLine);
-            }
-            reader.close();
-
             // Parse JSON.
-            JsonParser jsonParser = new JsonParser();
-            jsonParser.parse(String.valueOf(content));
+            JsonParser.parseReader(reader).getAsJsonObject();
             return null;
         } catch (IOException e) {
             // In case of any exceptions, we have nothing to return.
