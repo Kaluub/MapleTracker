@@ -32,6 +32,9 @@ public class WeatherAPI {
             }
         }
 
+        System.out.println(bestFeatureId);
+        System.out.println(closestDistance);
+
         return bestFeatureId;
     }
 
