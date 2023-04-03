@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.maplelogger.databinding.FragmentFirstBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class FirstFragment extends Fragment {
 
@@ -36,7 +38,24 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
-    }
+
+            public boolean navButton BottomNavigationView.OnNavigationItemSelectedListener { item ->
+                    when(item.itemId) {
+                R.id.Home -> {
+                    // Respond to navigation item 1 click
+                    true
+                }
+                R.id.item2 -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+                else -> false
+                }
+            }
+
+        }
+
+
 
     @Override
     public void onDestroyView() {
