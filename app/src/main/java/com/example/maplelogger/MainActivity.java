@@ -3,8 +3,11 @@ package com.example.maplelogger;
 import android.os.Bundle;
 
 import com.example.maplelogger.API.WeatherAPI;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.StrictMode;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private final WeatherAPI weatherAPI = new WeatherAPI();
+    private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,21 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean onCreateBottomNav(Menu menu){
+        //Add functionality to bottom nav bar
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+        return true;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
