@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean onCreateBottomNav(Menu menu){
+    /*public boolean onCreateBottomNav (Menu menu){
         //Add functionality to bottom nav bar
         BottomNavigationView navView = findViewById(R.id.nav_view);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
         return true;
-    }
+    } */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
