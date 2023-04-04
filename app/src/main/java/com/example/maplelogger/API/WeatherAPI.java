@@ -21,11 +21,13 @@ public class WeatherAPI {
         return Math.sqrt(Math.pow(locationAPI.latitude - elementLatitude, 2) + Math.pow(locationAPI.longitude - elementLongitude, 2));
     }
 
-    public String getClosestStationID() {
+    public String[] getClosestStationDetails() {
         JsonObject webData = parser.getJSONfromURL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
         JsonArray featuresArray = webData.getAsJsonArray("features");
         // Defaults to Ottawa in case you're not on Earth.
         String bestFeatureId = "s0000430";
+        String bestProvinceCode = "ON";
+        // The furthest possible distance should only be 180, so this should always be a bigger distance.
         double closestDistance = 100000;
 
         for (JsonElement element : featuresArray) {
@@ -33,16 +35,20 @@ public class WeatherAPI {
             double distance = getDistance(properties);
             if (distance < closestDistance) {
                 bestFeatureId = properties.get("Codes").getAsString();
+                bestProvinceCode = properties.get("Province Codes").getAsString();
                 closestDistance = distance;
             }
         }
 
-        return bestFeatureId;
+        String[] result = new String[2];
+        result[0] = bestFeatureId;
+        result[1] = bestProvinceCode;
+        return result;
     }
 
-    public double getStationTemperature(String stationID) {
+    public double getStationTemperature(String stationID, String provinceCode) {
         // Uses the station ID to get the weather from that station.
-        Document doc = parser.getXMLFromURL(String.format("https://dd.weather.gc.ca/citypage_weather/xml/ON/%s_e.xml", stationID));
+        Document doc = parser.getXMLFromURL(String.format("https://dd.weather.gc.ca/citypage_weather/xml/%s/%s_e.xml", provinceCode, stationID));
         if (doc == null) {
             // If there is no available Document, return 0.
             return 0;
