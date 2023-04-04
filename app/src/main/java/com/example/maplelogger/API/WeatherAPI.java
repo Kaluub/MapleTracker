@@ -15,25 +15,27 @@ public class WeatherAPI {
         locationAPI = new LocationAPI();
     }
 
+    public double getDistance(JsonObject properties) {
+        double elementLatitude = properties.get("Latitude").getAsDouble();
+        double elementLongitude = properties.get("Longitude").getAsDouble();
+        return Math.sqrt(Math.pow(locationAPI.latitude - elementLatitude, 2) + Math.pow(locationAPI.longitude - elementLongitude, 2));
+    }
+
     public String getClosestStationID() {
         JsonObject webData = parser.getJSONfromURL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
         JsonArray featuresArray = webData.getAsJsonArray("features");
+        // Defaults to Ottawa in case you're not on Earth.
         String bestFeatureId = "s0000430";
         double closestDistance = 100000;
+
         for (JsonElement element : featuresArray) {
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-            double elementLatitude = properties.get("Latitude").getAsDouble();
-            double elementLongitude = properties.get("Longitude").getAsDouble();
-
-            double distance = Math.sqrt(Math.pow(locationAPI.latitude - elementLatitude, 2) + Math.pow(locationAPI.longitude - elementLongitude, 2));
+            double distance = getDistance(properties);
             if (distance < closestDistance) {
                 bestFeatureId = properties.get("Codes").getAsString();
                 closestDistance = distance;
             }
         }
-
-        System.out.println(bestFeatureId);
-        System.out.println(closestDistance);
 
         return bestFeatureId;
     }
