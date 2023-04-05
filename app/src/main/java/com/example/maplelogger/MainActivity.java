@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private final WeatherAPI weatherAPI = new WeatherAPI();
     private ActivityMainBinding binding;
-    private ContentMainBinding binding2;
+    //private ContentMainBinding binding2;
 
 
     @Override
@@ -59,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Add functionality to bottom nav bar
-        binding2 = ContentMainBinding.inflate(getLayoutInflater());
-        com.example.maplelogger.databinding.ContentMainBinding binding2 = ContentMainBinding.inflate(getLayoutInflater());
+        //binding2 = ContentMainBinding.inflate(getLayoutInflater());
+        // binding = ActivityMainBinding.inflate(getLayoutInflater());
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        setContentView(binding2.getRoot());
+        setContentView(binding.getRoot());
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding2.navView, navController);
+        NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
     @Override
