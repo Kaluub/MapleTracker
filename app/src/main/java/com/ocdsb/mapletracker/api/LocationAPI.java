@@ -1,13 +1,9 @@
 package com.ocdsb.mapletracker.api;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.pm.PackageManager;
 import android.location.Location;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
