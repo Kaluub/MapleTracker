@@ -1,42 +1,47 @@
 package com.ocdsb.mapletracker.api;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 
 import androidx.annotation.NonNull;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.core.app.ActivityCompat;
 
-public class LocationAPI {
-    double latitude;
-    double longitude;
-    FusedLocationProviderClient locationProviderClient;
+public class LocationAPI implements LocationListener {
+    private LocationManager locationManager;
+    private String provider;
+    public double latitude;
+    public double longitude;
 
-    LocationAPI() {
+    public LocationAPI() {
         latitude = 0.0;
         longitude = 0.0;
+    }
 
-        Location location = updateLocation();
-        if (location != null) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
+    public void updateLocationManager(LocationManager manager) {
+        locationManager = manager;
+        provider = locationManager.getBestProvider(new Criteria(), false);
+        try {
+            Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
+            if (lastKnownLocation == null) {
+                return;
+            }
+            latitude = lastKnownLocation.getLatitude();
+            longitude = lastKnownLocation.getLongitude();
+        } catch (SecurityException e) {
+            System.out.println("Could not get location.");
+            latitude = 0.0;
+            longitude = 0.0;
         }
     }
 
-    @SuppressLint("MissingPermission")
-    public Location updateLocation() {
-        final Location[] location = new Location[1];
-        locationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                if (task.isSuccessful()) {
-                    location[0] = task.getResult();
-                } else {
-                    location[0] = null;
-                }
-            }
-        });
-        return location[0];
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
     }
 }
