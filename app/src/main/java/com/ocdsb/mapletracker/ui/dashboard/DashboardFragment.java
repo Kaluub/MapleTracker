@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.ocdsb.mapletracker.MainActivity;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.databinding.FragmentDashboardBinding;
+import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
 
@@ -59,7 +60,7 @@ public class DashboardFragment extends Fragment {
         map = (MapView) getView().findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
 
-       requestPermissionsIfNecessary(arrayOf(
+       requestPermissionsIfNecessary(arrayOf( //arrayOf does not exist in Java, can be fixed by converting file to kotlin or finding another method
                 // if you need to show the current location, uncomment the line below
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 // WRITE_EXTERNAL_STORAGE is required in order to show the map
@@ -73,7 +74,7 @@ public class DashboardFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-}
+
 
     @Override
     public void onPause() {
