@@ -20,7 +20,6 @@ import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private LocationAPI locationAPI;
     private WeatherAPI weatherAPI;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -29,7 +28,7 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        weatherAPI = new WeatherAPI();
+
         View root = binding.getRoot();
 
         final TextView textView = binding.textHome;

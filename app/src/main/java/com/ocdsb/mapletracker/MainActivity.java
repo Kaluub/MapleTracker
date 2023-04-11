@@ -15,10 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.ocdsb.mapletracker.api.LocationAPI;
+import com.ocdsb.mapletracker.api.WeatherAPI;
 import com.ocdsb.mapletracker.databinding.ActivityMainBinding;
 import com.ocdsb.mapletracker.ui.home.HomeFragment;
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     public LocationAPI locationAPI;
+    public WeatherAPI weatherAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,12 @@ public class MainActivity extends AppCompatActivity {
             permissions[1] = Manifest.permission.ACCESS_COARSE_LOCATION;
             ActivityCompat.requestPermissions(this, permissions, 0);
         } else {
+            System.out.println("Location API manager updating...");
             locationAPI.updateLocationManager(service);
         }
+
+        weatherAPI.updateLocationAPI(locationAPI);
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
