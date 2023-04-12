@@ -12,7 +12,6 @@ public class WeatherAPI {
 
     public WeatherAPI() {
         parser = new Parser();
-        locationAPI = new LocationAPI();
     }
 
     public double getDistance(JsonObject properties) {
@@ -66,5 +65,9 @@ public class WeatherAPI {
                 .getNodeValue();
         // Node value is a string, but we can trust that it will always be a number.
         return Double.parseDouble(temperature);
+    }
+
+    public void updateLocationAPI(LocationAPI api) {
+        locationAPI = api;
     }
 }
