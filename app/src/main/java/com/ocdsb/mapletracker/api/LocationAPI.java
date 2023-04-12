@@ -32,6 +32,7 @@ public class LocationAPI implements LocationListener {
             }
             latitude = lastKnownLocation.getLatitude();
             longitude = lastKnownLocation.getLongitude();
+            System.out.println(latitude + ", " + longitude);
         } catch (SecurityException e) {
             System.out.println("Could not get location.");
             latitude = 0.0;

@@ -15,20 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.ocdsb.mapletracker.api.LocationAPI;
-import com.ocdsb.mapletracker.api.WeatherAPI;
 import com.ocdsb.mapletracker.databinding.ActivityMainBinding;
-import com.ocdsb.mapletracker.ui.home.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    public LocationAPI locationAPI;
-    public WeatherAPI weatherAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        locationAPI = new LocationAPI();
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -61,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, permissions, 0);
         } else {
             System.out.println("Location API manager updating...");
-            locationAPI.updateLocationManager(service);
+            Config.locationAPI.updateLocationManager(service);
         }
 
-        weatherAPI.updateLocationAPI(locationAPI);
+        Config.weatherAPI.updateLocationAPI(Config.locationAPI);
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

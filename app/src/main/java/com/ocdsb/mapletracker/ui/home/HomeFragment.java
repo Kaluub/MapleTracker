@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.MainActivity;
 import com.ocdsb.mapletracker.api.LocationAPI;
 import com.ocdsb.mapletracker.api.WeatherAPI;
@@ -20,7 +21,6 @@ import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private WeatherAPI weatherAPI;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,18 +38,14 @@ public class HomeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] stationDetails = weatherAPI.getClosestStationDetails();
-                double temperature = weatherAPI.getStationTemperature(stationDetails[0], stationDetails[1]);
+                String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
+                double temperature = Config.weatherAPI.getStationTemperature(stationDetails[0], stationDetails[1]);
                 Snackbar.make(view, "Temperature right now is " + temperature + " at station ID " + stationDetails[0] + " (" + stationDetails[1] + ")", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
 
         return root;
-    }
-
-    public void updateLocationAPI(LocationAPI locationAPI) {
-        weatherAPI.updateLocationAPI(locationAPI);
     }
 
     @Override
