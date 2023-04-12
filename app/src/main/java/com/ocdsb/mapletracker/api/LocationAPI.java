@@ -28,6 +28,7 @@ public class LocationAPI implements LocationListener {
         try {
             Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
             if (lastKnownLocation == null) {
+                System.out.println("Provider is null!");
                 return;
             }
             latitude = lastKnownLocation.getLatitude();
