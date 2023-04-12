@@ -13,8 +13,11 @@ import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity; //unsure if needed
 import androidx.core.app.ActivityCompat; //unsure if needed
 import androidx.core.content.ContextCompat;
+
+import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
 import java.util.ArrayList;
@@ -57,11 +60,17 @@ public class DashboardFragment extends Fragment {
         //note, the load method also sets the HTTP User Agent to your application's package name, abusing osm's
         //tile servers will get you banned based on this string
         //inflate and create the map
-        //setContentView(R.layout.activity_main); //this line probably doesn't need to exist as this is not the main activity
+
         map = (MapView) root.findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
+        //Giving the user the ability to zoom the map
         map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
         map.setMultiTouchControls(true);
+        //Changing the default map location and zoom
+        IMapController mapController = map.getController();
+        mapController.setZoom(9.5);
+        GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
+        mapController.setCenter(startPoint);
         //Request Permissions necessary for map to function
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
