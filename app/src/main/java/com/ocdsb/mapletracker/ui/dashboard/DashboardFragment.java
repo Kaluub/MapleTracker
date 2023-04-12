@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.MainActivity;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.databinding.FragmentDashboardBinding;
@@ -69,7 +70,7 @@ public class DashboardFragment extends Fragment {
         //Changing the default map location and zoom
         IMapController mapController = map.getController();
         mapController.setZoom(17);
-        GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
+        GeoPoint startPoint = new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude);
         mapController.setCenter(startPoint);
         //Request Permissions necessary for map to function
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
