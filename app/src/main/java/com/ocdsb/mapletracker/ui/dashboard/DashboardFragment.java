@@ -68,7 +68,7 @@ public class DashboardFragment extends Fragment {
         map.setMultiTouchControls(true);
         //Changing the default map location and zoom
         IMapController mapController = map.getController();
-        mapController.setZoom(9.5);
+        mapController.setZoom(17);
         GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
         mapController.setCenter(startPoint);
         //Request Permissions necessary for map to function
