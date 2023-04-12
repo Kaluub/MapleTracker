@@ -41,8 +41,8 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //final TextView textView = binding.textDashboard;
+       // dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         //handle permissions first, before map is created. not depicted here
 
@@ -57,15 +57,17 @@ public class DashboardFragment extends Fragment {
         //tile servers will get you banned based on this string
         //inflate and create the map
         //setContentView(R.layout.activity_main); //this line probably doesn't need to exist as this is not the main activity
-        map = (MapView) getView().findViewById(R.id.map);
+        map = (MapView) root.findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
-
-       requestPermissionsIfNecessary(arrayOf( //arrayOf does not exist in Java, can be fixed by converting file to kotlin or finding another method
+        //Request Permissions necessary for map to function
+        String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        requestPermissionsIfNecessary(Permissions);
+       /*requestPermissionsIfNecessary(arrayOf( //arrayOf does not exist in Java, can be fixed by converting file to kotlin or finding another method
                 // if you need to show the current location, uncomment the line below
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 // WRITE_EXTERNAL_STORAGE is required in order to show the map
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
-        ));
+        )); */
         return root;
     }
 
