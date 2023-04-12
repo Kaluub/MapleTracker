@@ -59,6 +59,8 @@ public class DashboardFragment extends Fragment {
         //setContentView(R.layout.activity_main); //this line probably doesn't need to exist as this is not the main activity
         map = (MapView) root.findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setBuiltInZoomControls(true);
+        map.setMultiTouchControls(true);
         //Request Permissions necessary for map to function
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
