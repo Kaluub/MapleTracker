@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat; //unsure if needed
 import androidx.core.content.ContextCompat;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
 import java.util.ArrayList;
 
@@ -59,7 +60,7 @@ public class DashboardFragment extends Fragment {
         //setContentView(R.layout.activity_main); //this line probably doesn't need to exist as this is not the main activity
         map = (MapView) root.findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setBuiltInZoomControls(true);
+        map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
         map.setMultiTouchControls(true);
         //Request Permissions necessary for map to function
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
