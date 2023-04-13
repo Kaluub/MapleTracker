@@ -11,9 +11,10 @@ import android.location.LocationManager;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
+import java.util.List;
+
 public class LocationAPI implements LocationListener {
     private LocationManager locationManager;
-    private String provider;
     public double latitude;
     public double longitude;
 
@@ -24,21 +25,25 @@ public class LocationAPI implements LocationListener {
 
     public void updateLocationManager(LocationManager manager) {
         locationManager = manager;
-        provider = locationManager.getBestProvider(new Criteria(), false);
-        try {
-            Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
-            if (lastKnownLocation == null) {
-                System.out.println("Provider is null!");
-                return;
+        List<String> providers = locationManager.getAllProviders();
+        Location bestLocation = null;
+        for (String provider : providers) {
+            try {
+                Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
+                if (lastKnownLocation == null) {
+                    System.out.println("Provider " + provider + " does not work.");
+                    continue;
+                }
+                if (bestLocation == null || lastKnownLocation.getAccuracy() < bestLocation.getAccuracy()) {
+                    latitude = lastKnownLocation.getLatitude();
+                    longitude = lastKnownLocation.getLongitude();
+                    bestLocation = lastKnownLocation;
+                }
+            } catch (SecurityException e) {
+                System.out.println("Provider " + provider + " does not work (SecurityException).");
             }
-            latitude = lastKnownLocation.getLatitude();
-            longitude = lastKnownLocation.getLongitude();
-            System.out.println(latitude + ", " + longitude);
-        } catch (SecurityException e) {
-            System.out.println("Could not get location.");
-            latitude = 0.0;
-            longitude = 0.0;
         }
+        System.out.println(latitude + ", " + longitude);
     }
 
     @Override
