@@ -83,6 +83,7 @@ public class DashboardFragment extends Fragment {
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
         //MapView mMapView = new MapView(inflater.getContext());
+        GeoPoint mapPin = new GeoPoint(-45.000,75.000);
         Marker startMarker = new Marker(map);
         startMarker.setPosition(startPoint);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
