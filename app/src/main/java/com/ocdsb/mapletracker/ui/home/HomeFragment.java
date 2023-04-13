@@ -32,9 +32,9 @@ public class HomeFragment extends Fragment {
 
         View root = binding.getRoot();
 
-        final TextView temperatureText = binding.temperature;
-        double fetchedTemperature = this.fetchTemperature();
-        temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), fetchedTemperature));
+        //final TextView temperatureText = binding.temperature;
+        //double fetchedTemperature = this.fetchTemperature();
+        //temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), fetchedTemperature));
 
         final Button button = binding.button;
         button.setOnClickListener(new View.OnClickListener() {

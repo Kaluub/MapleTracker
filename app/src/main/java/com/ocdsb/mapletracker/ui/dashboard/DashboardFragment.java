@@ -76,16 +76,16 @@ public class DashboardFragment extends Fragment {
         map.setMultiTouchControls(true);
         //Changing the default map location and zoom
         IMapController mapController = map.getController();
-        mapController.setZoom(17);
+        mapController.setZoom(10);
         GeoPoint startPoint = new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude);
         mapController.setCenter(startPoint);
         //Request Permissions necessary for map to function
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
         //MapView mMapView = new MapView(inflater.getContext());
-        GeoPoint mapPin = new GeoPoint(-45.000,75.000);
+        GeoPoint mapPin = new GeoPoint(45.323171 ,-75.895422);
         Marker startMarker = new Marker(map);
-        startMarker.setPosition(startPoint);
+        startMarker.setPosition(mapPin);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
         map.getOverlays().add(startMarker);
         return root;
