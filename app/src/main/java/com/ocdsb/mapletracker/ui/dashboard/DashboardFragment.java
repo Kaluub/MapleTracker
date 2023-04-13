@@ -81,7 +81,7 @@ public class DashboardFragment extends Fragment {
         //Request Permissions necessary for map to function
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
-        MapView mMapView = new MapView(inflater.getContext());
+        //MapView mMapView = new MapView(inflater.getContext());
         return root;
     }
 
