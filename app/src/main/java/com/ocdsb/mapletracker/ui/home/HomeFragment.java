@@ -13,10 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
-import com.ocdsb.mapletracker.MainActivity;
 import com.ocdsb.mapletracker.R;
-import com.ocdsb.mapletracker.api.LocationAPI;
-import com.ocdsb.mapletracker.api.WeatherAPI;
 import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -32,10 +29,6 @@ public class HomeFragment extends Fragment {
 
         View root = binding.getRoot();
 
-        //final TextView temperatureText = binding.temperature;
-        //double fetchedTemperature = this.fetchTemperature();
-        //temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), fetchedTemperature));
-
         final Button button = binding.button;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +41,14 @@ public class HomeFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        final TextView temperatureText = binding.temperature;
+        double fetchedTemperature = this.fetchTemperature();
+        temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), fetchedTemperature));
     }
 
     public double fetchTemperature() {

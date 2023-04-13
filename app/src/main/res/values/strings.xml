@@ -4,5 +4,5 @@
     <string name="title_management">Management</string>
     <string name="title_notifications">Notifications</string>
     <string name="temperature_default">…°C</string>
-    <string name="temperature_replace">%1$d°C</string>
+    <string name="temperature_replace">%1$.1f°C</string>
 </resources>
