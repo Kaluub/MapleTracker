@@ -50,7 +50,7 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
     private FragmentDashboardBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
-    private IMapController mapController = map.getController();
+    //private IMapController mapController = map.getController();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
         map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
         map.setMultiTouchControls(true);
         //Changing the default map location and zoom
-        //IMapController mapController = map.getController();
+        IMapController mapController = map.getController();
         mapController.setZoom(10);
         GeoPoint startPoint = new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude);
         mapController.setCenter(startPoint);
@@ -152,7 +152,7 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
     }
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
-        //IMapController mapController = map.getController();
+        IMapController mapController = map.getController();
         mapController.animateTo(p);
         System.out.println(p);
         return true;
