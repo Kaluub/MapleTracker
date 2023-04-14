@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewbinding.BuildConfig;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
@@ -29,16 +30,19 @@ public class HomeFragment extends Fragment {
 
         View root = binding.getRoot();
 
-        final Button button = binding.button;
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
-                double temperature = Config.weatherAPI.getStationTemperature(stationDetails[0], stationDetails[1]);
-                Snackbar.make(view, "Temperature right now is " + temperature + " at station ID " + stationDetails[0] + " (" + stationDetails[1] + ")", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        if (BuildConfig.DEBUG) {
+            final Button debugButton = binding.debug;
+            debugButton.setVisibility(View.VISIBLE);
+            debugButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
+                    double temperature = Config.weatherAPI.getStationTemperature(stationDetails[0], stationDetails[1]);
+                    Snackbar.make(view, "Temperature right now is " + temperature + " at station ID " + stationDetails[0] + " (" + stationDetails[1] + ")", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            });
+        }
 
         return root;
     }
