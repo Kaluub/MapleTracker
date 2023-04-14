@@ -33,6 +33,7 @@ public class WeatherAPI {
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             double distance = getDistance(properties);
             if (distance < closestDistance) {
+                System.out.println("New closer distance! " + bestFeatureId + " (" + bestProvinceCode + ") is " + closestDistance);
                 bestFeatureId = properties.get("Codes").getAsString();
                 bestProvinceCode = properties.get("Province Codes").getAsString();
                 closestDistance = distance;

@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment {
 
         View root = binding.getRoot();
 
-        if (BuildConfig.DEBUG) {
+        if (Config.debugMode) {
             final Button debugButton = binding.debug;
             debugButton.setVisibility(View.VISIBLE);
             debugButton.setOnClickListener(new View.OnClickListener() {
