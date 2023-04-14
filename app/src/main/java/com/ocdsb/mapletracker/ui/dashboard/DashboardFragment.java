@@ -107,7 +107,11 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
                 Toast.makeText(getContext(),p.getLatitude() + " - "+p.getLongitude(), Toast.LENGTH_LONG).show();
-
+                Marker startMarker = new Marker(map);
+                startMarker.setPosition(p);
+                startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+                map.getOverlays().add(startMarker);
+                System.out.println(p);
                 return false;
             }
 
