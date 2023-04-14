@@ -154,6 +154,7 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
     public boolean singleTapConfirmedHelper(GeoPoint p) {
         //IMapController mapController = map.getController();
         mapController.animateTo(p);
+        System.out.println(p);
         return true;
     }
 
