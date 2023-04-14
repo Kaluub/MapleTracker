@@ -13,6 +13,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity; //unsure if needed
 import androidx.core.app.ActivityCompat; //unsure if needed
 import androidx.core.content.ContextCompat;
@@ -27,6 +29,7 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.Projection;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
+import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
@@ -100,7 +103,23 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
         singleTapConfirmedHelper(pin2);
 
         //allow user to add pins
+        MapEventsReceiver mReceive = new MapEventsReceiver() {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint p) {
+                Toast.makeText(getContext(),p.getLatitude() + " - "+p.getLongitude(), Toast.LENGTH_LONG).show();
 
+                return false;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint p) {
+                return false;
+            }
+        };
+
+
+        MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
+        map.getOverlays().add(OverlayEvents);
 
         return root;
     }
