@@ -96,6 +96,8 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
         startMarker.setPosition(mapPin);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
         map.getOverlays().add(startMarker);
+        GeoPoint pin2 = new GeoPoint(45.000,-75.000);
+        singleTapConfirmedHelper(pin2);
 
         //allow user to add pins
 
@@ -154,6 +156,10 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
     public boolean singleTapConfirmedHelper(GeoPoint p) {
         IMapController mapController = map.getController();
         mapController.animateTo(p);
+        Marker startMarker = new Marker(map);
+        startMarker.setPosition(p);
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+        map.getOverlays().add(startMarker);
         System.out.println(p);
         return true;
     }
