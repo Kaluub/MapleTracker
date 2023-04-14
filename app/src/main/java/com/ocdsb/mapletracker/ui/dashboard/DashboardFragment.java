@@ -53,7 +53,8 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
     private FragmentDashboardBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
-    //private IMapController mapController = map.getController();
+    private GeoPoint[] lookup = new GeoPoint[100];
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -99,19 +100,27 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
         startMarker.setPosition(mapPin);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
         map.getOverlays().add(startMarker);
-        GeoPoint pin2 = new GeoPoint(45.000,-75.000);
-        singleTapConfirmedHelper(pin2);
+        lookup[0] =mapPin;
+        //GeoPoint pin2 = new GeoPoint(45.000,-75.000);
+        //singleTapConfirmedHelper(pin2);
 
         //allow user to add pins
         MapEventsReceiver mReceive = new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
                 Toast.makeText(getContext(),p.getLatitude() + " - "+p.getLongitude(), Toast.LENGTH_LONG).show();
-                Marker startMarker = new Marker(map);
-                startMarker.setPosition(p);
-                startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-                map.getOverlays().add(startMarker);
-                System.out.println(p);
+                int index = lookupEmpty();
+                if (isFree(p)==true &&index >= 0) {
+                    Marker startMarker = new Marker(map);
+                    startMarker.setPosition(p);
+                    startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+                    map.getOverlays().add(startMarker);
+                    lookup[index]=p;
+                }
+                else if(index <0){
+                    System.out.println(p + " already has a pin");
+                }
+                System.out.println(lookup);
                 return false;
             }
 
@@ -190,6 +199,22 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
     @Override
     public boolean longPressHelper(GeoPoint p) {
         return false;
+    }
+    public boolean isFree(GeoPoint p){
+        for (int i =0; i< lookup.length; i++){
+            if (lookup[i] == p){
+                return false;
+            }
+        }
+        return true;
+    }
+    public int lookupEmpty(){
+        for (int i = 0; i< lookup.length;i++){
+            if (lookup[i]== null){
+                return i;
+            }
+        }
+        return -1;
     }
 
 }
