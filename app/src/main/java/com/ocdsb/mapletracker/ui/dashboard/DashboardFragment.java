@@ -1,7 +1,10 @@
 package com.ocdsb.mapletracker.ui.dashboard;
 
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,13 +19,16 @@ import androidx.core.content.ContextCompat;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
+import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.Projection;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
@@ -39,11 +45,12 @@ import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.databinding.FragmentDashboardBinding;
 import java.util.ArrayList;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements MapEventsReceiver {
 
     private FragmentDashboardBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
+    private IMapController mapController = map.getController();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -75,7 +82,7 @@ public class DashboardFragment extends Fragment {
         map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
         map.setMultiTouchControls(true);
         //Changing the default map location and zoom
-        IMapController mapController = map.getController();
+        //IMapController mapController = map.getController();
         mapController.setZoom(10);
         GeoPoint startPoint = new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude);
         mapController.setCenter(startPoint);
@@ -83,11 +90,16 @@ public class DashboardFragment extends Fragment {
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
         MapView mMapView = new MapView(inflater.getContext());
+        //Hard code a pin on the map
         GeoPoint mapPin = new GeoPoint(45.323171 ,-75.895422);
         Marker startMarker = new Marker(map);
         startMarker.setPosition(mapPin);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
         map.getOverlays().add(startMarker);
+
+        //allow user to add pins
+
+
         return root;
     }
 
@@ -138,4 +150,16 @@ public class DashboardFragment extends Fragment {
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
     }
+    @Override
+    public boolean singleTapConfirmedHelper(GeoPoint p) {
+        //IMapController mapController = map.getController();
+        mapController.animateTo(p);
+        return true;
+    }
+
+    @Override
+    public boolean longPressHelper(GeoPoint p) {
+        return false;
+    }
+
 }
