@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat; //unsure if needed
 import androidx.core.content.ContextCompat;
 
@@ -25,6 +26,10 @@ import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -39,7 +44,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
     private FragmentManagementBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
-    private GeoPoint[] lookup = new GeoPoint[100];
+    private ArrayList<GeoPoint> lookup = new ArrayList<GeoPoint>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -86,7 +91,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         startMarker.setPosition(mapPin);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
         map.getOverlays().add(startMarker);
-        lookup[0] =mapPin;
+        lookup.add(mapPin);
         //GeoPoint pin2 = new GeoPoint(45.000,-75.000);
         //singleTapConfirmedHelper(pin2);
 
@@ -94,20 +99,17 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         MapEventsReceiver mReceive = new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                Toast.makeText(getContext(),p.getLatitude() + " - "+p.getLongitude(), Toast.LENGTH_LONG).show();
-                int index = lookupEmpty();
-                if (isFree(p) && index >= 0) {
-                    Marker startMarker = new Marker(map);
-                    startMarker.setPosition(p);
-                    startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-                    map.getOverlays().add(startMarker);
-                    lookup[index]=p;
-                }
-                else if(index <0){
+                Toast.makeText(getContext(),p.getLatitude() + ", " + p.getLongitude(), Toast.LENGTH_SHORT).show();
+                if(lookup.contains(p)) {
                     System.out.println(p + " already has a pin");
+                    return false;
                 }
-                System.out.println(lookup);
-                return false;
+                Marker startMarker = new Marker(map);
+                startMarker.setPosition(p);
+                startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+                map.getOverlays().add(startMarker);
+                lookup.add(p);
+                return true;
             }
 
             @Override
@@ -186,21 +188,4 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
     public boolean longPressHelper(GeoPoint p) {
         return false;
     }
-    public boolean isFree(GeoPoint p){
-        for (int i =0; i< lookup.length; i++){
-            if (lookup[i] == p){
-                return false;
-            }
-        }
-        return true;
-    }
-    public int lookupEmpty(){
-        for (int i = 0; i< lookup.length;i++){
-            if (lookup[i]== null){
-                return i;
-            }
-        }
-        return -1;
-    }
-
 }
