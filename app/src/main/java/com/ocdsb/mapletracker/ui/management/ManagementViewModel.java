@@ -10,10 +10,8 @@ public class ManagementViewModel extends ViewModel {
 
     public ManagementViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("Manage Trees");
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+    public LiveData<String> getText() {return mText;}
 }

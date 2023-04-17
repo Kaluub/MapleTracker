@@ -1,6 +1,7 @@
 package com.ocdsb.mapletracker.ui.management;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat; //unsure if needed
@@ -34,8 +37,10 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.button.MaterialButton;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
@@ -56,6 +61,8 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
         binding = FragmentManagementBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        final TextView textView = binding.textDashboard;
+        managementViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         //final TextView textView = binding.textDashboard;
        // dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
@@ -129,6 +136,12 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
         map.getOverlays().add(OverlayEvents);
+       /* MaterialButton button = (MaterialButton) requireActivity().findViewById(R.id.newTreeButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("BUTTONS", "User tapped the Supabutton");
+            }
+        }); */
 
         return root;
     }
