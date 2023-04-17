@@ -78,6 +78,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
         map = mapAPI.buildMap(map, getContext());
+        map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
         /*System.out.println(binding.getRoot());
         map.setTileSource(TileSourceFactory.MAPNIK);
         //Giving the user the ability to zoom the map
@@ -115,6 +116,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
                 startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
                 map.getOverlays().add(startMarker);
                 lookup.add(p);
+                map = mapAPI.buildMap(map, getContext());
                 return true;
             }
 

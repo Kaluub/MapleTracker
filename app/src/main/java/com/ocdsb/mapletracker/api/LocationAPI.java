@@ -14,7 +14,6 @@ import androidx.core.app.ActivityCompat;
 import java.util.List;
 
 public class LocationAPI implements LocationListener {
-    private LocationManager locationManager;
     public double latitude;
     public double longitude;
 
@@ -24,12 +23,11 @@ public class LocationAPI implements LocationListener {
     }
 
     public void updateLocationManager(LocationManager manager) {
-        locationManager = manager;
-        List<String> providers = locationManager.getAllProviders();
+        List<String> providers = manager.getAllProviders();
         Location bestLocation = null;
         for (String provider : providers) {
             try {
-                Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
+                Location lastKnownLocation = manager.getLastKnownLocation(provider);
                 if (lastKnownLocation == null) {
                     System.out.println("Provider " + provider + " does not work.");
                     continue;
@@ -51,4 +49,5 @@ public class LocationAPI implements LocationListener {
         latitude = location.getLatitude();
         longitude = location.getLongitude();
     }
+
 }
