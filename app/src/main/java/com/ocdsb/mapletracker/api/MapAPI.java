@@ -1,7 +1,10 @@
 package com.ocdsb.mapletracker.api;
 
+import com.ocdsb.mapletracker.R;
+
 import org.osmdroid.api.IMapController;
 import org.osmdroid.events.MapEventsReceiver;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
@@ -10,6 +13,13 @@ public class MapAPI implements MapEventsReceiver {
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
     private GeoPoint[] lookup = new GeoPoint[100];
+
+    public MapView buildMap (int m){
+
+        //map = (MapView) root.findViewById(R.id.map);
+        //map.setTileSource(TileSourceFactory.MAPNIK);
+        return null;
+    }
 
 
     @Override
