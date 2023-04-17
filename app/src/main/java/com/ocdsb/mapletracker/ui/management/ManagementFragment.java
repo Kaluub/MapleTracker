@@ -9,7 +9,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat; //unsure if needed
@@ -26,10 +25,12 @@ import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -45,7 +46,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
     private FragmentManagementBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
-    private ArrayList<GeoPoint> lookup = new ArrayList<GeoPoint>();
+    private ArrayList<GeoPoint> lookup = new ArrayList<>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -99,13 +100,12 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         map.getOverlays().add(startMarker);
         lookup.add(mapPin);
         //GeoPoint pin2 = new GeoPoint(45.000,-75.000);
-        //singleTapConfirmedHelper(pin2);
+        //singleTapConfirmedHelper(pin2); */
 
         //allow user to add pins
         MapEventsReceiver mReceive = new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                Toast.makeText(getContext(),p.getLatitude() + ", " + p.getLongitude(), Toast.LENGTH_SHORT).show();
                 if(lookup.contains(p)) {
                     System.out.println(p + " already has a pin");
                     return false;
@@ -126,7 +126,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
-        map.getOverlays().add(OverlayEvents); */
+        map.getOverlays().add(OverlayEvents);
 
         return root;
     }
@@ -149,14 +149,11 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        ArrayList<String> permissionsToRequest = new ArrayList<>();
-        for (int i = 0; i < grantResults.length; i++) {
-            permissionsToRequest.add(permissions[i]);
-        }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
+        ArrayList<String> permissionsToRequest = new ArrayList<>(Arrays.asList(permissions).subList(0, grantResults.length));
         if (permissionsToRequest.size() > 0) {
             ActivityCompat.requestPermissions(
-                    getActivity(),
+                    requireActivity(),
                     permissionsToRequest.toArray(new String[0]),
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
@@ -165,7 +162,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
     private void requestPermissionsIfNecessary(String[] permissions) {
         ArrayList<String> permissionsToRequest = new ArrayList<>();
         for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(getActivity(), permission)
+            if (ContextCompat.checkSelfPermission(requireActivity(), permission)
                     != PackageManager.PERMISSION_GRANTED) {
                 // Permission is not granted
                 permissionsToRequest.add(permission);
@@ -173,7 +170,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         }
         if (permissionsToRequest.size() > 0) {
             ActivityCompat.requestPermissions(
-                    getActivity(),
+                    requireActivity(),
                     permissionsToRequest.toArray(new String[0]),
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }

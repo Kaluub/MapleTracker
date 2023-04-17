@@ -1,32 +1,24 @@
 package com.ocdsb.mapletracker.api;
 
-import static java.security.AccessController.getContext;
 
-import android.Manifest;
 import android.content.Context;
-import android.widget.Toast;
-
 import com.ocdsb.mapletracker.Config;
-import com.ocdsb.mapletracker.R;
-
 import org.osmdroid.api.IMapController;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
 
 public class MapAPI implements MapEventsReceiver {
-    private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
+    //private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1; //This line can probably be removed, leaving it commented out for now
     private MapView map = null;
-    ArrayList<GeoPoint> lookup = new ArrayList<GeoPoint>();
+    ArrayList<GeoPoint> lookup = new ArrayList<>();
 
     public MapView buildMap (MapView m, Context c){
-        Context mapContext = c;
         map = m;
         map.setTileSource(TileSourceFactory.MAPNIK);
         //Giving the user the ability to zoom the map
@@ -39,7 +31,7 @@ public class MapAPI implements MapEventsReceiver {
         mapController.setCenter(startPoint);
         //MapView mMapView = new MapView(inflater.getContext());
         //allow user to add pins -- this should probably be moved to the fragment where it is used
-        MapEventsReceiver mReceive = new MapEventsReceiver() {
+        /*MapEventsReceiver mReceive = new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
                 if(lookup.contains(p)) {
@@ -58,11 +50,11 @@ public class MapAPI implements MapEventsReceiver {
             public boolean longPressHelper(GeoPoint p) {
                 return false;
             }
-        };
+        }; */
 
 
-        MapEventsOverlay OverlayEvents = new MapEventsOverlay(mapContext, mReceive);
-        map.getOverlays().add(OverlayEvents);
+        //MapEventsOverlay OverlayEvents = new MapEventsOverlay(c, mReceive);
+        //map.getOverlays().add(OverlayEvents);
 
 
         //map.setTileSource(TileSourceFactory.MAPNIK);
