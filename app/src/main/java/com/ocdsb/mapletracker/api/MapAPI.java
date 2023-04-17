@@ -66,7 +66,7 @@ public class MapAPI implements MapEventsReceiver {
 
 
         //map.setTileSource(TileSourceFactory.MAPNIK);
-        return null;
+        return map;
     }
 
 
