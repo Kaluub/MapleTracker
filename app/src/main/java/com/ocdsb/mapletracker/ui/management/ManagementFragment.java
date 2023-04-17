@@ -67,6 +67,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         //inflate and create the map
 
         map = (MapView) root.findViewById(R.id.map);
+        System.out.println(root.findViewById(R.id.map));
         map.setTileSource(TileSourceFactory.MAPNIK);
         //Giving the user the ability to zoom the map
         map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
