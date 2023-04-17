@@ -37,6 +37,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
+import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.databinding.FragmentManagementBinding;
 
 public class ManagementFragment extends Fragment implements MapEventsReceiver {
@@ -70,9 +71,13 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         //note, the load method also sets the HTTP User Agent to your application's package name, abusing osm's
         //tile servers will get you banned based on this string
         //inflate and create the map
-
+        MapAPI mapAPI = new MapAPI();
         map = (MapView) root.findViewById(R.id.map);
-        System.out.println(binding.getRoot());
+        //Request Permissions necessary for map to function
+        String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        requestPermissionsIfNecessary(Permissions);
+        map = mapAPI.buildMap(map, getContext());
+        /*System.out.println(binding.getRoot());
         map.setTileSource(TileSourceFactory.MAPNIK);
         //Giving the user the ability to zoom the map
         map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
@@ -121,7 +126,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
-        map.getOverlays().add(OverlayEvents);
+        map.getOverlays().add(OverlayEvents); */
 
         return root;
     }
