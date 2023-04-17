@@ -1,13 +1,9 @@
-package com.ocdsb.mapletracker.ui.dashboard;
+package com.ocdsb.mapletracker.ui.management;
 
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 // imports required for OSM
 import android.Manifest;
 import android.content.Context;
@@ -15,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity; //unsure if needed
 import androidx.core.app.ActivityCompat; //unsure if needed
 import androidx.core.content.ContextCompat;
 
@@ -26,15 +21,8 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.Projection;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.Overlay;
-import org.osmdroid.views.overlay.OverlayItem;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 
@@ -43,14 +31,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ocdsb.mapletracker.Config;
-import com.ocdsb.mapletracker.MainActivity;
 import com.ocdsb.mapletracker.R;
-import com.ocdsb.mapletracker.databinding.FragmentDashboardBinding;
-import java.util.ArrayList;
+import com.ocdsb.mapletracker.databinding.FragmentManagementBinding;
 
-public class DashboardFragment extends Fragment implements MapEventsReceiver {
+public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
-    private FragmentDashboardBinding binding;
+    private FragmentManagementBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
     private GeoPoint[] lookup = new GeoPoint[100];
@@ -58,10 +44,10 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        ManagementViewModel managementViewModel =
+                new ViewModelProvider(this).get(ManagementViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentManagementBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         //final TextView textView = binding.textDashboard;
@@ -110,7 +96,7 @@ public class DashboardFragment extends Fragment implements MapEventsReceiver {
             public boolean singleTapConfirmedHelper(GeoPoint p) {
                 Toast.makeText(getContext(),p.getLatitude() + " - "+p.getLongitude(), Toast.LENGTH_LONG).show();
                 int index = lookupEmpty();
-                if (isFree(p)==true &&index >= 0) {
+                if (isFree(p) && index >= 0) {
                     Marker startMarker = new Marker(map);
                     startMarker.setPosition(p);
                     startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
