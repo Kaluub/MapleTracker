@@ -28,6 +28,7 @@ import java.util.Arrays;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
@@ -108,6 +109,12 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fragment newTree = NewTreeFragment.newInstance();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.newtree, newTree ); // give your fragment container id in first parameter
+                transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
+                transaction.commit();
+
                 Log.d("BUTTONS", "User tapped the New Tree Button");
             }
         });
