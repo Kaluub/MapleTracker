@@ -35,6 +35,7 @@ import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.databinding.FragmentManagementBinding;
+import com.ocdsb.mapletracker.ui.home.HomeFragment;
 
 public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
@@ -91,11 +92,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         map.getOverlays().add(OverlayEvents);
         MaterialButton button = binding.newTreeButton;
         button.setOnClickListener(v -> {
-            Fragment newTree = NewTreeFragment.newInstance();
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.navigation_new_tree, newTree ); // give your fragment container id in first parameter
-            transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
-            transaction.commit();
+
 
             Log.d("BUTTONS", "User tapped the New Tree Button");
         });
