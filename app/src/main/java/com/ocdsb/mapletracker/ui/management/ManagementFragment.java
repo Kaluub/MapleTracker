@@ -70,7 +70,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         //handle permissions first, before map is created. not depicted here
 
         //load/initialize the osmdroid configuration, this can be done
-        Context ctx = getActivity().getApplicationContext(); //unsure how to fix error method should exist from android.content.Context
+        Context ctx = requireActivity().getApplicationContext(); //unsure how to fix error method should exist from android.content.Context
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         //setting this before the layout is inflated is a good idea
         //it 'should' ensure that the map has a writable location for the map cache, even without permissions
@@ -100,7 +100,8 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
                 startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
                 map.getOverlays().add(startMarker);
                 lookup.add(p);
-                map = mapAPI.buildMap(map, getContext());
+                map.getController().setCenter(map.getMapCenter());
+                //map = mapAPI.buildMap(map, getContext());
                 return true;
             }
 
@@ -113,13 +114,14 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
         map.getOverlays().add(OverlayEvents);
-        MaterialButton button = (MaterialButton) requireActivity().findViewById(R.id.newTreeButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("BUTTONS", "User tapped the New Tree Button");
-            }
-        });
+        MaterialButton button = (MaterialButton) requireActivity().findViewById(R.id.new_tree_button);
+        System.out.println(button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("BUTTONS", "User tapped the New Tree Button");
+//            }
+//        });
 
         return root;
     }
