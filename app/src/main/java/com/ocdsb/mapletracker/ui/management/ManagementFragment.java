@@ -10,34 +10,24 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat; //unsure if needed
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
@@ -101,7 +91,6 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
                 map.getOverlays().add(startMarker);
                 lookup.add(p);
                 map.getController().setCenter(map.getMapCenter());
-                //map = mapAPI.buildMap(map, getContext());
                 return true;
             }
 
@@ -114,14 +103,14 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
         map.getOverlays().add(OverlayEvents);
-        MaterialButton button = (MaterialButton) requireActivity().findViewById(R.id.new_tree_button);
+        MaterialButton button = binding.newTreeButton;
         System.out.println(button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("BUTTONS", "User tapped the New Tree Button");
-//            }
-//        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("BUTTONS", "User tapped the New Tree Button");
+            }
+        });
 
         return root;
     }
@@ -136,11 +125,8 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
     @Override
     public void onPause() {
         super.onPause();
-        //this will refresh the osmdroid configuration on resuming.
-        //if you make changes to the configuration, use
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        //Configuration.getInstance().save(this, prefs);
-        map.onPause();  //needed for compass, my location overlays, v6.0.0 and up
+        // This will refresh the osmdroid configuration on resuming.
+        map.onPause();
     }
 
     @Override
