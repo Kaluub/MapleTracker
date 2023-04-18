@@ -10,7 +10,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -41,7 +40,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
     private FragmentManagementBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
-    private ArrayList<GeoPoint> lookup = new ArrayList<>();
+    private final ArrayList<GeoPoint> lookup = new ArrayList<>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -51,27 +50,13 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
         binding = FragmentManagementBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        final TextView textView = binding.textDashboard;
-        managementViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        //final TextView textView = binding.textDashboard;
-       // dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-        //handle permissions first, before map is created. not depicted here
-
-        //load/initialize the osmdroid configuration, this can be done
-        Context ctx = requireActivity().getApplicationContext(); //unsure how to fix error method should exist from android.content.Context
+        Context ctx = requireActivity().getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-        //setting this before the layout is inflated is a good idea
-        //it 'should' ensure that the map has a writable location for the map cache, even without permissions
-        //if no tiles are displayed, you can try overriding the cache path using Configuration.getInstance().setCachePath
-        //see also StorageUtils
-        //note, the load method also sets the HTTP User Agent to your application's package name, abusing osm's
-        //tile servers will get you banned based on this string
-        //inflate and create the map
         MapAPI mapAPI = new MapAPI();
         map = (MapView) root.findViewById(R.id.map);
-        //Request Permissions necessary for map to function
+
+        //Request Permissions necessary for map to function.
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
         map = mapAPI.buildMap(map, getContext());
@@ -104,13 +89,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
         map.getOverlays().add(OverlayEvents);
         MaterialButton button = binding.newTreeButton;
-        System.out.println(button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("BUTTONS", "User tapped the New Tree Button");
-            }
-        });
+        button.setOnClickListener(v -> Log.d("BUTTONS", "User tapped the New Tree Button"));
 
         return root;
     }
