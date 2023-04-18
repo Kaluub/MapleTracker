@@ -86,29 +86,6 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         requestPermissionsIfNecessary(Permissions);
         map = mapAPI.buildMap(map, getContext());
         map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
-        /*System.out.println(binding.getRoot());
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        //Giving the user the ability to zoom the map
-        map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
-        map.setMultiTouchControls(true);
-        //Changing the default map location and zoom
-        IMapController mapController = map.getController();
-        mapController.setZoom(10);
-        GeoPoint startPoint = new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude);
-        mapController.setCenter(startPoint);
-        //Request Permissions necessary for map to function
-        String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        requestPermissionsIfNecessary(Permissions);
-        MapView mMapView = new MapView(inflater.getContext());
-        //Hard code a pin on the map
-        GeoPoint mapPin = new GeoPoint(45.323171 ,-75.895422);
-        Marker startMarker = new Marker(map);
-        startMarker.setPosition(mapPin);
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-        map.getOverlays().add(startMarker);
-        lookup.add(mapPin);
-        //GeoPoint pin2 = new GeoPoint(45.000,-75.000);
-        //singleTapConfirmedHelper(pin2); */
 
         //allow user to add pins
         MapEventsReceiver mReceive = new MapEventsReceiver() {
@@ -136,12 +113,13 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
         map.getOverlays().add(OverlayEvents);
-       /* MaterialButton button = (MaterialButton) requireActivity().findViewById(R.id.newTreeButton);
+        MaterialButton button = (MaterialButton) requireActivity().findViewById(R.id.newTreeButton);
         button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                Log.d("BUTTONS", "User tapped the Supabutton");
+                Log.d("BUTTONS", "User tapped the New Tree Button");
             }
-        }); */
+        });
 
         return root;
     }
