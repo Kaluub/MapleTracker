@@ -15,7 +15,14 @@
         android:id="@+id/navigation_management"
         android:name="com.ocdsb.mapletracker.ui.management.ManagementFragment"
         android:label="@string/title_management"
-        tools:layout="@layout/fragment_management" />
+        tools:layout="@layout/fragment_management" >
+    <action
+        android:id="@+id/action_Management_to_NewTree"
+        app:destination="@id/navigation_new_tree"
+        />
+
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_new_tree"
@@ -27,5 +34,10 @@
         android:id="@+id/navigation_notifications"
         android:name="com.ocdsb.mapletracker.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_NewTree_to_Management"
+            app:destination="@id/navigation_management"
+            />
+    </fragment>
 </navigation>

@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.button.MaterialButton;
 import com.ocdsb.mapletracker.Config;
@@ -93,7 +94,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         MaterialButton button = binding.newTreeButton;
         button.setOnClickListener(v -> {
 
-
+            NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_new_tree);
             Log.d("BUTTONS", "User tapped the New Tree Button");
         });
 
