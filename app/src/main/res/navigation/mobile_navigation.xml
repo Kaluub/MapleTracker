@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_management" />
 
     <fragment
+        android:id="@+id/navigation_new_tree"
+        android:name="com.ocdsb.mapletracker.ui.management.NewTreeFragment"
+        android:label="@string/title_new_tree"
+        tools:layout="@layout/fragment_new_tree" />
+
+    <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.ocdsb.mapletracker.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"

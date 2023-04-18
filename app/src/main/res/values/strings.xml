@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_management">Management</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_new_tree">New Tree</string>
     <string name="temperature_default">…°C</string>
     <string name="temperature_replace">%1$.1f°C</string>
     <string name="new_tree">Add New Tree</string>

@@ -93,7 +93,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
         button.setOnClickListener(v -> {
             Fragment newTree = NewTreeFragment.newInstance();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.newtree, newTree ); // give your fragment container id in first parameter
+            transaction.replace(R.id.navigation_new_tree, newTree ); // give your fragment container id in first parameter
             transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
             transaction.commit();
 
