@@ -66,17 +66,6 @@ public class WeatherAPI {
                 .item(0)
                 .getNodeValue();
 
-        NodeList nodes = doc.getFirstChild().getChildNodes().item(13).getChildNodes().item(5).getChildNodes();
-        for (int i = 0; i < nodes.getLength(); i++) {
-            Node node = nodes.item(i);
-            NodeList nodeList = node.getChildNodes();
-            System.out.println("(" + i + ") " + node.getNodeName() + ": " + node.getNodeValue());
-            for (int j = 0; j < nodeList.getLength(); j++) {
-                Node jNode = nodeList.item(j);
-                System.out.println("(" + i + ", " + j + ") " + jNode.getNodeName() + ": " + jNode.getNodeValue());
-            }
-        }
-
         String high = doc
                 .getFirstChild()
                 .getChildNodes()
