@@ -73,7 +73,7 @@ public class WeatherAPI {
             System.out.println("(" + i + ") " + node.getNodeName() + ": " + node.getNodeValue());
             for (int j = 0; j < nodeList.getLength(); j++) {
                 Node jNode = nodeList.item(j);
-                System.out.println("(" + j + ") " + jNode.getNodeName() + ": " + jNode.getNodeValue());
+                System.out.println("(" + i + ", " + j + ") " + jNode.getNodeName() + ": " + jNode.getChildNodes().item(0).getNodeValue());
             }
         }
 
