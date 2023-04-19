@@ -5,6 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class WeatherAPI {
     Parser parser;
@@ -64,34 +66,45 @@ public class WeatherAPI {
                 .item(0)
                 .getNodeValue();
 
-        String high = doc
-                .getFirstChild()
-                .getChildNodes()
-                .item(13)
-                .getChildNodes()
-                .item(3)
-                .getChildNodes()
-                .item(2)
-                .getChildNodes()
-                .item(0)
-                .getNodeValue();
+        NodeList nodes = doc.getFirstChild().getChildNodes();
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Node node = nodes.item(i);
+            NodeList nodeList = node.getChildNodes();
+            System.out.println("(" + i + ") " + node.getNodeName() + ": " + node.getNodeValue());
+            for (int j = 0; j < nodeList.getLength(); j++) {
+                Node jNode = nodeList.item(j);
+                System.out.println("(" + j + ") " + jNode.getNodeName() + ": " + jNode.getNodeValue());
+            }
+        }
 
-        String low = doc
-                .getFirstChild()
-                .getChildNodes()
-                .item(13)
-                .getChildNodes()
-                .item(3)
-                .getChildNodes()
-                .item(3)
-                .getChildNodes()
-                .item(0)
-                .getNodeValue();
+//        String high = doc
+//                .getFirstChild()
+//                .getChildNodes()
+//                .item(13)
+//                .getChildNodes()
+//                .item(3)
+//                .getChildNodes()
+//                .item(2)
+//                .getChildNodes()
+//                .item(0)
+//                .getNodeValue();
+//
+//        String low = doc
+//                .getFirstChild()
+//                .getChildNodes()
+//                .item(13)
+//                .getChildNodes()
+//                .item(3)
+//                .getChildNodes()
+//                .item(3)
+//                .getChildNodes()
+//                .item(0)
+//                .getNodeValue();
 
         StationResult stationResult = new StationResult();
         stationResult.temperature = Double.parseDouble(temperature);
-        stationResult.high = Double.parseDouble(high);
-        stationResult.low = Double.parseDouble(low);
+//        stationResult.high = Double.parseDouble(high);
+//        stationResult.low = Double.parseDouble(low);
         stationResult.stationID = stationID;
         stationResult.provinceCode = provinceCode;
 
