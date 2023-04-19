@@ -21,7 +21,7 @@ public class WeatherAPI {
     }
 
     public String[] getClosestStationDetails() {
-        JsonObject webData = parser.getJSONfromURL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
+        JsonObject webData = parser.getJSONFromURL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
         JsonArray featuresArray = webData.getAsJsonArray("features");
         // Defaults to Ottawa in case you're not on Earth.
         String bestFeatureId = "s0000430";
@@ -46,15 +46,14 @@ public class WeatherAPI {
         return result;
     }
 
-    public double getStationTemperature(String stationID, String provinceCode) {
+    public StationResult getStation(String stationID, String provinceCode) {
         // Uses the station ID to get the weather from that station.
         Document doc = parser.getXMLFromURL(String.format("https://dd.weather.gc.ca/citypage_weather/xml/%s/%s_e.xml", provinceCode, stationID));
         if (doc == null) {
-            // If there is no available Document, return 0.
-            return 0;
+            // If there is no available Document, return null.
+            return null;
         }
 
-        // I wish I knew a better way to do this.
         String temperature = doc
                 .getFirstChild()
                 .getChildNodes()
@@ -64,8 +63,39 @@ public class WeatherAPI {
                 .getChildNodes()
                 .item(0)
                 .getNodeValue();
-        // Node value is a string, but we can trust that it will always be a number.
-        return Double.parseDouble(temperature);
+
+        String high = doc
+                .getFirstChild()
+                .getChildNodes()
+                .item(13)
+                .getChildNodes()
+                .item(3)
+                .getChildNodes()
+                .item(2)
+                .getChildNodes()
+                .item(0)
+                .getNodeValue();
+
+        String low = doc
+                .getFirstChild()
+                .getChildNodes()
+                .item(13)
+                .getChildNodes()
+                .item(3)
+                .getChildNodes()
+                .item(3)
+                .getChildNodes()
+                .item(0)
+                .getNodeValue();
+
+        StationResult stationResult = new StationResult();
+        stationResult.temperature = Double.parseDouble(temperature);
+        stationResult.high = Double.parseDouble(high);
+        stationResult.low = Double.parseDouble(low);
+        stationResult.stationID = stationID;
+        stationResult.provinceCode = provinceCode;
+
+        return stationResult;
     }
 
     public void updateLocationAPI(LocationAPI api) {
