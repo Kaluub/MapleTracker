@@ -77,36 +77,38 @@ public class WeatherAPI {
             }
         }
 
-//        String high = doc
-//                .getFirstChild()
-//                .getChildNodes()
-//                .item(13)
-//                .getChildNodes()
-//                .item(3)
-//                .getChildNodes()
-//                .item(2)
-//                .getChildNodes()
-//                .item(0)
-//                .getNodeValue();
-//
-//        String low = doc
-//                .getFirstChild()
-//                .getChildNodes()
-//                .item(13)
-//                .getChildNodes()
-//                .item(3)
-//                .getChildNodes()
-//                .item(3)
-//                .getChildNodes()
-//                .item(0)
-//                .getNodeValue();
+        String high = doc
+                .getFirstChild()
+                .getChildNodes()
+                .item(13)
+                .getChildNodes()
+                .item(5)
+                .getChildNodes()
+                .item(3)
+                .getChildNodes()
+                .item(0)
+                .getNodeValue();
+
+        String low = doc
+                .getFirstChild()
+                .getChildNodes()
+                .item(13)
+                .getChildNodes()
+                .item(5)
+                .getChildNodes()
+                .item(5)
+                .getChildNodes()
+                .item(0)
+                .getNodeValue();
 
         StationResult stationResult = new StationResult();
         stationResult.temperature = Double.parseDouble(temperature);
-//        stationResult.high = Double.parseDouble(high);
-//        stationResult.low = Double.parseDouble(low);
+        stationResult.high = Double.parseDouble(high);
+        stationResult.low = Double.parseDouble(low);
         stationResult.stationID = stationID;
         stationResult.provinceCode = provinceCode;
+
+        System.out.println(high + low);
 
         return stationResult;
     }
