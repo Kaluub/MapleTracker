@@ -7,4 +7,5 @@
     <string name="temperature_default">…°C</string>
     <string name="temperature_replace">%1$.1f°C</string>
     <string name="new_tree">Add New Tree</string>
+    <string name="hello">Hello</string>
 </resources>
