@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Maple Tracker</string>
-    <string name="title_home">Home</string>
-    <string name="title_management">Management</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_new_tree">New Tree</string>
-    <string name="temperature_default">…°C</string>
-    <string name="temperature_replace">%1$.1f°C</string>
-    <string name="new_tree">Add New Tree</string>
-    <string name="hello">Hello</string>
+    <string name="app_name" translatable="false">Maple Tracker</string>
+    <string name="title_management" translatable="false">Management</string>
+    <string name="title_notifications" translatable="false">Notifications</string>
+    <string name="title_new_tree" translatable="false">New Tree</string>
+    <string name="temperature_default" translatable="false">…°C</string>
+    <string name="temperature_replace" translatable="false">%1$.1f°C</string>
+    <string name="new_tree" translatable="false">Add New Tree</string>
+    <string name="hello" translatable="false">Hello</string>
+    <string name="create_tree" translatable="false">Create New Tree</string>
 </resources>
