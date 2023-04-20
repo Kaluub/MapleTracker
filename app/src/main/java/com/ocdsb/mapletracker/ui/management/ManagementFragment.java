@@ -38,12 +38,12 @@ import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.databinding.FragmentManagementBinding;
 import com.ocdsb.mapletracker.ui.home.HomeFragment;
 
-public class ManagementFragment extends Fragment implements MapEventsReceiver {
+public class ManagementFragment extends Fragment /*implements MapEventsReceiver */{
 
     private FragmentManagementBinding binding;
-    private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
-    private MapView map = null;
-    private final ArrayList<GeoPoint> lookup = new ArrayList<>();
+   // private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
+   // private MapView map = null;
+    //private final ArrayList<GeoPoint> lookup = new ArrayList<>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -56,7 +56,7 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
         Context ctx = requireActivity().getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-        MapAPI mapAPI = new MapAPI();
+       /* MapAPI mapAPI = new MapAPI();
         map = (MapView) root.findViewById(R.id.map);
 
         //Request Permissions necessary for map to function.
@@ -90,12 +90,18 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
 
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
-        map.getOverlays().add(OverlayEvents);
+        map.getOverlays().add(OverlayEvents); */
         MaterialButton button = binding.newTreeButton;
         button.setOnClickListener(v -> {
 
             NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_new_tree);
             Log.d("BUTTONS", "User tapped the New Tree Button");
+        });
+        MaterialButton button2 = binding.editTreeButton;
+        button.setOnClickListener(v -> {
+
+            NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_edit_tree);
+            Log.d("BUTTONS", "User tapped the Edit Tree Button");
         });
 
         return root;
@@ -112,10 +118,10 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
     public void onPause() {
         super.onPause();
         // This will refresh the osmdroid configuration on resuming.
-        map.onPause();
+       // map.onPause();
     }
 
-    @Override
+    /*@Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         ArrayList<String> permissionsToRequest = new ArrayList<>(Arrays.asList(permissions).subList(0, grantResults.length));
         if (permissionsToRequest.size() > 0) {
@@ -157,5 +163,5 @@ public class ManagementFragment extends Fragment implements MapEventsReceiver {
     @Override
     public boolean longPressHelper(GeoPoint p) {
         return false;
-    }
+    } */
 }

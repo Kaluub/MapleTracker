@@ -20,6 +20,10 @@
         android:id="@+id/action_Management_to_NewTree"
         app:destination="@id/navigation_new_tree"
         />
+    <action
+        android:id="@+id/action_Management_to_Edit"
+        app:destination="@id/navigation_edit_tree"
+        />
 
     </fragment>
 
@@ -29,6 +33,11 @@
         android:name="com.ocdsb.mapletracker.ui.management.NewTreeFragment"
         android:label="@string/title_new_tree"
         tools:layout="@layout/fragment_new_tree" />
+    <fragment
+        android:id="@+id/navigation_edit_tree"
+        android:name="com.ocdsb.mapletracker.ui.management.NewTreeFragment"
+        android:label="@string/title_edit_tree"
+        tools:layout="@layout/fragment_edit_tree" />
 
     <fragment
         android:id="@+id/navigation_notifications"
