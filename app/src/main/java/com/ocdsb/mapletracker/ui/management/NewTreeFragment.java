@@ -17,9 +17,13 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.ocdsb.mapletracker.Config;
@@ -89,7 +93,18 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
         map.getOverlays().add(OverlayEvents);
 
-
+        EditText editText = (EditText) root.findViewById(R.id.editName);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    System.out.println("inside onEditorAction");
+                    handled = true;
+                }
+                return handled;
+            }
+        });
         return root;
     }
 
