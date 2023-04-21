@@ -12,6 +12,7 @@ import android.provider.Settings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
 
         LocationManager service = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -71,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        //ActionBar actionBar = getSupportActionBar();
+
     }
 
     @Override
@@ -87,4 +91,10 @@ public class MainActivity extends AppCompatActivity {
             Config.locationAPI.updateLocationManager(service);
         }
     }
+    /*@Override
+    public boolean onSupportNavigateUp(){
+        NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment_activity_main);
+        return NavigationUI.navigateUp(navController,appBarConfiguration)
+                || super.onSupportNavigateUp();
+    } */
 }
