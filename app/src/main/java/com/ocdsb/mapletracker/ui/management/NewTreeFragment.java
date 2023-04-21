@@ -92,19 +92,6 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
         map.getOverlays().add(OverlayEvents);
-
-        EditText editText = (EditText) root.findViewById(R.id.editName);
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    System.out.println("inside onEditorAction");
-                    handled = true;
-                }
-                return handled;
-            }
-        });
         return root;
     }
 
