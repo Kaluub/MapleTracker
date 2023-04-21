@@ -59,7 +59,7 @@ public class Parser {
         }
     }
 
-    public JsonObject getJSONfromURL(String address) {
+    public JsonObject getJSONFromURL(String address) {
         try {
             // Open the connection.
             URL url = new URL(address);

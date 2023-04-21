@@ -10,11 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewbinding.BuildConfig;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
+import com.ocdsb.mapletracker.api.StationResult;
 import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -37,8 +37,8 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
-                    double temperature = Config.weatherAPI.getStationTemperature(stationDetails[0], stationDetails[1]);
-                    Snackbar.make(view, "Temperature right now is " + temperature + " at station ID " + stationDetails[0] + " (" + stationDetails[1] + ")", Snackbar.LENGTH_LONG)
+                    StationResult stationResult = Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]);
+                    Snackbar.make(view, "Temperature right now is " + stationResult.temperature + " at station ID " + stationDetails[0] + " (" + stationDetails[1] + ")", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
             });
@@ -57,7 +57,8 @@ public class HomeFragment extends Fragment {
 
     public double fetchTemperature() {
         String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
-        return Config.weatherAPI.getStationTemperature(stationDetails[0], stationDetails[1]);
+        StationResult stationResult = Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]);
+        return stationResult.temperature;
     }
 
     @Override
