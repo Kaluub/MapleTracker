@@ -17,7 +17,9 @@ public class FileManager {
             try {
                 file.createNewFile();
             } catch (IOException e) {
+                System.out.println(e);
                 System.out.println("Could not create file");
+                return;
             }
         }
         String content = "Smiley cat";
