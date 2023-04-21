@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Config.weatherAPI.updateLocationAPI(Config.locationAPI);
+        Config.fileManager.context = getApplicationContext();
+
+        Config.fileManager.saveFile();
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

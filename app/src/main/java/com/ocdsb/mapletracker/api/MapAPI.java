@@ -14,7 +14,6 @@ import org.osmdroid.views.overlay.Marker;
 import java.util.ArrayList;
 
 public class MapAPI implements MapEventsReceiver {
-    //private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1; //This line can probably be removed, leaving it commented out for now
     private MapView map = null;
     ArrayList<GeoPoint> lookup = new ArrayList<>();
 
