@@ -97,8 +97,6 @@ public class WeatherAPI {
         stationResult.stationID = stationID;
         stationResult.provinceCode = provinceCode;
 
-        System.out.println(high + low);
-
         return stationResult;
     }
 
