@@ -5,25 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-// imports required for OSM
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.preference.PreferenceManager;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import org.osmdroid.api.IMapController;
-import org.osmdroid.config.Configuration;
-import org.osmdroid.events.MapEventsReceiver;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.MapEventsOverlay;
-import org.osmdroid.views.overlay.Marker;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -38,7 +20,7 @@ import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.databinding.FragmentManagementBinding;
 import com.ocdsb.mapletracker.ui.home.HomeFragment;
 
-public class ManagementFragment extends Fragment /*implements MapEventsReceiver */{
+public class ManagementFragment extends Fragment {
 
     private FragmentManagementBinding binding;
    // private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
@@ -54,43 +36,6 @@ public class ManagementFragment extends Fragment /*implements MapEventsReceiver 
         binding = FragmentManagementBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Context ctx = requireActivity().getApplicationContext();
-        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-       /* MapAPI mapAPI = new MapAPI();
-        map = (MapView) root.findViewById(R.id.map);
-
-        //Request Permissions necessary for map to function.
-        String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        requestPermissionsIfNecessary(Permissions);
-        map = mapAPI.buildMap(map, getContext());
-        map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
-
-        //allow user to add pins
-        MapEventsReceiver mReceive = new MapEventsReceiver() {
-            @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if(lookup.contains(p)) {
-                    System.out.println(p + " already has a pin");
-                    return false;
-                }
-                Marker startMarker = new Marker(map);
-                startMarker.setPosition(p);
-                startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-                map.getOverlays().add(startMarker);
-                lookup.add(p);
-                map.getController().setCenter(map.getMapCenter());
-                return true;
-            }
-
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                return false;
-            }
-        };
-
-
-        MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
-        map.getOverlays().add(OverlayEvents); */
         MaterialButton button = binding.newTreeButton;
         button.setOnClickListener(v -> {
 
