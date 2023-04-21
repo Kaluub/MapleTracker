@@ -35,7 +35,7 @@
         tools:layout="@layout/fragment_new_tree" />
     <fragment
         android:id="@+id/navigation_edit_tree"
-        android:name="com.ocdsb.mapletracker.ui.management.NewTreeFragment"
+        android:name="com.ocdsb.mapletracker.ui.management.EditTreeFragment"
         android:label="@string/title_edit_tree"
         tools:layout="@layout/fragment_edit_tree" />
 
