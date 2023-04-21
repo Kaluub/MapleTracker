@@ -98,7 +98,7 @@ public class ManagementFragment extends Fragment /*implements MapEventsReceiver 
             Log.d("BUTTONS", "User tapped the New Tree Button");
         });
         MaterialButton button2 = binding.editTreeButton;
-        button.setOnClickListener(v -> {
+        button2.setOnClickListener(v -> {
 
             NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_edit_tree);
             Log.d("BUTTONS", "User tapped the Edit Tree Button");
