@@ -19,16 +19,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <org.osmdroid.views.MapView
-        android:id="@+id/map"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_tree_button"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="154dp"
+        android:text="@string/edit_tree"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.749" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_dashboard"
