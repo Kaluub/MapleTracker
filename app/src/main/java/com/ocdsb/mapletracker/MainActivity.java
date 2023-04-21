@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         Config.fileManager.context = getApplicationContext();
 
         Config.fileManager.saveFile();
+        Config.fileManager.readFile();
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
