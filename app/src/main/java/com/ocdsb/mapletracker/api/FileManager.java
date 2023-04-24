@@ -3,7 +3,6 @@ package com.ocdsb.mapletracker.api;
 import android.content.Context;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,8 +13,9 @@ public class FileManager {
     public Context context;
     public FileManager() {}
 
-    public void readFile() {
-        try (FileInputStream fis = context.openFileInput("maple.trees")) {
+    public String readFile(String fileName) {
+        String contents = "";
+        try (FileInputStream fis = context.openFileInput(fileName)) {
             InputStreamReader inputStreamReader =
                     new InputStreamReader(fis, StandardCharsets.UTF_8);
             StringBuilder stringBuilder = new StringBuilder();
@@ -28,25 +28,25 @@ public class FileManager {
             } catch (IOException e) {
                 System.out.println("IO exception while READING file");
                 System.out.println(e);
+                return null;
             } finally {
-                String contents = stringBuilder.toString();
-                System.out.println(contents);
+                contents = stringBuilder.toString();
             }
         } catch (IOException e) {
             System.out.println("IO exception while READING file");
             System.out.println(e);
+            return null;
         }
+        return contents;
     }
 
-    public void saveFile() {
-        String content = "Smiley cat";
-        try (FileOutputStream fos = context.openFileOutput("maple.trees", Context.MODE_PRIVATE)) {
+    public void saveFile(String fileName, String content) {
+        try (FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE)) {
             fos.write(content.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             System.out.println("IO exception while WRITING file");
             System.out.println(e);
             return;
         }
-        System.out.println("File created");
     }
 }
