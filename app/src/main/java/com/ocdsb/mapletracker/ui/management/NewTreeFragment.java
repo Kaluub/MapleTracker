@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -39,6 +40,7 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Overlay;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,6 +94,20 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
         map.getOverlays().add(OverlayEvents);
+
+        Overlay mOverlay = new Overlay() {
+
+            @Override
+            public boolean onScroll(MotionEvent pEvent1, MotionEvent pEvent2, float pDistanceX, float pDistanceY, MapView pMapView) {
+                Marker marker = new Marker(map);
+                marker.setPosition(new GeoPoint((float) pMapView.getMapCenter().getLatitude(),
+                        (float) pMapView.getMapCenter().getLongitude()));
+
+                return super.onScroll(pEvent1, pEvent2, pDistanceX, pDistanceY, pMapView);
+            }
+        };
+
+        map.getOverlays().add(mOverlay);
         return root;
     }
 
