@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Maple Tracker</string>
     <string name="title_home" translatable="false">Home</string>
     <string name="title_management" translatable="false">Management</string>
-    <string name="title_notifications" translatable="false">Notifications</string>
+    <string name="title_statistics" translatable="false">Statistics</string>
     <string name="title_new_tree" translatable="false">New Tree</string>
     <string name="title_edit_tree" translatable="false">Edit Tree</string>
     <string name="temperature_default" translatable="false">…°C</string>
