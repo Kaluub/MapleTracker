@@ -72,6 +72,31 @@ public class MapAPI implements MapEventsReceiver {
         return true;
     }
 
+    public void readPins() {
+        String store = Config.fileManager.readFile("pins");
+        for (String treeData : store.split("\n")) {
+            if (treeData.length() <= 0) {
+                continue;
+            }
+            String[] data = treeData.split(",");
+            GeoPoint geoPoint = new GeoPoint(Double.parseDouble(data[0]), Double.parseDouble(data[1]));
+            Marker marker = new Marker(map);
+            marker.setPosition(geoPoint);
+            map.getOverlays().add(marker);
+        }
+    }
+
+    public void savePins() {
+        StringBuilder store = new StringBuilder();
+        for (GeoPoint point : this.lookup) {
+            store.append("\n")
+                    .append(point.getLatitude())
+                    .append(",")
+                    .append(point.getLongitude());
+        }
+        Config.fileManager.saveFile("pins", store.toString());
+    }
+
     @Override
     public boolean longPressHelper(GeoPoint p) {
         return false;
