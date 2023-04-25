@@ -59,22 +59,20 @@ public class MainActivity extends AppCompatActivity {
         Config.weatherAPI.updateLocationAPI(Config.locationAPI);
         Config.fileManager.context = getApplicationContext();
 
-        Config.fileManager.saveFile("Maple tre", "smiley cat");
-        String fileContents = Config.fileManager.readFile("Maple tre");
-        System.out.println(fileContents);
-
+        Config.fileManager.saveFile("log", "I am the winner!");
+        String output = Config.fileManager.readFile("log");
+        System.out.println("fileManager test result: " + output);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_management, R.id.navigation_notifications)
+                R.id.navigation_home, R.id.navigation_management, R.id.navigation_statistics)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        //ActionBar actionBar = getSupportActionBar();
-
+        ActionBar actionBar = getSupportActionBar();
     }
 
     @Override
@@ -91,10 +89,4 @@ public class MainActivity extends AppCompatActivity {
             Config.locationAPI.updateLocationManager(service);
         }
     }
-    /*@Override
-    public boolean onSupportNavigateUp(){
-        NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment_activity_main);
-        return NavigationUI.navigateUp(navController,appBarConfiguration)
-                || super.onSupportNavigateUp();
-    } */
 }
