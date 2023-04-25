@@ -49,7 +49,6 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
     private FragmentNewTreeBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
-    private final ArrayList<GeoPoint> lookup = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -72,7 +71,7 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         MapEventsReceiver mReceive = new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if(lookup.contains(p)) {
+                if(mapAPI.lookup.contains(p)) {
                     System.out.println(p + " already has a pin");
                     return false;
                 }
@@ -80,8 +79,9 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
                 startMarker.setPosition(p);
                 startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
                 map.getOverlays().add(startMarker);
-                lookup.add(p);
+                mapAPI.lookup.add(p);
                 map.getController().setCenter(map.getMapCenter());
+                mapAPI.savePins();
                 return true;
             }
 

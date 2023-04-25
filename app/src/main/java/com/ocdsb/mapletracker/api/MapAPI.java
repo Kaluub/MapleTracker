@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MapAPI implements MapEventsReceiver {
     private MapView map = null;
-    ArrayList<GeoPoint> lookup = new ArrayList<>();
+    public ArrayList<GeoPoint> lookup = new ArrayList<>();
 
     public MapView buildMap (MapView m, Context c){
         map = m;
@@ -26,6 +26,7 @@ public class MapAPI implements MapEventsReceiver {
         //Changing the default map location and zoom
         IMapController mapController = map.getController();
         mapController.setZoom(10);
+        loadPins();
         //mapController.setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
         //MapView mMapView = new MapView(inflater.getContext());
         //allow user to add pins -- this should probably be moved to the fragment where it is used
@@ -68,12 +69,16 @@ public class MapAPI implements MapEventsReceiver {
         startMarker.setPosition(p);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
         map.getOverlays().add(startMarker);
-        System.out.println(p);
+        savePins();
         return true;
     }
 
-    public void readPins() {
+    public void loadPins() {
         String store = Config.fileManager.readFile("pins");
+        if (store == null) {
+            System.out.println("Pins is null");
+            return;
+        }
         for (String treeData : store.split("\n")) {
             if (treeData.length() <= 0) {
                 continue;
@@ -87,6 +92,7 @@ public class MapAPI implements MapEventsReceiver {
     }
 
     public void savePins() {
+        System.out.println("Store Pins Method has been called");
         StringBuilder store = new StringBuilder();
         for (GeoPoint point : this.lookup) {
             store.append("\n")
