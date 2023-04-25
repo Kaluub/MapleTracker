@@ -13,11 +13,4 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.MapleTracker.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <!-- Needed to be able to get the back button in the app bar to work -->
-    <style name="Theme.MapleTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="Theme.MapleTracker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>
