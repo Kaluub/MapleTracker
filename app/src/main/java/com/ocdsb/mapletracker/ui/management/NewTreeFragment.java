@@ -94,19 +94,22 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
 
         MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
         map.getOverlays().add(OverlayEvents);
+        Marker marker = new Marker(map);
+        map.getOverlays().add(marker);
+
 
         Overlay mOverlay = new Overlay() {
 
             @Override
             public boolean onScroll(MotionEvent pEvent1, MotionEvent pEvent2, float pDistanceX, float pDistanceY, MapView pMapView) {
-                Marker marker = new Marker(map);
+
                 marker.setPosition(new GeoPoint((float) pMapView.getMapCenter().getLatitude(),
                         (float) pMapView.getMapCenter().getLongitude()));
 
                 return super.onScroll(pEvent1, pEvent2, pDistanceX, pDistanceY, pMapView);
             }
         };
-
+        System.out.println("this is mOverlay " + mOverlay);
         map.getOverlays().add(mOverlay);
         return root;
     }
