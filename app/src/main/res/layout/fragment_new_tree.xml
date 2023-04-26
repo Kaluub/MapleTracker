@@ -24,7 +24,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/create_tree"
+            android:textSize="17sp"
+            android:translationY="-450dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/tree_name"
             android:textSize="12sp"
-            android:translationY="-300dp"/>
+            android:translationX= "25dp"
+            android:translationY="-425dp"/>
 
 </LinearLayout>

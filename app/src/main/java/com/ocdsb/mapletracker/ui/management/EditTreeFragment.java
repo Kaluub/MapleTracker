@@ -25,27 +25,19 @@ public class EditTreeFragment extends Fragment {
     private EditTreeViewModel mViewModel;
     private FragmentEditTreeBinding binding;
 
-    public static EditTreeFragment newInstance() {
-        return new EditTreeFragment();
-    }
-
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentEditTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         EditText editText = (EditText)  root.findViewById(R.id.editName);
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    System.out.println("inside onEditorAction");
-                    handled = true;
-                }
-                return handled;
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            boolean handled = false;
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                System.out.println("inside onEditorAction\nhere is the variable v: " + v);
+                handled = true;
             }
+            return handled;
         });
         return inflater.inflate(R.layout.fragment_edit_tree, container, false);
     }

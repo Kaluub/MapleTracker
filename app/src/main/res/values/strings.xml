@@ -11,4 +11,5 @@
     <string name="hello" translatable="false">Hello</string>
     <string name="create_tree" translatable="false">Create New Tree</string>
     <string name="edit_tree" translatable="false">Edit Tree</string>
+    <string name="tree_name" translatable="false">Tree Name</string>
 </resources>
