@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
@@ -22,12 +21,10 @@ import java.util.Random;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private Random rng = new Random();
+    private final Random rng = new Random();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
@@ -50,9 +47,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        this.fetchStationResults(stationResults -> requireActivity().runOnUiThread(() -> updateFromStationResults(stationResults)));
+    }
+
+    public void updateFromStationResults(StationResult stationResults) {
         final TextView temperatureText = binding.temperature;
         final TextView splashText = binding.splash;
-        StationResult stationResults = this.fetchStationResults();
         temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), stationResults.temperature));
         if (stationResults.low < 0 && stationResults.high > 0) {
             // The weather is good for maple tapping. Use a good splash text.
@@ -67,9 +67,11 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public StationResult fetchStationResults() {
-        String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
-        return Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]);
+    private void fetchStationResults(StationResultCallback callback) {
+        new Thread(() -> {
+            String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
+            callback.onResult(Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]));
+        }).start();
     }
 
     @Override
@@ -77,4 +79,8 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+}
+
+interface StationResultCallback {
+    void onResult(StationResult stationResult);
 }
