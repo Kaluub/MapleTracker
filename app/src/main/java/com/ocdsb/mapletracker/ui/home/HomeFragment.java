@@ -17,9 +17,12 @@ import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.StationResult;
 import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
 
+import java.util.Random;
+
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    private Random rng = new Random();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,14 +36,11 @@ public class HomeFragment extends Fragment {
         if (Config.debugMode) {
             final Button debugButton = binding.debug;
             debugButton.setVisibility(View.VISIBLE);
-            debugButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
-                    StationResult stationResult = Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]);
-                    Snackbar.make(view, "Temperature right now is " + stationResult.temperature + " at station ID " + stationDetails[0] + " (" + stationDetails[1] + ")", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
+            debugButton.setOnClickListener(view -> {
+                String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
+                StationResult stationResult = Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]);
+                Snackbar.make(view, "Temperature right now is " + stationResult.temperature + " at station ID " + stationDetails[0] + " (" + stationDetails[1] + ")", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             });
         }
 
@@ -51,14 +51,25 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         final TextView temperatureText = binding.temperature;
-        double fetchedTemperature = this.fetchTemperature();
-        temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), fetchedTemperature));
+        final TextView splashText = binding.splash;
+        StationResult stationResults = this.fetchStationResults();
+        temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), stationResults.temperature));
+        if (stationResults.low < 0 && stationResults.high > 0) {
+            // The weather is good for maple tapping. Use a good splash text.
+            String[] splashGood = getResources().getStringArray(R.array.splash_good);
+            int splashIndex = rng.nextInt(splashGood.length);
+            splashText.setText(splashGood[splashIndex]);
+        } else {
+            // The weather is not good for maple tapping. Use a bad splash text.
+            String[] splashBad = getResources().getStringArray(R.array.splash_bad);
+            int splashIndex = rng.nextInt(splashBad.length);
+            splashText.setText(splashBad[splashIndex]);
+        }
     }
 
-    public double fetchTemperature() {
+    public StationResult fetchStationResults() {
         String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
-        StationResult stationResult = Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]);
-        return stationResult.temperature;
+        return Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]);
     }
 
     @Override

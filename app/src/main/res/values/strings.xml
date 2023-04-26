@@ -12,5 +12,17 @@
     <string name="create_tree" translatable="false">Create New Tree</string>
     <string name="edit_tree" translatable="false">Edit Tree</string>
     <string name="tree_name" translatable="false">Tree Name</string>
-    <string name="save" translatable="false">Save</string>
+    <string name="splash_default">…</string>
+    <string-array name="splash_good" translatable="false">
+        <item>It\'s prime tapping time!</item>
+        <item>The sap is flowing!</item>
+        <item>Maple syrup season is here!</item>
+        <item>Try tapping some trees!</item>
+    </string-array>
+    <string-array name="splash_bad" translatable="false">
+        <item>No sap today.</item>
+        <item>No syrup on the table yet.</item>
+        <item>The trees are taking their break.</item>
+        <item>Try tapping later!</item>
+    </string-array>
 </resources>
