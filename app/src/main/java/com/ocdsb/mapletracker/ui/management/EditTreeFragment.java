@@ -16,8 +16,10 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.databinding.FragmentEditTreeBinding;
+import com.ocdsb.mapletracker.databinding.FragmentManagementBinding;
 import com.ocdsb.mapletracker.databinding.FragmentNewTreeBinding;
 
 public class EditTreeFragment extends Fragment {
@@ -30,16 +32,17 @@ public class EditTreeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentEditTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        EditText editText = (EditText)  root.findViewById(R.id.editName);
-        editText.setOnEditorActionListener((v, actionId, event) -> {
-            boolean handled = false;
-            if (actionId == EditorInfo.IME_ACTION_SEND) {
-                System.out.println("inside onEditorAction\nhere is the variable v: " + v);
-                handled = true;
-            }
-            return handled;
+        //Get user text input
+        EditText editText = (EditText) root.findViewById(R.id.editName);
+        System.out.println("This is edit text: " + editText);
+        System.out.println(editText.getText());
+        MaterialButton button = binding.saveButton;
+        System.out.println(button);
+        button.setOnClickListener(v -> {
+            System.out.println("The rad user tapped the cool button");
+            System.out.println(editText.getText());
         });
-        return inflater.inflate(R.layout.fragment_edit_tree, container, false);
+        return root;
     }
 
     @Override
