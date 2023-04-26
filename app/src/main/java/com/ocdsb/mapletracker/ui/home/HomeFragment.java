@@ -15,6 +15,7 @@ import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.StationResult;
 import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
+import com.ocdsb.mapletracker.interfaces.StationResultCallback;
 
 import java.util.Random;
 
@@ -34,10 +35,13 @@ public class HomeFragment extends Fragment {
             final Button debugButton = binding.debug;
             debugButton.setVisibility(View.VISIBLE);
             debugButton.setOnClickListener(view -> {
-                String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
-                StationResult stationResult = Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]);
-                Snackbar.make(view, "Temperature right now is " + stationResult.temperature + " at station ID " + stationDetails[0] + " (" + stationDetails[1] + ")", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Config.useFakeTemperature = !Config.useFakeTemperature;
+                this.updateWeatherElements();
+                Snackbar.make(
+                        view,
+                        String.format("Fake temperature mode is now set to %b.", Config.useFakeTemperature),
+                        Snackbar.LENGTH_SHORT
+                ).show();
             });
         }
 
@@ -47,12 +51,15 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        this.fetchStationResults(stationResults -> requireActivity().runOnUiThread(() -> updateFromStationResults(stationResults)));
+        this.updateWeatherElements();
     }
 
     public void updateFromStationResults(StationResult stationResults) {
+        // Prevent crashing if user switches the fragment too early.
+        if (binding == null) return;
         final TextView temperatureText = binding.temperature;
         final TextView splashText = binding.splash;
+        // Format the temperature string properly.
         temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), stationResults.temperature));
         if (stationResults.low < 0 && stationResults.high > 0) {
             // The weather is good for maple tapping. Use a good splash text.
@@ -67,7 +74,14 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    public void updateWeatherElements() {
+        binding.temperature.setText(R.string.temperature_default);
+        binding.splash.setText(R.string.splash_default);
+        this.fetchStationResults(stationResults -> requireActivity().runOnUiThread(() -> updateFromStationResults(stationResults)));
+    }
+
     private void fetchStationResults(StationResultCallback callback) {
+        // Use a new thread to run the function in the background.
         new Thread(() -> {
             String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
             callback.onResult(Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]));
@@ -79,8 +93,4 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-}
-
-interface StationResultCallback {
-    void onResult(StationResult stationResult);
 }

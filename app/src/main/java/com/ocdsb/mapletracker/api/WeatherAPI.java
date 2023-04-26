@@ -3,14 +3,12 @@ package com.ocdsb.mapletracker.api;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.ocdsb.mapletracker.Config;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class WeatherAPI {
     Parser parser;
-    LocationAPI locationAPI;
 
     public WeatherAPI() {
         parser = new Parser();
@@ -19,7 +17,7 @@ public class WeatherAPI {
     public double getDistance(JsonObject properties) {
         double elementLatitude = properties.get("Latitude").getAsDouble();
         double elementLongitude = properties.get("Longitude").getAsDouble();
-        return Math.sqrt(Math.pow(locationAPI.latitude - elementLatitude, 2) + Math.pow(locationAPI.longitude - elementLongitude, 2));
+        return Math.sqrt(Math.pow(Config.locationAPI.latitude - elementLatitude, 2) + Math.pow(Config.locationAPI.longitude - elementLongitude, 2));
     }
 
     public String[] getClosestStationDetails() {
@@ -56,6 +54,7 @@ public class WeatherAPI {
             return null;
         }
 
+        // Uses the index from the XML document to get these.
         String temperature = doc
                 .getFirstChild()
                 .getChildNodes()
@@ -97,10 +96,13 @@ public class WeatherAPI {
         stationResult.stationID = stationID;
         stationResult.provinceCode = provinceCode;
 
-        return stationResult;
-    }
+        if (Config.useFakeTemperature) {
+            // Use fake data to simulate prime tapping conditions.
+            stationResult.temperature = -0.0;
+            stationResult.high = 10.0;
+            stationResult.low = -10.0;
+        }
 
-    public void updateLocationAPI(LocationAPI api) {
-        locationAPI = api;
+        return stationResult;
     }
 }

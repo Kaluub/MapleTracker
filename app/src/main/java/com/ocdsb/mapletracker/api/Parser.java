@@ -60,6 +60,7 @@ public class Parser {
     }
 
     public JsonObject getJSONFromURL(String address) {
+        // Parses a JSON document to a JsonObject instance.
         try {
             // Open the connection.
             URL url = new URL(address);

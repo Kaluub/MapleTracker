@@ -25,7 +25,7 @@ public class MapAPI implements MapEventsReceiver {
         map.setMultiTouchControls(true);
         //Changing the default map location and zoom
         IMapController mapController = map.getController();
-        mapController.setZoom(10);
+        mapController.zoomTo(10.0);
         loadPins();
         //mapController.setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
         //MapView mMapView = new MapView(inflater.getContext());
@@ -74,7 +74,7 @@ public class MapAPI implements MapEventsReceiver {
     }
 
     public void loadPins() {
-        String store = Config.fileManager.readFile("pins");
+        String store = Config.fileManager.readFile(map.getContext(), "pins");
         if (store == null) {
             System.out.println("Pins is null");
             return;
@@ -100,7 +100,7 @@ public class MapAPI implements MapEventsReceiver {
                     .append(",")
                     .append(point.getLongitude());
         }
-        Config.fileManager.saveFile("pins", store.toString());
+        Config.fileManager.saveFile(map.getContext(), "pins", store.toString());
     }
 
     @Override

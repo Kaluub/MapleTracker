@@ -9,10 +9,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
@@ -23,16 +20,13 @@ import androidx.navigation.ui.NavigationUI;
 import com.ocdsb.mapletracker.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
-    private ActivityMainBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         LocationManager service = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -56,14 +50,6 @@ public class MainActivity extends AppCompatActivity {
             Config.locationAPI.updateLocationManager(service);
         }
 
-        Config.weatherAPI.updateLocationAPI(Config.locationAPI);
-        Config.fileManager.context = getApplicationContext();
-
-        Config.fileManager.saveFile("log", "I am the winner!");
-        String output = Config.fileManager.readFile("log");
-        System.out.println("fileManager test result: " + output);
-
-        BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -72,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        ActionBar actionBar = getSupportActionBar();
     }
 
     @Override

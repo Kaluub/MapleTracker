@@ -10,11 +10,10 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class FileManager {
-    public Context context;
     public FileManager() {}
 
-    public String readFile(String fileName) {
-        String contents = "";
+    public String readFile(Context context, String fileName) {
+        String contents;
         try (FileInputStream fis = context.openFileInput(fileName)) {
             InputStreamReader inputStreamReader =
                     new InputStreamReader(fis, StandardCharsets.UTF_8);
@@ -27,26 +26,22 @@ public class FileManager {
                 }
             } catch (IOException e) {
                 System.out.println("IO exception while READING file");
-                System.out.println(e);
                 return null;
             } finally {
                 contents = stringBuilder.toString();
             }
         } catch (IOException e) {
             System.out.println("IO exception while READING file");
-            System.out.println(e);
             return null;
         }
         return contents;
     }
 
-    public void saveFile(String fileName, String content) {
+    public void saveFile(Context context, String fileName, String content) {
         try (FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE)) {
             fos.write(content.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             System.out.println("IO exception while WRITING file");
-            System.out.println(e);
-            return;
         }
     }
 }
