@@ -25,9 +25,9 @@ public class MapAPI implements MapEventsReceiver {
         map.setMultiTouchControls(true);
         //Changing the default map location and zoom
         IMapController mapController = map.getController();
-        mapController.zoomTo(10.0);
-        loadPins();
+        mapController.setZoom(10.0);
         //mapController.setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
+        loadPins();
         //MapView mMapView = new MapView(inflater.getContext());
         //allow user to add pins -- this should probably be moved to the fragment where it is used
         /*MapEventsReceiver mReceive = new MapEventsReceiver() {
