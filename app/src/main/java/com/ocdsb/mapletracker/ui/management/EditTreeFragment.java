@@ -2,7 +2,6 @@ package com.ocdsb.mapletracker.ui.management;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.content.Context;
@@ -14,21 +13,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.databinding.FragmentEditTreeBinding;
-import com.ocdsb.mapletracker.databinding.FragmentManagementBinding;
-import com.ocdsb.mapletracker.databinding.FragmentNewTreeBinding;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
@@ -38,8 +32,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class EditTreeFragment extends Fragment {
-
-    private EditTreeViewModel mViewModel;
     private FragmentEditTreeBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
@@ -114,12 +106,4 @@ public class EditTreeFragment extends Fragment {
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(EditTreeViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
 }
