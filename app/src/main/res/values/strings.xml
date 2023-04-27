@@ -13,7 +13,10 @@
     <string name="edit_tree" translatable="false">Edit Tree</string>
     <string name="tree_name" translatable="false">Tree Name</string>
     <string name="save" translatable="false">Save</string>
+    <string name="syrup_collected" translatable="false">Syrup Collected</string>
     <string name="new_name_default" translatable="false">No Name</string>
+    <string name="litres" translatable="false">Litres</string>
+    <string name="default_number" translatable="false">0.0</string>
     <string name="splash_default">…</string>
     <string-array name="splash_good" translatable="false">
         <item>It\'s prime tapping time!</item>

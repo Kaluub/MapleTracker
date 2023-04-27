@@ -26,7 +26,10 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/create_tree"
             android:textSize="17sp"
-            android:translationY="-320dp"/>
+            android:translationY="-250dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
         <EditText
             android:autofillHints="treeName"
             android:id="@+id/addName"
@@ -35,7 +38,7 @@
             android:layout_width="125dp"
             android:layout_height="48dp"
             android:layout_gravity="start"
-            android:translationY="-230dp"
+            android:translationY="-200dp"
             android:translationX="25dp"
             android:textSize="14sp"
             android:text="@string/new_name_default" />
@@ -47,6 +50,36 @@
             android:textSize="14sp"
             android:translationX= "25dp"
             android:translationY="-300dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/syrup_collected"
+            android:textSize="14sp"
+            android:translationX= "25dp"
+            android:translationY="-150dp"/>
+        <EditText
+            android:autofillHints="treeName"
+            android:id="@+id/add_collected"
+            android:inputType="textCapSentences|textAutoCorrect"
+            android:imeOptions="actionSend"
+            android:layout_width="125dp"
+            android:layout_height="48dp"
+            android:layout_gravity="start"
+            android:translationY="-150dp"
+            android:translationX="25dp"
+            android:textSize="14sp"
+            android:text="@string/default_number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/litres"
+            android:textSize="14sp"
+            android:translationX="150dp"
+            android:translationY="-180dp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/save_button2"
             style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
