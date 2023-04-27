@@ -78,7 +78,7 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         //Add user text input
         EditText name = (EditText) root.findViewById(R.id.addName);
         //Add save button
-        MaterialButton button = binding.saveButton;
+        MaterialButton button = binding.saveButton2;
         button.setOnClickListener(v -> {
             System.out.println("The rad user tapped the cool button");
             System.out.println(name.getText());
