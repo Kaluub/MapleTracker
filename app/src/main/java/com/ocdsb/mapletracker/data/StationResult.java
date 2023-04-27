@@ -3,6 +3,7 @@ package com.ocdsb.mapletracker.data;
 import java.util.Date;
 
 public class StationResult {
+    // Stores the used results from fetching with the WeatherAPI.
     public Date createdAt = new Date();
     public double temperature;
     public double high;

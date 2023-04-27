@@ -50,6 +50,7 @@ public class WeatherAPI {
     }
 
     public StationResult getStation(String stationID, String provinceCode) {
+        // Check if the StationResult cached instance is less than 1 minute old.
         if (Config.stationResult != null &&
                 new Date().getTime() - Config.stationResult.createdAt.getTime() < 60000)
             return Config.stationResult;

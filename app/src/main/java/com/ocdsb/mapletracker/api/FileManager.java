@@ -13,11 +13,13 @@ public class FileManager {
     public FileManager() {}
 
     public String readFile(Context context, String fileName) {
+        // Read the contents of a filename (stored in internal Android storage).
         String contents;
         try (FileInputStream fis = context.openFileInput(fileName)) {
             InputStreamReader inputStreamReader =
                     new InputStreamReader(fis, StandardCharsets.UTF_8);
             StringBuilder stringBuilder = new StringBuilder();
+            // Read chunk by chunk from the file.
             try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
                 String line = reader.readLine();
                 while (line != null) {
@@ -38,6 +40,7 @@ public class FileManager {
     }
 
     public void saveFile(Context context, String fileName, String content) {
+        // Save a file to the internal Android storage.
         try (FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE)) {
             fos.write(content.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {

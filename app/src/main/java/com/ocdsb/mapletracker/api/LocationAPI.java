@@ -21,10 +21,10 @@ public class LocationAPI implements LocationListener {
         List<String> providers = manager.getAllProviders();
         Location bestLocation = null;
         for (String provider : providers) {
+            // We can determine the most accurate location provider to provide the best service.
             try {
                 Location lastKnownLocation = manager.getLastKnownLocation(provider);
                 if (lastKnownLocation == null) {
-                    System.out.println("Provider " + provider + " does not work.");
                     continue;
                 }
                 if (bestLocation == null || lastKnownLocation.getAccuracy() < bestLocation.getAccuracy()) {
@@ -36,11 +36,12 @@ public class LocationAPI implements LocationListener {
                 System.out.println("Provider " + provider + " does not work (SecurityException).");
             }
         }
-        System.out.println(latitude + ", " + longitude);
     }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
+        // Keep the location up-to-date.
+        System.out.println("Location updated.");
         latitude = location.getLatitude();
         longitude = location.getLongitude();
     }

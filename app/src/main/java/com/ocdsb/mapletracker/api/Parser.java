@@ -19,8 +19,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class Parser {
-    public Parser() {
-    }
+    public Parser() {}
 
     public Document getXMLFromURL(String address) {
         // Parses an XML file online to a Document.
