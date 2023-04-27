@@ -56,6 +56,7 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         binding = FragmentNewTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //Building the map
         Context ctx = requireActivity().getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         MapAPI mapAPI = new MapAPI();
@@ -66,34 +67,8 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         requestPermissionsIfNecessary(Permissions);
         map = mapAPI.buildMap(map, getContext());
         map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
-        //allow user to add pins
-//        MapEventsReceiver mReceive = new MapEventsReceiver() {
-//            @Override
-//            public boolean singleTapConfirmedHelper(GeoPoint p) {
-//                if(mapAPI.lookup.contains(p)) {
-//                    System.out.println(p + " already has a pin");
-//                    return false;
-//                }
-//                Marker startMarker = new Marker(map);
-//                startMarker.setPosition(p);
-//                startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-//                map.getOverlays().add(startMarker);
-//                mapAPI.lookup.add(p);
-//                map.getController().setCenter(map.getMapCenter());
-//                mapAPI.savePins();
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean longPressHelper(GeoPoint p) {
-//                return false;
-//            }
-//        };
-//
-//
-//        MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
-//        map.getOverlays().add(OverlayEvents);
         Marker marker = new Marker(map);
+        marker.setPosition((GeoPoint) map.getMapCenter());
         map.getOverlays().add(marker);
 
 
