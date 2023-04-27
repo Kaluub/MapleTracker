@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment {
             debugButton.setVisibility(View.VISIBLE);
             debugButton.setOnClickListener(view -> {
                 Config.useFakeTemperature = !Config.useFakeTemperature;
+                Config.stationResult = null;
                 this.updateWeatherElements();
                 Snackbar.make(
                         view,
