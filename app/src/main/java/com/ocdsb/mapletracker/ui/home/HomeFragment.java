@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
-import com.ocdsb.mapletracker.api.StationResult;
+import com.ocdsb.mapletracker.data.StationResult;
 import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
 import com.ocdsb.mapletracker.interfaces.StationResultCallback;
 

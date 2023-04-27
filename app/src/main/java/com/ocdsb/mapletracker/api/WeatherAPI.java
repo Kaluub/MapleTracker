@@ -4,8 +4,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.ocdsb.mapletracker.Config;
+import com.ocdsb.mapletracker.data.StationResult;
 
 import org.w3c.dom.Document;
+
+import java.util.Date;
 
 public class WeatherAPI {
     Parser parser;
@@ -47,6 +50,10 @@ public class WeatherAPI {
     }
 
     public StationResult getStation(String stationID, String provinceCode) {
+        if (Config.stationResult != null &&
+                new Date().getTime() - Config.stationResult.createdAt.getTime() < 60000)
+            return Config.stationResult;
+
         // Uses the station ID to get the weather from that station.
         Document doc = parser.getXMLFromURL(String.format("https://dd.weather.gc.ca/citypage_weather/xml/%s/%s_e.xml", provinceCode, stationID));
         if (doc == null) {
@@ -102,6 +109,8 @@ public class WeatherAPI {
             stationResult.high = 10.0;
             stationResult.low = -10.0;
         }
+
+        Config.stationResult = stationResult;
 
         return stationResult;
     }
