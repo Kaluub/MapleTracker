@@ -17,7 +17,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import com.google.android.material.button.MaterialButton;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
@@ -73,6 +75,14 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
             }
         };
         map.getOverlays().add(mOverlay);
+        //Add user text input
+        EditText name = (EditText) root.findViewById(R.id.addName);
+        //Add save button
+        MaterialButton button = binding.saveButton;
+        button.setOnClickListener(v -> {
+            System.out.println("The rad user tapped the cool button");
+            System.out.println(name.getText());
+        });
         return root;
     }
 
