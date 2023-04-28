@@ -41,7 +41,11 @@
             android:translationY="-200dp"
             android:translationX="25dp"
             android:textSize="14sp"
-            android:text="@string/new_name_default" />
+            android:text="@string/new_name_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +53,11 @@
             android:text="@string/tree_name"
             android:textSize="14sp"
             android:translationX= "25dp"
-            android:translationY="-300dp"/>
+            android:translationY="-300dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,7 +65,11 @@
             android:text="@string/syrup_collected"
             android:textSize="14sp"
             android:translationX= "25dp"
-            android:translationY="-150dp"/>
+            android:translationY="-150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <EditText
             android:autofillHints="treeName"
             android:id="@+id/add_collected"
@@ -69,7 +81,11 @@
             android:translationY="-150dp"
             android:translationX="25dp"
             android:textSize="14sp"
-            android:text="@string/default_number" />
+            android:text="@string/default_number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,7 +94,11 @@
             android:text="@string/litres"
             android:textSize="14sp"
             android:translationX="150dp"
-            android:translationY="-180dp" />
+            android:translationY="-180dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/save_button2"
