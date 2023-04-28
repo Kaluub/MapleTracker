@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="title_home">Accueil</string>
     <string name="title_management">Modifications</string>
     <string name="title_statistics">Statistiques</string>
     <string name="title_new_tree">Nouvelle arbre</string>
+    <string name="app_name">Trackeur d\'érable</string>
+    <string name="title_edit_tree">Modifier une arbre</string>
+    <string name="new_tree">Ajouter une nouvelle arbre</string>
+    <string name="hello">Bonjour</string>
+    <string name="create_tree">Créer une nouvelle arbre</string>
+    <string name="edit_tree">Modifier une arbre</string>
+    <string name="tree_name">Nom d\'arbre</string>
+    <string name="save">Sauvegarde</string>
+    <string name="syrup_collected">Syrop ramassé</string>
+    <string name="new_name_default">Sans nom</string>
+    <string name="litres">Litres</string>
+    <string-array name="splash_good" tools:ignore="InconsistentArrays">
+        <item>C\'est le propre saison!</item>
+        <item>L\'érable se coule!</item>
+        <item>Les arbres sont prètes!</item>
+    </string-array>
+    <string-array name="splash_bad" tools:ignore="InconsistentArrays">
+        <item>On n\'a pas d\'érable.</item>
+        <item>Les arbres prend leur repos.</item>
+        <item>Ne touche pas les arbres!</item>
+    </string-array>
 </resources>
