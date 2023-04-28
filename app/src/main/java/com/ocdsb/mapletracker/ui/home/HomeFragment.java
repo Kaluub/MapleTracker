@@ -84,8 +84,13 @@ public class HomeFragment extends Fragment {
     private void fetchStationResults(StationResultCallback callback) {
         // Use a new thread to run the function in the background.
         new Thread(() -> {
-            String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
-            callback.onResult(Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]));
+            try {
+                String[] stationDetails = Config.weatherAPI.getClosestStationDetails();
+                callback.onResult(Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]));
+            } catch (Exception e) {
+                System.out.println("Exception while fetching the weather.");
+                System.out.println(e);
+            }
         }).start();
     }
 
