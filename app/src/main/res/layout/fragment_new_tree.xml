@@ -75,7 +75,7 @@
         <EditText
             android:autofillHints="sapCollected"
             android:id="@+id/add_collected"
-            android:inputType="textCapSentences|textAutoCorrect"
+            android:inputType="numberDecimal"
             android:imeOptions="actionSend"
             android:layout_width="125dp"
             android:layout_height="48dp"
