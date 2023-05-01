@@ -76,12 +76,13 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         };
         map.getOverlays().add(mOverlay);
         //Add user text input
-        EditText name = (EditText) root.findViewById(R.id.addName);
+        EditText name = root.findViewById(R.id.addName);
+        EditText sap = root.findViewById(R.id.add_collected);
         //Add save button
         MaterialButton button = binding.saveButton2;
         button.setOnClickListener(v -> {
             System.out.println("The rad user tapped the cool button");
-            System.out.println(name.getText());
+            System.out.println("From " + name.getText() + " " + sap.getText() + " litres has been collected");
         });
         return root;
     }
