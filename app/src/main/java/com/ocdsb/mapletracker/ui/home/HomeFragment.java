@@ -89,7 +89,6 @@ public class HomeFragment extends Fragment {
                 callback.onResult(Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]));
             } catch (Exception e) {
                 System.out.println("Exception while fetching the weather.");
-                System.out.println(e);
             }
         }).start();
     }
