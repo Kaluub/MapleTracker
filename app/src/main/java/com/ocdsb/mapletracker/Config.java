@@ -9,6 +9,7 @@ public class Config {
     // Tools and settings.
     public static final Boolean debugMode = true;
     public static Boolean useFakeTemperature = false;
+    public static String fileName = "Tree_Data";
     // Class instances.
     public static LocationAPI locationAPI = new LocationAPI();
     public static WeatherAPI weatherAPI = new WeatherAPI();

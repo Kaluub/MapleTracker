@@ -82,7 +82,7 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         MaterialButton button = binding.saveButton2;
         button.setOnClickListener(v -> {
             System.out.println("The rad user tapped the cool button");
-            System.out.println("From " + name.getText() + " " + sap.getText() + " litres has been collected");
+            System.out.println("From " + name.getText() + " at " + map.getMapCenter() + ", " + sap.getText() + " litres has been collected");
         });
         return root;
     }
