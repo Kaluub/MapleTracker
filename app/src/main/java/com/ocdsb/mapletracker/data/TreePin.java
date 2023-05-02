@@ -9,12 +9,12 @@ public class TreePin {
     public Date createdAt = new Date();
     public Date editedAt = new Date();
     public String name;
-    public double latitude;
-    public double longitude;
-    public double sapLitresCollectedTotal;
-    public double sapLitresCollectedResettable;
-    public int editsTotal;
-    public int editsResettable;
+    public double latitude = 0;
+    public double longitude = 0;
+    public double sapLitresCollectedTotal = 0;
+    public double sapLitresCollectedResettable = 0;
+    public int editsTotal = 0;
+    public int editsResettable = 0;
 
     public String saveToLine() {
         return createdAt +
