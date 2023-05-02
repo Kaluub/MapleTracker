@@ -75,7 +75,6 @@ public class Parser {
             return JsonParser.parseReader(reader).getAsJsonObject();
         } catch (IOException e) {
             // In case of any exceptions, we have nothing to return.
-            System.out.println(e);
             return null;
         }
     }

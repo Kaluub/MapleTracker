@@ -3,6 +3,8 @@ package com.ocdsb.mapletracker.api;
 
 import android.content.Context;
 import com.ocdsb.mapletracker.Config;
+import com.ocdsb.mapletracker.data.TreePin;
+
 import org.osmdroid.api.IMapController;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class MapAPI implements MapEventsReceiver {
     private MapView map = null;
     public ArrayList<GeoPoint> lookup = new ArrayList<>();
+    public ArrayList<TreePin> treePins = new ArrayList<>();
 
     public MapView buildMap (MapView m, Context c){
         map = m;
@@ -83,8 +86,10 @@ public class MapAPI implements MapEventsReceiver {
             if (treeData.length() <= 0) {
                 continue;
             }
-            String[] data = treeData.split(",");
-            GeoPoint geoPoint = new GeoPoint(Double.parseDouble(data[0]), Double.parseDouble(data[1]));
+            TreePin pin = TreePin.getFromFileLine(treeData);
+            treePins.add(pin);
+            GeoPoint geoPoint = new GeoPoint(pin.longitude, pin.latitude);
+            lookup.add(geoPoint);
             Marker marker = new Marker(map);
             marker.setPosition(geoPoint);
             map.getOverlays().add(marker);
@@ -94,11 +99,8 @@ public class MapAPI implements MapEventsReceiver {
     public void savePins() {
         System.out.println("Store Pins Method has been called");
         StringBuilder store = new StringBuilder();
-        for (GeoPoint point : this.lookup) {
-            store.append("\n")
-                    .append(point.getLatitude())
-                    .append(",")
-                    .append(point.getLongitude());
+        for (TreePin pin : this.treePins) {
+            store.append("\n").append(pin.saveToLine());
         }
         Config.fileManager.saveFile(map.getContext(), "pins", store.toString());
     }

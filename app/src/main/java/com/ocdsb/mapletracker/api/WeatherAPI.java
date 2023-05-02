@@ -24,8 +24,9 @@ public class WeatherAPI {
     }
 
     public String[] getClosestStationDetails() {
-        JsonObject webData = parser.getJSONFromURL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
-        JsonArray featuresArray = webData.getAsJsonArray("features");
+        // TODO: Consider using American weather stations as well. See: https://api.weather.gov/stations
+        JsonObject canadianStations = parser.getJSONFromURL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
+        JsonArray featuresArray = canadianStations.getAsJsonArray("features");
         // Defaults to Ottawa in case you're not on Earth.
         String bestFeatureId = "s0000430";
         String bestProvinceCode = "ON";
