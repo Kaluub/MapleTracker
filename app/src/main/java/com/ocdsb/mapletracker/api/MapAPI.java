@@ -77,7 +77,7 @@ public class MapAPI implements MapEventsReceiver {
     }
 
     public void loadPins() {
-        String store = Config.fileManager.readFile(map.getContext(), "pins");
+        String store = Config.fileManager.readFile(map.getContext(), Config.fileName);
         if (store == null) {
             System.out.println("Pins is null");
             return;
@@ -102,12 +102,11 @@ public class MapAPI implements MapEventsReceiver {
         for (TreePin pin : this.treePins) {
             store.append("\n").append(pin.saveToLine());
         }
-        Config.fileManager.saveFile(map.getContext(), "pins", store.toString());
+        Config.fileManager.saveFile(map.getContext(), Config.fileName, store.toString());
     }
 
     @Override
     public boolean longPressHelper(GeoPoint p) {
         return false;
     }
-
 }
