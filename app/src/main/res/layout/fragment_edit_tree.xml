@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:textSize="20sp"
-        android:text="Test" />
+        android:text="@string/edit_name" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_button"

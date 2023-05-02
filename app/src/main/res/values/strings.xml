@@ -12,6 +12,7 @@
     <string name="create_tree">Create New Tree</string>
     <string name="edit_tree">Edit Tree</string>
     <string name="tree_name">Tree Name</string>
+    <string name="edit_name">Edit Name</string>
     <string name="save">Save</string>
     <string name="syrup_collected">Syrup Collected</string>
     <string name="new_name_default">No Name</string>

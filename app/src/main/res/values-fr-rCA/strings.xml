@@ -11,6 +11,7 @@
     <string name="create_tree">Créer une nouvelle arbre</string>
     <string name="edit_tree">Modifier une arbre</string>
     <string name="tree_name">Nom d\'arbre</string>
+    <string name="edit_name">Modifier le nom</string>
     <string name="save">Sauvegarde</string>
     <string name="syrup_collected">Syrop ramassé</string>
     <string name="new_name_default">Sans nom</string>
