@@ -1,19 +1,19 @@
-packagecom.ocdsb.mapletracker.ui.statistics;
+package com.ocdsb.mapletracker.ui.statistics;
 
-importandroidx.lifecycle.LiveData;
-importandroidx.lifecycle.MutableLiveData;
-importandroidx.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-publicclassStatisticsViewModelextendsViewModel{
+public class StatisticsViewModel extends ViewModel {
 
-privatefinalMutableLiveData<String>mText;
+    private final MutableLiveData<String> mText;
 
-publicStatisticsViewModel(){
-mText=newMutableLiveData<>();
-mText.setValue("Thisisstatisticsfragment");
-}
+    public StatisticsViewModel() {
+        mText = new MutableLiveData<>();
+        mText.setValue("This is statistics fragment");
+    }
 
-publicLiveData<String>getText(){
-returnmText;
-}
+    public LiveData<String> getText() {
+        return mText;
+    }
 }

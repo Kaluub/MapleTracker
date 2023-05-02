@@ -1,47 +1,47 @@
-packagecom.ocdsb.mapletracker.ui.management;
+package com.ocdsb.mapletracker.ui.management;
 
-importandroid.os.Bundle;
-importandroid.util.Log;
-importandroid.view.LayoutInflater;
-importandroid.view.View;
-importandroid.view.ViewGroup;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 
-importandroidx.annotation.NonNull;
-importandroidx.fragment.app.Fragment;
-importandroidx.navigation.fragment.NavHostFragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
-importcom.google.android.material.button.MaterialButton;
-importcom.ocdsb.mapletracker.R;
-importcom.ocdsb.mapletracker.databinding.FragmentManagementBinding;
+import com.google.android.material.button.MaterialButton;
+import com.ocdsb.mapletracker.R;
+import com.ocdsb.mapletracker.databinding.FragmentManagementBinding;
 
-publicclassManagementFragmentextendsFragment{
-privateFragmentManagementBindingbinding;
+public class ManagementFragment extends Fragment {
+    private FragmentManagementBinding binding;
 
-publicViewonCreateView(@NonNullLayoutInflaterinflater,
-ViewGroupcontainer,BundlesavedInstanceState){
-binding=FragmentManagementBinding.inflate(inflater,container,false);
-Viewroot=binding.getRoot();
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentManagementBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-MaterialButtonbutton=binding.newTreeButton;
-button.setOnClickListener(v->{
+        MaterialButton button = binding.newTreeButton;
+        button.setOnClickListener(v -> {
 
-NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_new_tree);
-Log.d("BUTTONS","UsertappedtheNewTreeButton");
-});
-MaterialButtonbutton2=binding.editTreeButton;
-button2.setOnClickListener(v->{
+            NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_new_tree);
+            Log.d("BUTTONS", "User tapped the New Tree Button");
+        });
+        MaterialButton button2 = binding.editTreeButton;
+        button2.setOnClickListener(v -> {
 
-NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_edit_tree);
-Log.d("BUTTONS","UsertappedtheEditTreeButton");
-});
+            NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_edit_tree);
+            Log.d("BUTTONS", "User tapped the Edit Tree Button");
+        });
 
-returnroot;
-}
+        return root;
+    }
 
-@Override
-publicvoidonDestroyView(){
-super.onDestroyView();
-binding=null;
-}
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

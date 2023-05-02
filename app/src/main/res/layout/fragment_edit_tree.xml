@@ -1,64 +1,64 @@
-<?xmlversion="1.0"encoding="utf-8"?>
-<LinearLayoutxmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:gravity="center"
-android:orientation="vertical"
-tools:context=".ui.management.EditTreeFragment">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.management.EditTreeFragment">
 
-<TextView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_gravity="center_horizontal"
-android:text="@string/edit_tree"
-android:textSize="17sp"
-android:translationY="-50dp"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/edit_tree"
+        android:textSize="17sp"
+        android:translationY="-50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-<Spinner
-android:id="@+id/tree_spinner"
-style="@style/Theme.MapleTracker"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"/>
+    <Spinner
+        android:id="@+id/tree_spinner"
+        style="@style/Theme.MapleTracker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-<org.osmdroid.views.MapView
-android:id="@+id/map"
-android:layout_width="300dp"
-android:layout_height="250dp"
-android:translationX="0dp"
-android:translationY="150dp"
-app:layout_constraintBottom_toBottomOf="parent"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"/>
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:translationX="0dp"
+        android:translationY="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<EditText
-android:id="@+id/editName"
-android:inputType="textCapSentences|textAutoCorrect"
-android:imeOptions="actionSend"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_marginTop="50dp"
-android:textSize="20sp"
-android:text="@string/edit_name"/>
+    <EditText
+        android:id="@+id/editName"
+        android:inputType="textCapSentences|textAutoCorrect"
+        android:imeOptions="actionSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:text="@string/edit_name" />
 
-<com.google.android.material.button.MaterialButton
-android:id="@+id/save_button"
-style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-android:layout_width="wrap_content"
-android:layout_height="40dp"
-android:layout_marginTop="154dp"
-app:cornerRadius="20dp"
-android:text="@string/save"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_button"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="154dp"
+        app:cornerRadius="20dp"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </LinearLayout>

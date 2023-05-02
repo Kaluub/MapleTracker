@@ -1,119 +1,119 @@
-packagecom.ocdsb.mapletracker.api;
+package com.ocdsb.mapletracker.api;
 
-importcom.google.gson.JsonArray;
-importcom.google.gson.JsonElement;
-importcom.google.gson.JsonObject;
-importcom.ocdsb.mapletracker.Config;
-importcom.ocdsb.mapletracker.data.StationResult;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.ocdsb.mapletracker.Config;
+import com.ocdsb.mapletracker.data.StationResult;
 
-importorg.w3c.dom.Document;
+import org.w3c.dom.Document;
 
-importjava.util.Date;
+import java.util.Date;
 
-publicclassWeatherAPI{
-Parserparser;
+public class WeatherAPI {
+    Parser parser;
 
-publicWeatherAPI(){
-parser=newParser();
-}
+    public WeatherAPI() {
+        parser = new Parser();
+    }
 
-publicdoublegetDistance(JsonObjectproperties){
-doubleelementLatitude=properties.get("Latitude").getAsDouble();
-doubleelementLongitude=properties.get("Longitude").getAsDouble();
-returnMath.sqrt(Math.pow(Config.locationAPI.latitude-elementLatitude,2)+Math.pow(Config.locationAPI.longitude-elementLongitude,2));
-}
+    public double getDistance(JsonObject properties) {
+        double elementLatitude = properties.get("Latitude").getAsDouble();
+        double elementLongitude = properties.get("Longitude").getAsDouble();
+        return Math.sqrt(Math.pow(Config.locationAPI.latitude - elementLatitude, 2) + Math.pow(Config.locationAPI.longitude - elementLongitude, 2));
+    }
 
-publicString[]getClosestStationDetails(){
-//TODO:ConsiderusingAmericanweatherstationsaswell.See:https://api.weather.gov/stations
-JsonObjectcanadianStations=parser.getJSONFromURL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
-JsonArrayfeaturesArray=canadianStations.getAsJsonArray("features");
-//DefaultstoOttawaincaseyou'renotonEarth.
-StringbestFeatureId="s0000430";
-StringbestProvinceCode="ON";
-//Thefurthestpossibledistanceshouldonlybe180,sothisshouldalwaysbeabiggerdistance.
-doubleclosestDistance=100000;
+    public String[] getClosestStationDetails() {
+        // TODO: Consider using American weather stations as well. See: https://api.weather.gov/stations
+        JsonObject canadianStations = parser.getJSONFromURL("https://collaboration.cmc.ec.gc.ca/cmc/cmos/public_doc/msc-data/citypage-weather/site_list_en.geojson");
+        JsonArray featuresArray = canadianStations.getAsJsonArray("features");
+        // Defaults to Ottawa in case you're not on Earth.
+        String bestFeatureId = "s0000430";
+        String bestProvinceCode = "ON";
+        // The furthest possible distance should only be 180, so this should always be a bigger distance.
+        double closestDistance = 100000;
 
-for(JsonElementelement:featuresArray){
-JsonObjectproperties=element.getAsJsonObject().get("properties").getAsJsonObject();
-doubledistance=getDistance(properties);
-if(distance<closestDistance){
-System.out.println("Newcloserdistance!"+bestFeatureId+"("+bestProvinceCode+")is"+closestDistance);
-bestFeatureId=properties.get("Codes").getAsString();
-bestProvinceCode=properties.get("ProvinceCodes").getAsString();
-closestDistance=distance;
-}
-}
+        for (JsonElement element : featuresArray) {
+            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+            double distance = getDistance(properties);
+            if (distance < closestDistance) {
+                System.out.println("New closer distance! " + bestFeatureId + " (" + bestProvinceCode + ") is " + closestDistance);
+                bestFeatureId = properties.get("Codes").getAsString();
+                bestProvinceCode = properties.get("Province Codes").getAsString();
+                closestDistance = distance;
+            }
+        }
 
-String[]result=newString[2];
-result[0]=bestFeatureId;
-result[1]=bestProvinceCode;
-returnresult;
-}
+        String[] result = new String[2];
+        result[0] = bestFeatureId;
+        result[1] = bestProvinceCode;
+        return result;
+    }
 
-publicStationResultgetStation(StringstationID,StringprovinceCode){
-//CheckiftheStationResultcachedinstanceislessthan1minuteold.
-if(Config.stationResult!=null&&
-newDate().getTime()-Config.stationResult.createdAt.getTime()<60000)
-returnConfig.stationResult;
+    public StationResult getStation(String stationID, String provinceCode) {
+        // Check if the StationResult cached instance is less than 1 minute old.
+        if (Config.stationResult != null &&
+                new Date().getTime() - Config.stationResult.createdAt.getTime() < 60000)
+            return Config.stationResult;
 
-//UsesthestationIDtogettheweatherfromthatstation.
-Documentdoc=parser.getXMLFromURL(String.format("https://dd.weather.gc.ca/citypage_weather/xml/%s/%s_e.xml",provinceCode,stationID));
-if(doc==null){
-//IfthereisnoavailableDocument,returnnull.
-returnnull;
-}
+        // Uses the station ID to get the weather from that station.
+        Document doc = parser.getXMLFromURL(String.format("https://dd.weather.gc.ca/citypage_weather/xml/%s/%s_e.xml", provinceCode, stationID));
+        if (doc == null) {
+            // If there is no available Document, return null.
+            return null;
+        }
 
-//UsestheindexfromtheXMLdocumenttogetthese.
-Stringtemperature=doc
-.getFirstChild()
-.getChildNodes()
-.item(11)
-.getChildNodes()
-.item(11)
-.getChildNodes()
-.item(0)
-.getNodeValue();
+        // Uses the index from the XML document to get these.
+        String temperature = doc
+                .getFirstChild()
+                .getChildNodes()
+                .item(11)
+                .getChildNodes()
+                .item(11)
+                .getChildNodes()
+                .item(0)
+                .getNodeValue();
 
-Stringhigh=doc
-.getFirstChild()
-.getChildNodes()
-.item(13)
-.getChildNodes()
-.item(5)
-.getChildNodes()
-.item(3)
-.getChildNodes()
-.item(0)
-.getNodeValue();
+        String high = doc
+                .getFirstChild()
+                .getChildNodes()
+                .item(13)
+                .getChildNodes()
+                .item(5)
+                .getChildNodes()
+                .item(3)
+                .getChildNodes()
+                .item(0)
+                .getNodeValue();
 
-Stringlow=doc
-.getFirstChild()
-.getChildNodes()
-.item(13)
-.getChildNodes()
-.item(5)
-.getChildNodes()
-.item(5)
-.getChildNodes()
-.item(0)
-.getNodeValue();
+        String low = doc
+                .getFirstChild()
+                .getChildNodes()
+                .item(13)
+                .getChildNodes()
+                .item(5)
+                .getChildNodes()
+                .item(5)
+                .getChildNodes()
+                .item(0)
+                .getNodeValue();
 
-StationResultstationResult=newStationResult();
-stationResult.temperature=Double.parseDouble(temperature);
-stationResult.high=Double.parseDouble(high);
-stationResult.low=Double.parseDouble(low);
-stationResult.stationID=stationID;
-stationResult.provinceCode=provinceCode;
+        StationResult stationResult = new StationResult();
+        stationResult.temperature = Double.parseDouble(temperature);
+        stationResult.high = Double.parseDouble(high);
+        stationResult.low = Double.parseDouble(low);
+        stationResult.stationID = stationID;
+        stationResult.provinceCode = provinceCode;
 
-if(Config.useFakeTemperature){
-//Usefakedatatosimulateprimetappingconditions.
-stationResult.temperature=-0.0;
-stationResult.high=10.0;
-stationResult.low=-10.0;
-}
+        if (Config.useFakeTemperature) {
+            // Use fake data to simulate prime tapping conditions.
+            stationResult.temperature = -0.0;
+            stationResult.high = 10.0;
+            stationResult.low = -10.0;
+        }
 
-Config.stationResult=stationResult;
+        Config.stationResult = stationResult;
 
-returnstationResult;
-}
+        return stationResult;
+    }
 }

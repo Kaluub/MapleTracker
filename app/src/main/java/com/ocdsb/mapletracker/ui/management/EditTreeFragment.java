@@ -1,122 +1,122 @@
-packagecom.ocdsb.mapletracker.ui.management;
+package com.ocdsb.mapletracker.ui.management;
 
-importandroidx.core.app.ActivityCompat;
-importandroidx.core.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-importandroid.Manifest;
-importandroid.content.Context;
-importandroid.content.pm.PackageManager;
-importandroid.os.Bundle;
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 
-importandroidx.annotation.NonNull;
-importandroidx.annotation.Nullable;
-importandroidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-importandroid.preference.PreferenceManager;
-importandroid.view.LayoutInflater;
-importandroid.view.View;
-importandroid.view.ViewGroup;
-importandroid.widget.ArrayAdapter;
-importandroid.widget.EditText;
-importandroid.widget.Spinner;
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 
-importcom.google.android.material.button.MaterialButton;
-importcom.ocdsb.mapletracker.Config;
-importcom.ocdsb.mapletracker.R;
-importcom.ocdsb.mapletracker.api.MapAPI;
-importcom.ocdsb.mapletracker.databinding.FragmentEditTreeBinding;
+import com.google.android.material.button.MaterialButton;
+import com.ocdsb.mapletracker.Config;
+import com.ocdsb.mapletracker.R;
+import com.ocdsb.mapletracker.api.MapAPI;
+import com.ocdsb.mapletracker.databinding.FragmentEditTreeBinding;
 
-importorg.osmdroid.config.Configuration;
-importorg.osmdroid.util.GeoPoint;
-importorg.osmdroid.views.MapView;
+import org.osmdroid.config.Configuration;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
 
-importjava.util.ArrayList;
-importjava.util.Arrays;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-publicclassEditTreeFragmentextendsFragment{
-privateFragmentEditTreeBindingbinding;
-privatefinalintREQUEST_PERMISSIONS_REQUEST_CODE=1;
-privateMapViewmap=null;
+public class EditTreeFragment extends Fragment {
+    private FragmentEditTreeBinding binding;
+    private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
+    private MapView map = null;
 
-@Override
-publicViewonCreateView(@NonNullLayoutInflaterinflater,@NullableViewGroupcontainer,
-@NullableBundlesavedInstanceState){
-binding=FragmentEditTreeBinding.inflate(inflater,container,false);
-Viewroot=binding.getRoot();
-//Addingthespinnertothefragment
-Spinnerspinner=root.findViewById(R.id.tree_spinner);
-//CharSequenceArraywhichthespinnerwilldisplaytotheuser
-CharSequence[]name={"this","thing","that"};
-//Initialisethespinner
-ArrayAdapter<CharSequence>adapter=newArrayAdapter<>(requireContext(),android.R.layout.simple_spinner_dropdown_item);
-adapter.addAll(name);
-//Specifylayoutusedbythespinner
-adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//Applyadaptertothespinner
-spinner.setAdapter(adapter);
-//Addthemaptothefragment
-//Buildingthemap
-Contextctx=requireActivity().getApplicationContext();
-Configuration.getInstance().load(ctx,PreferenceManager.getDefaultSharedPreferences(ctx));
-MapAPImapAPI=newMapAPI();
-map=root.findViewById(R.id.map);
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        binding = FragmentEditTreeBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        //Adding the spinner to the fragment
+        Spinner spinner = root.findViewById(R.id.tree_spinner);
+        //CharSequence Array which the spinner will display to the user
+        CharSequence[] name ={"this","thing","that"};
+        //Initialise the spinner
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item);
+        adapter.addAll(name);
+        //Specify layout used by the spinner
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply adapter to the spinner
+        spinner.setAdapter(adapter);
+        //Add the map to the fragment
+        //Building the map
+        Context ctx = requireActivity().getApplicationContext();
+        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
+        MapAPI mapAPI = new MapAPI();
+        map = root.findViewById(R.id.map);
 
-//RequestPermissionsnecessaryformaptofunction.
-String[]Permissions={Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
-requestPermissionsIfNecessary(Permissions);
-map=mapAPI.buildMap(map,getContext());
-map.getController().setCenter(newGeoPoint(Config.locationAPI.latitude,Config.locationAPI.longitude));
-//Getusertextinput
-EditTexteditText=(EditText)root.findViewById(R.id.editName);
-System.out.println("Thisisedittext:"+editText);
-System.out.println(editText.getText());
-MaterialButtonbutton=binding.saveButton;
-System.out.println(button);
-button.setOnClickListener(v->{
-System.out.println("Theradusertappedthecoolbutton");
-System.out.println(editText.getText());
-});
-returnroot;
-}
-@Override
-publicvoidonDestroyView(){
-super.onDestroyView();
-binding=null;
-}
+        //Request Permissions necessary for map to function.
+        String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        requestPermissionsIfNecessary(Permissions);
+        map = mapAPI.buildMap(map, getContext());
+        map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
+        //Get user text input
+        EditText editText = (EditText) root.findViewById(R.id.editName);
+        System.out.println("This is edit text: " + editText);
+        System.out.println(editText.getText());
+        MaterialButton button = binding.saveButton;
+        System.out.println(button);
+        button.setOnClickListener(v -> {
+            System.out.println("The rad user tapped the cool button");
+            System.out.println(editText.getText());
+        });
+        return root;
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 
 
-@Override
-publicvoidonPause(){
-super.onPause();
-//Thiswillrefreshtheosmdroidconfigurationonresuming.
-map.onPause();
-}
+    @Override
+    public void onPause() {
+        super.onPause();
+        // This will refresh the osmdroid configuration on resuming.
+        map.onPause();
+    }
 
-@Override
-publicvoidonRequestPermissionsResult(intrequestCode,@NonNullString[]permissions,int[]grantResults){
-ArrayList<String>permissionsToRequest=newArrayList<>(Arrays.asList(permissions).subList(0,grantResults.length));
-if(permissionsToRequest.size()>0){
-ActivityCompat.requestPermissions(
-requireActivity(),
-permissionsToRequest.toArray(newString[0]),
-REQUEST_PERMISSIONS_REQUEST_CODE);
-}
-}
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
+        ArrayList<String> permissionsToRequest = new ArrayList<>(Arrays.asList(permissions).subList(0, grantResults.length));
+        if (permissionsToRequest.size() > 0) {
+            ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    permissionsToRequest.toArray(new String[0]),
+                    REQUEST_PERMISSIONS_REQUEST_CODE);
+        }
+    }
 
-privatevoidrequestPermissionsIfNecessary(String[]permissions){
-ArrayList<String>permissionsToRequest=newArrayList<>();
-for(Stringpermission:permissions){
-if(ContextCompat.checkSelfPermission(requireActivity(),permission)
-!=PackageManager.PERMISSION_GRANTED){
-//Permissionisnotgranted
-permissionsToRequest.add(permission);
-}
-}
-if(permissionsToRequest.size()>0){
-ActivityCompat.requestPermissions(
-requireActivity(),
-permissionsToRequest.toArray(newString[0]),
-REQUEST_PERMISSIONS_REQUEST_CODE);
-}
-}
+    private void requestPermissionsIfNecessary(String[] permissions) {
+        ArrayList<String> permissionsToRequest = new ArrayList<>();
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(requireActivity(), permission)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // Permission is not granted
+                permissionsToRequest.add(permission);
+            }
+        }
+        if (permissionsToRequest.size() > 0) {
+            ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    permissionsToRequest.toArray(new String[0]),
+                    REQUEST_PERMISSIONS_REQUEST_CODE);
+        }
+    }
 }

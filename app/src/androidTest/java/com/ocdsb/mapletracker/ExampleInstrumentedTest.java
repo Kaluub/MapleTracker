@@ -1,26 +1,26 @@
-packagecom.ocdsb.mapletracker;
+package com.ocdsb.mapletracker;
 
-importandroid.content.Context;
+import android.content.Context;
 
-importandroidx.test.platform.app.InstrumentationRegistry;
-importandroidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-importorg.junit.Test;
-importorg.junit.runner.RunWith;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-importstaticorg.junit.Assert.*;
+import static org.junit.Assert.*;
 
 /**
-*Instrumentedtest,whichwillexecuteonanAndroiddevice.
-*
-*@see<ahref="http://d.android.com/tools/testing">Testingdocumentation</a>
-*/
+ * Instrumented test, which will execute on an Android device.
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
 @RunWith(AndroidJUnit4.class)
-publicclassExampleInstrumentedTest{
-@Test
-publicvoiduseAppContext(){
-//Contextoftheappundertest.
-ContextappContext=InstrumentationRegistry.getInstrumentation().getTargetContext();
-assertEquals("com.ocdsb.mapletracker",appContext.getPackageName());
-}
+public class ExampleInstrumentedTest {
+    @Test
+    public void useAppContext() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("com.ocdsb.mapletracker", appContext.getPackageName());
+    }
 }

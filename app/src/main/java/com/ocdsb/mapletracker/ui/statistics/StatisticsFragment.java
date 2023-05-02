@@ -1,37 +1,37 @@
-packagecom.ocdsb.mapletracker.ui.statistics;
+package com.ocdsb.mapletracker.ui.statistics;
 
-importandroid.os.Bundle;
-importandroid.view.LayoutInflater;
-importandroid.view.View;
-importandroid.view.ViewGroup;
-importandroid.widget.TextView;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-importandroidx.annotation.NonNull;
-importandroidx.fragment.app.Fragment;
-importandroidx.lifecycle.ViewModelProvider;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
-importcom.ocdsb.mapletracker.databinding.FragmentStatisticsBinding;
+import com.ocdsb.mapletracker.databinding.FragmentStatisticsBinding;
 
-publicclassStatisticsFragmentextendsFragment{
+public class StatisticsFragment extends Fragment {
 
-privateFragmentStatisticsBindingbinding;
+    private FragmentStatisticsBinding binding;
 
-publicViewonCreateView(@NonNullLayoutInflaterinflater,
-ViewGroupcontainer,BundlesavedInstanceState){
-StatisticsViewModelstatisticsViewModel=
-newViewModelProvider(this).get(StatisticsViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        StatisticsViewModel statisticsViewModel =
+                new ViewModelProvider(this).get(StatisticsViewModel.class);
 
-binding=FragmentStatisticsBinding.inflate(inflater,container,false);
-Viewroot=binding.getRoot();
+        binding = FragmentStatisticsBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-finalTextViewtextView=binding.textStatistics;
-statisticsViewModel.getText().observe(getViewLifecycleOwner(),textView::setText);
-returnroot;
-}
+        final TextView textView = binding.textStatistics;
+        statisticsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        return root;
+    }
 
-@Override
-publicvoidonDestroyView(){
-super.onDestroyView();
-binding=null;
-}
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

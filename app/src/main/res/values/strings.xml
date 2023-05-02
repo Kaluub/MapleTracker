@@ -1,40 +1,40 @@
-<resourcesxmlns:tools="http://schemas.android.com/tools">
-<stringname="app_name">MapleTracker</string>
-<stringname="title_home">Home</string>
-<stringname="title_management">Management</string>
-<stringname="title_statistics">Statistics</string>
-<stringname="title_new_tree">NewTree</string>
-<stringname="title_edit_tree">EditTree</string>
-<stringname="temperature_default"translatable="false">…°C</string>
-<stringname="temperature_replace"translatable="false">%1$.1f°C</string>
-<stringname="new_tree">AddNewTree</string>
-<stringname="hello">Hello</string>
-<stringname="create_tree">CreateNewTree</string>
-<stringname="edit_tree">EditTree</string>
-<stringname="tree_name">TreeName</string>
-<stringname="edit_name">EditName</string>
-<stringname="save">Save</string>
-<stringname="syrup_collected">SyrupCollected</string>
-<stringname="new_name_default">NoName</string>
-<stringname="litres">Litres</string>
-<stringname="default_number"translatable="false">0.0</string>
-<stringname="splash_default"translatable="false">…</string>
-<string-arrayname="splash_good"tools:ignore="InconsistentArrays">
-<item>It\'sprimetappingtime!</item>
-<item>Thesapisflowing!</item>
-<item>Maplesyrupseasonishere!</item>
-<item>Trytappingsometrees!</item>
-<item>Thetreesarehardatwork.</item>
-<item>Syrupisonthetable!</item>
-</string-array>
-<string-arrayname="splash_bad"tools:ignore="InconsistentArrays">
-<item>Nosaptoday.</item>
-<item>Nosyruponthetableyet.</item>
-<item>Thetreesaretakingtheirbreak.</item>
-<item>Trytappinglater!</item>
-<item>Treesaren\'tonthejobrightnow.</item>
-<item>Leavethetreesalone!</item>
-<item>Cutthemsomeslack!</item>
-<item>It\'stheirnappingseasonnow.</item>
-</string-array>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Maple Tracker</string>
+    <string name="title_home">Home</string>
+    <string name="title_management">Management</string>
+    <string name="title_statistics">Statistics</string>
+    <string name="title_new_tree">New Tree</string>
+    <string name="title_edit_tree">Edit Tree</string>
+    <string name="temperature_default" translatable="false">…°C</string>
+    <string name="temperature_replace" translatable="false">%1$.1f°C</string>
+    <string name="new_tree">Add New Tree</string>
+    <string name="hello">Hello</string>
+    <string name="create_tree">Create New Tree</string>
+    <string name="edit_tree">Edit Tree</string>
+    <string name="tree_name">Tree Name</string>
+    <string name="edit_name">Edit Name</string>
+    <string name="save">Save</string>
+    <string name="syrup_collected">Syrup Collected</string>
+    <string name="new_name_default">No Name</string>
+    <string name="litres">Litres</string>
+    <string name="default_number" translatable="false">0.0</string>
+    <string name="splash_default" translatable="false">…</string>
+    <string-array name="splash_good" tools:ignore="InconsistentArrays">
+        <item>It\'s prime tapping time!</item>
+        <item>The sap is flowing!</item>
+        <item>Maple syrup season is here!</item>
+        <item>Try tapping some trees!</item>
+        <item>The trees are hard at work.</item>
+        <item>Syrup is on the table!</item>
+    </string-array>
+    <string-array name="splash_bad" tools:ignore="InconsistentArrays">
+        <item>No sap today.</item>
+        <item>No syrup on the table yet.</item>
+        <item>The trees are taking their break.</item>
+        <item>Try tapping later!</item>
+        <item>Trees aren\'t on the job right now.</item>
+        <item>Leave the trees alone!</item>
+        <item>Cut them some slack!</item>
+        <item>It\'s their napping season now.</item>
+    </string-array>
 </resources>

@@ -1,17 +1,17 @@
-packagecom.ocdsb.mapletracker;
+package com.ocdsb.mapletracker;
 
-importorg.junit.Test;
+import org.junit.Test;
 
-importstaticorg.junit.Assert.*;
+import static org.junit.Assert.*;
 
 /**
-*Examplelocalunittest,whichwillexecuteonthedevelopmentmachine(host).
-*
-*@see<ahref="http://d.android.com/tools/testing">Testingdocumentation</a>
-*/
-publicclassExampleUnitTest{
-@Test
-publicvoidaddition_isCorrect(){
-assertEquals(4,2+2);
-}
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
+public class ExampleUnitTest {
+    @Test
+    public void addition_isCorrect() {
+        assertEquals(4, 2 + 2);
+    }
 }

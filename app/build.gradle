@@ -1,64 +1,64 @@
-plugins{
-id'com.android.application'
+plugins {
+    id 'com.android.application'
 }
 
-android{
-namespace'com.ocdsb.mapletracker'
-compileSdk33
+android {
+    namespace 'com.ocdsb.mapletracker'
+    compileSdk 33
 
-defaultConfig{
-applicationId"com.ocdsb.mapletracker"
-minSdk24
-targetSdk33
-versionCode1
-versionName"1.0"
+    defaultConfig {
+        applicationId "com.ocdsb.mapletracker"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
 
-testInstrumentationRunner"androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
-buildTypes{
-release{
-minifyEnabledfalse
-proguardFilesgetDefaultProguardFile('proguard-android-optimize.txt'),'proguard-rules.pro'
-}
-}
-compileOptions{
-sourceCompatibilityJavaVersion.VERSION_1_8
-targetCompatibilityJavaVersion.VERSION_1_8
-}
-buildFeatures{
-viewBindingtrue
-}
-}
+dependencies {
 
-dependencies{
-
-implementation'androidx.appcompat:appcompat:1.6.1'
-implementation'com.google.android.material:material:1.8.0'
-implementation'androidx.constraintlayout:constraintlayout:2.1.4'
-implementation'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
-implementation'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
-implementation'androidx.navigation:navigation-fragment:2.5.3'
-implementation'androidx.navigation:navigation-ui:2.5.3'
-implementation'androidx.legacy:legacy-support-v4:1.0.0'
-testImplementation'junit:junit:4.13.2'
-androidTestImplementation'androidx.test.ext:junit:1.1.5'
-androidTestImplementation'androidx.test.espresso:espresso-core:3.5.1'
-//GooglePlayservicesprovidesalocationtool.
-implementation'com.google.android.gms:play-services-location:21.0.1'
-//GoogleGSONfortheJsonParser.
-implementation'com.google.code.gson:gson:2.10.1'
-//AddOSMdependencies
-implementation'org.osmdroid:osmdroid-android:6.1.8'
-//implementation'com.github.MKergall:osmbonuspack:6.4'
-//Adddependenciesforlegacysupporthttps://stackoverflow.com/questions/75263047/duplicate-class-in-kotlin-android
-constraints{
-//fixeserrorbyonlyallowinglatestversionofkotlin
-implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0"){
-because("kotlin-stdlib-jdk7isnowapartofkotlin-stdlib")
-}
-implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0"){
-because("kotlin-stdlib-jdk8isnowapartofkotlin-stdlib")
-}
-}
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // Google Play services provides a location tool.
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    // Google GSON for the JsonParser.
+    implementation 'com.google.code.gson:gson:2.10.1'
+    //Add OSM dependencies
+    implementation 'org.osmdroid:osmdroid-android:6.1.8'
+    //implementation 'com.github.MKergall:osmbonuspack:6.4'
+    //Add dependencies for legacy support https://stackoverflow.com/questions/75263047/duplicate-class-in-kotlin-android
+    constraints {
+        //fixes error by only allowing latest version of kotlin
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
 }
