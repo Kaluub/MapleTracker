@@ -86,13 +86,17 @@ public class MapAPI implements MapEventsReceiver {
             if (treeData.length() <= 0) {
                 continue;
             }
-            TreePin pin = TreePin.getFromFileLine(treeData);
-            treePins.add(pin);
-            GeoPoint geoPoint = new GeoPoint(pin.longitude, pin.latitude);
-            lookup.add(geoPoint);
-            Marker marker = new Marker(map);
-            marker.setPosition(geoPoint);
-            map.getOverlays().add(marker);
+            try {
+                TreePin pin = TreePin.getFromFileLine(treeData);
+                treePins.add(pin);
+                GeoPoint geoPoint = new GeoPoint(pin.longitude, pin.latitude);
+                lookup.add(geoPoint);
+                Marker marker = new Marker(map);
+                marker.setPosition(geoPoint);
+                map.getOverlays().add(marker);
+            } catch (Exception e) {
+                // The tree could not be read.
+            }
         }
     }
 
@@ -102,6 +106,7 @@ public class MapAPI implements MapEventsReceiver {
         for (TreePin pin : this.treePins) {
             store.append("\n").append(pin.saveToLine());
         }
+        System.out.println(store.toString());
         Config.fileManager.saveFile(map.getContext(), Config.fileName, store.toString());
     }
 

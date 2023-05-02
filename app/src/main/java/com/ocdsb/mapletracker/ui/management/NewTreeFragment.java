@@ -23,6 +23,7 @@ import com.google.android.material.button.MaterialButton;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
+import com.ocdsb.mapletracker.data.TreePin;
 import com.ocdsb.mapletracker.databinding.FragmentNewTreeBinding;
 
 import org.osmdroid.api.IMapController;
@@ -47,30 +48,38 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         binding = FragmentNewTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //Request Permissions necessary for map to function.
+        String [] Permissions = {
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
+        requestPermissionsIfNecessary(Permissions);
+
         //Building the map
         Context ctx = requireActivity().getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         MapAPI mapAPI = new MapAPI();
         map = root.findViewById(R.id.map);
-
-        //Request Permissions necessary for map to function.
-        String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        requestPermissionsIfNecessary(Permissions);
         map = mapAPI.buildMap(map, getContext());
         map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
+
+        mapAPI.loadPins();
+        for (TreePin pin : mapAPI.treePins) {
+            Marker treeMarker = new Marker(map);
+            treeMarker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
+            treeMarker.setTextIcon("T");
+            map.getOverlays().add(treeMarker);
+        }
+
         Marker marker = new Marker(map);
         marker.setPosition((GeoPoint) map.getMapCenter());
         map.getOverlays().add(marker);
 
-
         Overlay mOverlay = new Overlay() {
-
             @Override
             public boolean onScroll(MotionEvent pEvent1, MotionEvent pEvent2, float pDistanceX, float pDistanceY, MapView pMapView) {
-
                 marker.setPosition(new GeoPoint((float) pMapView.getMapCenter().getLatitude(),
                         (float) pMapView.getMapCenter().getLongitude()));
-
                 return super.onScroll(pEvent1, pEvent2, pDistanceX, pDistanceY, pMapView);
             }
         };
@@ -81,8 +90,14 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         //Add save button
         MaterialButton button = binding.saveButton2;
         button.setOnClickListener(v -> {
-            System.out.println("The rad user tapped the cool button");
-            System.out.println("From " + name.getText() + " at " + map.getMapCenter() + ", " + sap.getText() + " litres has been collected");
+            TreePin treePin = new TreePin();
+            treePin.name = name.getText().toString();
+            treePin.sapLitresCollectedTotal = Double.parseDouble(sap.getText().toString());
+            treePin.sapLitresCollectedResettable = treePin.sapLitresCollectedTotal;
+            treePin.latitude = map.getMapCenter().getLatitude();
+            treePin.longitude = map.getMapCenter().getLongitude();
+            mapAPI.treePins.add(treePin);
+            mapAPI.savePins();
         });
         return root;
     }
@@ -144,12 +159,4 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
     public boolean longPressHelper(GeoPoint p) {
         return false;
     }
-
-
-    /*@Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        NewTreeViewModel mViewModel = new ViewModelProvider(this).get(NewTreeViewModel.class);
-    }*/
-
 }

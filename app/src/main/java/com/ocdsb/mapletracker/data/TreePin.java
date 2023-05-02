@@ -17,9 +17,9 @@ public class TreePin {
     public int editsResettable = 0;
 
     public String saveToLine() {
-        return createdAt +
+        return createdAt.getTime() +
                 Config.fileSeparator +
-                editedAt +
+                editedAt.getTime() +
                 Config.fileSeparator +
                 name +
                 Config.fileSeparator +
@@ -39,8 +39,8 @@ public class TreePin {
     public static TreePin getFromFileLine(String line) {
         String[] data = line.split(",");
         TreePin pin = new TreePin();
-        pin.createdAt = data.length > 0 ? new Date(Integer.parseInt(data[0])) : new Date();
-        pin.editedAt = data.length > 1 ? new Date(Integer.parseInt(data[1])) : new Date();
+        pin.createdAt = data.length > 0 ? new Date(Long.parseLong(data[0])) : new Date();
+        pin.editedAt = data.length > 1 ? new Date(Long.parseLong(data[1])) : new Date();
         pin.name = data.length > 2 ? data[2] : "Default";
         pin.latitude = data.length > 3 ? Double.parseDouble(data[3]): 0.0;
         pin.longitude = data.length > 4 ? Double.parseDouble(data[4]) : 0.0;
