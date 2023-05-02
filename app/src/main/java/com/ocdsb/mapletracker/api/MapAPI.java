@@ -1,117 +1,117 @@
-package com.ocdsb.mapletracker.api;
+packagecom.ocdsb.mapletracker.api;
 
 
-import android.content.Context;
-import com.ocdsb.mapletracker.Config;
-import com.ocdsb.mapletracker.data.TreePin;
+importandroid.content.Context;
+importcom.ocdsb.mapletracker.Config;
+importcom.ocdsb.mapletracker.data.TreePin;
 
-import org.osmdroid.api.IMapController;
-import org.osmdroid.events.MapEventsReceiver;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.CustomZoomButtonsController;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Marker;
+importorg.osmdroid.api.IMapController;
+importorg.osmdroid.events.MapEventsReceiver;
+importorg.osmdroid.tileprovider.tilesource.TileSourceFactory;
+importorg.osmdroid.util.GeoPoint;
+importorg.osmdroid.views.CustomZoomButtonsController;
+importorg.osmdroid.views.MapView;
+importorg.osmdroid.views.overlay.Marker;
 
-import java.util.ArrayList;
+importjava.util.ArrayList;
 
-public class MapAPI implements MapEventsReceiver {
-    private MapView map = null;
-    public ArrayList<GeoPoint> lookup = new ArrayList<>();
-    public ArrayList<TreePin> treePins = new ArrayList<>();
+publicclassMapAPIimplementsMapEventsReceiver{
+privateMapViewmap=null;
+publicArrayList<GeoPoint>lookup=newArrayList<>();
+publicArrayList<TreePin>treePins=newArrayList<>();
 
-    public MapView buildMap (MapView m, Context c){
-        map = m;
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        //Giving the user the ability to zoom the map
-        map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
-        map.setMultiTouchControls(true);
-        //Changing the default map location and zoom
-        IMapController mapController = map.getController();
-        mapController.setZoom(10.0);
-        //mapController.setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
-        loadPins();
-        //MapView mMapView = new MapView(inflater.getContext());
-        //allow user to add pins -- this should probably be moved to the fragment where it is used
-        /*MapEventsReceiver mReceive = new MapEventsReceiver() {
-            @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if(lookup.contains(p)) {
-                    System.out.println(p + " already has a pin");
-                    return false;
-                }
-                Marker startMarker = new Marker(map);
-                startMarker.setPosition(p);
-                startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-                map.getOverlays().add(startMarker);
-                lookup.add(p);
-                return true;
-            }
+publicMapViewbuildMap(MapViewm,Contextc){
+map=m;
+map.setTileSource(TileSourceFactory.MAPNIK);
+//Givingtheusertheabilitytozoomthemap
+map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
+map.setMultiTouchControls(true);
+//Changingthedefaultmaplocationandzoom
+IMapControllermapController=map.getController();
+mapController.setZoom(10.0);
+//mapController.setCenter(newGeoPoint(Config.locationAPI.latitude,Config.locationAPI.longitude));
+loadPins();
+//MapViewmMapView=newMapView(inflater.getContext());
+//allowusertoaddpins--thisshouldprobablybemovedtothefragmentwhereitisused
+/*MapEventsReceivermReceive=newMapEventsReceiver(){
+@Override
+publicbooleansingleTapConfirmedHelper(GeoPointp){
+if(lookup.contains(p)){
+System.out.println(p+"alreadyhasapin");
+returnfalse;
+}
+MarkerstartMarker=newMarker(map);
+startMarker.setPosition(p);
+startMarker.setAnchor(Marker.ANCHOR_CENTER,Marker.ANCHOR_CENTER);
+map.getOverlays().add(startMarker);
+lookup.add(p);
+returntrue;
+}
 
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                return false;
-            }
-        }; */
-
-
-        //MapEventsOverlay OverlayEvents = new MapEventsOverlay(c, mReceive);
-        //map.getOverlays().add(OverlayEvents);
+@Override
+publicbooleanlongPressHelper(GeoPointp){
+returnfalse;
+}
+};*/
 
 
-        //map.setTileSource(TileSourceFactory.MAPNIK);
-        return map;
-    }
+//MapEventsOverlayOverlayEvents=newMapEventsOverlay(c,mReceive);
+//map.getOverlays().add(OverlayEvents);
 
 
-    @Override
-    public boolean singleTapConfirmedHelper(GeoPoint p) {
-        IMapController mapController = map.getController();
-        mapController.animateTo(p);
-        Marker startMarker = new Marker(map);
-        startMarker.setPosition(p);
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-        map.getOverlays().add(startMarker);
-        savePins();
-        return true;
-    }
+//map.setTileSource(TileSourceFactory.MAPNIK);
+returnmap;
+}
 
-    public void loadPins() {
-        String store = Config.fileManager.readFile(map.getContext(), Config.fileName);
-        if (store == null) {
-            System.out.println("Pins is null");
-            return;
-        }
-        for (String treeData : store.split("\n")) {
-            if (treeData.length() <= 0) {
-                continue;
-            }
-            try {
-                TreePin pin = TreePin.getFromFileLine(treeData);
-                treePins.add(pin);
-                GeoPoint geoPoint = new GeoPoint(pin.longitude, pin.latitude);
-                lookup.add(geoPoint);
-                Marker marker = new Marker(map);
-                marker.setPosition(geoPoint);
-                map.getOverlays().add(marker);
-            } catch (Exception e) {
-                // The tree could not be read.
-            }
-        }
-    }
 
-    public void savePins() {
-        System.out.println("Store Pins Method has been called");
-        StringBuilder store = new StringBuilder();
-        for (TreePin pin : this.treePins) {
-            store.append("\n").append(pin.saveToLine());
-        }
-        System.out.println(store.toString());
-        Config.fileManager.saveFile(map.getContext(), Config.fileName, store.toString());
-    }
+@Override
+publicbooleansingleTapConfirmedHelper(GeoPointp){
+IMapControllermapController=map.getController();
+mapController.animateTo(p);
+MarkerstartMarker=newMarker(map);
+startMarker.setPosition(p);
+startMarker.setAnchor(Marker.ANCHOR_CENTER,Marker.ANCHOR_CENTER);
+map.getOverlays().add(startMarker);
+savePins();
+returntrue;
+}
 
-    @Override
-    public boolean longPressHelper(GeoPoint p) {
-        return false;
-    }
+publicvoidloadPins(){
+Stringstore=Config.fileManager.readFile(map.getContext(),Config.fileName);
+if(store==null){
+System.out.println("Pinsisnull");
+return;
+}
+for(StringtreeData:store.split("\n")){
+if(treeData.length()<=0){
+continue;
+}
+try{
+TreePinpin=TreePin.getFromFileLine(treeData);
+treePins.add(pin);
+GeoPointgeoPoint=newGeoPoint(pin.longitude,pin.latitude);
+lookup.add(geoPoint);
+Markermarker=newMarker(map);
+marker.setPosition(geoPoint);
+map.getOverlays().add(marker);
+}catch(Exceptione){
+//Thetreecouldnotberead.
+}
+}
+}
+
+publicvoidsavePins(){
+System.out.println("StorePinsMethodhasbeencalled");
+StringBuilderstore=newStringBuilder();
+for(TreePinpin:this.treePins){
+store.append("\n").append(pin.saveToLine());
+}
+System.out.println(store.toString());
+Config.fileManager.saveFile(map.getContext(),Config.fileName,store.toString());
+}
+
+@Override
+publicbooleanlongPressHelper(GeoPointp){
+returnfalse;
+}
 }

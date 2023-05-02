@@ -1,50 +1,50 @@
-package com.ocdsb.mapletracker.api;
+packagecom.ocdsb.mapletracker.api;
 
-import android.content.Context;
+importandroid.content.Context;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+importjava.io.BufferedReader;
+importjava.io.FileInputStream;
+importjava.io.FileOutputStream;
+importjava.io.IOException;
+importjava.io.InputStreamReader;
+importjava.nio.charset.StandardCharsets;
 
-public class FileManager {
-    public FileManager() {}
+publicclassFileManager{
+publicFileManager(){}
 
-    public String readFile(Context context, String fileName) {
-        // Read the contents of a filename (stored in internal Android storage).
-        String contents;
-        try (FileInputStream fis = context.openFileInput(fileName)) {
-            InputStreamReader inputStreamReader =
-                    new InputStreamReader(fis, StandardCharsets.UTF_8);
-            StringBuilder stringBuilder = new StringBuilder();
-            // Read chunk by chunk from the file.
-            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
-                String line = reader.readLine();
-                while (line != null) {
-                    stringBuilder.append(line).append('\n');
-                    line = reader.readLine();
-                }
-            } catch (IOException e) {
-                System.out.println("IO exception while READING file");
-                return null;
-            } finally {
-                contents = stringBuilder.toString();
-            }
-        } catch (IOException e) {
-            System.out.println("IO exception while READING file");
-            return null;
-        }
-        return contents;
-    }
+publicStringreadFile(Contextcontext,StringfileName){
+//Readthecontentsofafilename(storedininternalAndroidstorage).
+Stringcontents;
+try(FileInputStreamfis=context.openFileInput(fileName)){
+InputStreamReaderinputStreamReader=
+newInputStreamReader(fis,StandardCharsets.UTF_8);
+StringBuilderstringBuilder=newStringBuilder();
+//Readchunkbychunkfromthefile.
+try(BufferedReaderreader=newBufferedReader(inputStreamReader)){
+Stringline=reader.readLine();
+while(line!=null){
+stringBuilder.append(line).append('\n');
+line=reader.readLine();
+}
+}catch(IOExceptione){
+System.out.println("IOexceptionwhileREADINGfile");
+returnnull;
+}finally{
+contents=stringBuilder.toString();
+}
+}catch(IOExceptione){
+System.out.println("IOexceptionwhileREADINGfile");
+returnnull;
+}
+returncontents;
+}
 
-    public void saveFile(Context context, String fileName, String content) {
-        // Save a file to the internal Android storage.
-        try (FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE)) {
-            fos.write(content.getBytes(StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            System.out.println("IO exception while WRITING file");
-        }
-    }
+publicvoidsaveFile(Contextcontext,StringfileName,Stringcontent){
+//SaveafiletotheinternalAndroidstorage.
+try(FileOutputStreamfos=context.openFileOutput(fileName,Context.MODE_PRIVATE)){
+fos.write(content.getBytes(StandardCharsets.UTF_8));
+}catch(IOExceptione){
+System.out.println("IOexceptionwhileWRITINGfile");
+}
+}
 }

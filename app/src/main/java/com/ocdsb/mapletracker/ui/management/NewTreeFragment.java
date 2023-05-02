@@ -1,162 +1,162 @@
-package com.ocdsb.mapletracker.ui.management;
+packagecom.ocdsb.mapletracker.ui.management;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+importandroidx.core.app.ActivityCompat;
+importandroidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
+importandroid.Manifest;
+importandroid.content.Context;
+importandroid.content.pm.PackageManager;
+importandroid.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+importandroidx.annotation.NonNull;
+importandroidx.annotation.Nullable;
+importandroidx.fragment.app.Fragment;
 
-import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
+importandroid.preference.PreferenceManager;
+importandroid.view.LayoutInflater;
+importandroid.view.MotionEvent;
+importandroid.view.View;
+importandroid.view.ViewGroup;
+importandroid.widget.EditText;
 
-import com.google.android.material.button.MaterialButton;
-import com.ocdsb.mapletracker.Config;
-import com.ocdsb.mapletracker.R;
-import com.ocdsb.mapletracker.api.MapAPI;
-import com.ocdsb.mapletracker.data.TreePin;
-import com.ocdsb.mapletracker.databinding.FragmentNewTreeBinding;
+importcom.google.android.material.button.MaterialButton;
+importcom.ocdsb.mapletracker.Config;
+importcom.ocdsb.mapletracker.R;
+importcom.ocdsb.mapletracker.api.MapAPI;
+importcom.ocdsb.mapletracker.data.TreePin;
+importcom.ocdsb.mapletracker.databinding.FragmentNewTreeBinding;
 
-import org.osmdroid.api.IMapController;
-import org.osmdroid.config.Configuration;
-import org.osmdroid.events.MapEventsReceiver;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.Overlay;
+importorg.osmdroid.api.IMapController;
+importorg.osmdroid.config.Configuration;
+importorg.osmdroid.events.MapEventsReceiver;
+importorg.osmdroid.util.GeoPoint;
+importorg.osmdroid.views.MapView;
+importorg.osmdroid.views.overlay.Marker;
+importorg.osmdroid.views.overlay.Overlay;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+importjava.util.ArrayList;
+importjava.util.Arrays;
 
-public class NewTreeFragment extends Fragment implements MapEventsReceiver {
-    private FragmentNewTreeBinding binding;
-    private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
-    private MapView map = null;
+publicclassNewTreeFragmentextendsFragmentimplementsMapEventsReceiver{
+privateFragmentNewTreeBindingbinding;
+privatefinalintREQUEST_PERMISSIONS_REQUEST_CODE=1;
+privateMapViewmap=null;
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        binding = FragmentNewTreeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+@Override
+publicViewonCreateView(@NonNullLayoutInflaterinflater,@NullableViewGroupcontainer,
+@NullableBundlesavedInstanceState){
+binding=FragmentNewTreeBinding.inflate(inflater,container,false);
+Viewroot=binding.getRoot();
 
-        //Request Permissions necessary for map to function.
-        String [] Permissions = {
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        };
-        requestPermissionsIfNecessary(Permissions);
+//RequestPermissionsnecessaryformaptofunction.
+String[]Permissions={
+Manifest.permission.ACCESS_FINE_LOCATION,
+Manifest.permission.WRITE_EXTERNAL_STORAGE
+};
+requestPermissionsIfNecessary(Permissions);
 
-        //Building the map
-        Context ctx = requireActivity().getApplicationContext();
-        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-        MapAPI mapAPI = new MapAPI();
-        map = root.findViewById(R.id.map);
-        map = mapAPI.buildMap(map, getContext());
-        map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
+//Buildingthemap
+Contextctx=requireActivity().getApplicationContext();
+Configuration.getInstance().load(ctx,PreferenceManager.getDefaultSharedPreferences(ctx));
+MapAPImapAPI=newMapAPI();
+map=root.findViewById(R.id.map);
+map=mapAPI.buildMap(map,getContext());
+map.getController().setCenter(newGeoPoint(Config.locationAPI.latitude,Config.locationAPI.longitude));
 
-        mapAPI.loadPins();
-        for (TreePin pin : mapAPI.treePins) {
-            Marker treeMarker = new Marker(map);
-            treeMarker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
-            treeMarker.setTextIcon("T");
-            map.getOverlays().add(treeMarker);
-        }
+mapAPI.loadPins();
+for(TreePinpin:mapAPI.treePins){
+MarkertreeMarker=newMarker(map);
+treeMarker.setPosition(newGeoPoint(pin.latitude,pin.longitude));
+treeMarker.setTextIcon("T");
+map.getOverlays().add(treeMarker);
+}
 
-        Marker marker = new Marker(map);
-        marker.setPosition((GeoPoint) map.getMapCenter());
-        map.getOverlays().add(marker);
+Markermarker=newMarker(map);
+marker.setPosition((GeoPoint)map.getMapCenter());
+map.getOverlays().add(marker);
 
-        Overlay mOverlay = new Overlay() {
-            @Override
-            public boolean onScroll(MotionEvent pEvent1, MotionEvent pEvent2, float pDistanceX, float pDistanceY, MapView pMapView) {
-                marker.setPosition(new GeoPoint((float) pMapView.getMapCenter().getLatitude(),
-                        (float) pMapView.getMapCenter().getLongitude()));
-                return super.onScroll(pEvent1, pEvent2, pDistanceX, pDistanceY, pMapView);
-            }
-        };
-        map.getOverlays().add(mOverlay);
-        //Add user text input
-        EditText name = root.findViewById(R.id.addName);
-        EditText sap = root.findViewById(R.id.add_collected);
-        //Add save button
-        MaterialButton button = binding.saveButton2;
-        button.setOnClickListener(v -> {
-            TreePin treePin = new TreePin();
-            treePin.name = name.getText().toString();
-            treePin.sapLitresCollectedTotal = Double.parseDouble(sap.getText().toString());
-            treePin.sapLitresCollectedResettable = treePin.sapLitresCollectedTotal;
-            treePin.latitude = map.getMapCenter().getLatitude();
-            treePin.longitude = map.getMapCenter().getLongitude();
-            mapAPI.treePins.add(treePin);
-            mapAPI.savePins();
-        });
-        return root;
-    }
+OverlaymOverlay=newOverlay(){
+@Override
+publicbooleanonScroll(MotionEventpEvent1,MotionEventpEvent2,floatpDistanceX,floatpDistanceY,MapViewpMapView){
+marker.setPosition(newGeoPoint((float)pMapView.getMapCenter().getLatitude(),
+(float)pMapView.getMapCenter().getLongitude()));
+returnsuper.onScroll(pEvent1,pEvent2,pDistanceX,pDistanceY,pMapView);
+}
+};
+map.getOverlays().add(mOverlay);
+//Addusertextinput
+EditTextname=root.findViewById(R.id.addName);
+EditTextsap=root.findViewById(R.id.add_collected);
+//Addsavebutton
+MaterialButtonbutton=binding.saveButton2;
+button.setOnClickListener(v->{
+TreePintreePin=newTreePin();
+treePin.name=name.getText().toString();
+treePin.sapLitresCollectedTotal=Double.parseDouble(sap.getText().toString());
+treePin.sapLitresCollectedResettable=treePin.sapLitresCollectedTotal;
+treePin.latitude=map.getMapCenter().getLatitude();
+treePin.longitude=map.getMapCenter().getLongitude();
+mapAPI.treePins.add(treePin);
+mapAPI.savePins();
+});
+returnroot;
+}
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+@Override
+publicvoidonDestroyView(){
+super.onDestroyView();
+binding=null;
+}
 
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        // This will refresh the osmdroid configuration on resuming.
-        map.onPause();
-    }
+@Override
+publicvoidonPause(){
+super.onPause();
+//Thiswillrefreshtheosmdroidconfigurationonresuming.
+map.onPause();
+}
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
-        ArrayList<String> permissionsToRequest = new ArrayList<>(Arrays.asList(permissions).subList(0, grantResults.length));
-        if (permissionsToRequest.size() > 0) {
-            ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    permissionsToRequest.toArray(new String[0]),
-                    REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
-    }
+@Override
+publicvoidonRequestPermissionsResult(intrequestCode,@NonNullString[]permissions,int[]grantResults){
+ArrayList<String>permissionsToRequest=newArrayList<>(Arrays.asList(permissions).subList(0,grantResults.length));
+if(permissionsToRequest.size()>0){
+ActivityCompat.requestPermissions(
+requireActivity(),
+permissionsToRequest.toArray(newString[0]),
+REQUEST_PERMISSIONS_REQUEST_CODE);
+}
+}
 
-    private void requestPermissionsIfNecessary(String[] permissions) {
-        ArrayList<String> permissionsToRequest = new ArrayList<>();
-        for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(requireActivity(), permission)
-                    != PackageManager.PERMISSION_GRANTED) {
-                // Permission is not granted
-                permissionsToRequest.add(permission);
-            }
-        }
-        if (permissionsToRequest.size() > 0) {
-            ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    permissionsToRequest.toArray(new String[0]),
-                    REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
-    }
-    @Override
-    public boolean singleTapConfirmedHelper(GeoPoint p) {
-        IMapController mapController = map.getController();
-        mapController.animateTo(p);
-        Marker startMarker = new Marker(map);
-        startMarker.setPosition(p);
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-        map.getOverlays().add(startMarker);
-        System.out.println(p);
-        return true;
-    }
+privatevoidrequestPermissionsIfNecessary(String[]permissions){
+ArrayList<String>permissionsToRequest=newArrayList<>();
+for(Stringpermission:permissions){
+if(ContextCompat.checkSelfPermission(requireActivity(),permission)
+!=PackageManager.PERMISSION_GRANTED){
+//Permissionisnotgranted
+permissionsToRequest.add(permission);
+}
+}
+if(permissionsToRequest.size()>0){
+ActivityCompat.requestPermissions(
+requireActivity(),
+permissionsToRequest.toArray(newString[0]),
+REQUEST_PERMISSIONS_REQUEST_CODE);
+}
+}
+@Override
+publicbooleansingleTapConfirmedHelper(GeoPointp){
+IMapControllermapController=map.getController();
+mapController.animateTo(p);
+MarkerstartMarker=newMarker(map);
+startMarker.setPosition(p);
+startMarker.setAnchor(Marker.ANCHOR_CENTER,Marker.ANCHOR_CENTER);
+map.getOverlays().add(startMarker);
+System.out.println(p);
+returntrue;
+}
 
-    @Override
-    public boolean longPressHelper(GeoPoint p) {
-        return false;
-    }
+@Override
+publicbooleanlongPressHelper(GeoPointp){
+returnfalse;
+}
 }

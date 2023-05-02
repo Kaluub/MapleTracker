@@ -1,47 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+<?xmlversion="1.0"encoding="utf-8"?>
+<navigationxmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/mobile_navigation"
+app:startDestination="@+id/navigation_home">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.ocdsb.mapletracker.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+<fragment
+android:id="@+id/navigation_home"
+android:name="com.ocdsb.mapletracker.ui.home.HomeFragment"
+android:label="@string/title_home"
+tools:layout="@layout/fragment_home"/>
 
-    <fragment
-        android:id="@+id/navigation_management"
-        android:name="com.ocdsb.mapletracker.ui.management.ManagementFragment"
-        android:label="@string/title_management"
-        tools:layout="@layout/fragment_management" >
-    <action
-        android:id="@+id/action_Management_to_NewTree"
-        app:destination="@id/navigation_new_tree"
-        />
-    <action
-        android:id="@+id/action_Management_to_Edit"
-        app:destination="@id/navigation_edit_tree"
-        />
+<fragment
+android:id="@+id/navigation_management"
+android:name="com.ocdsb.mapletracker.ui.management.ManagementFragment"
+android:label="@string/title_management"
+tools:layout="@layout/fragment_management">
+<action
+android:id="@+id/action_Management_to_NewTree"
+app:destination="@id/navigation_new_tree"
+/>
+<action
+android:id="@+id/action_Management_to_Edit"
+app:destination="@id/navigation_edit_tree"
+/>
 
-    </fragment>
+</fragment>
 
 
-    <fragment
-        android:id="@+id/navigation_new_tree"
-        android:name="com.ocdsb.mapletracker.ui.management.NewTreeFragment"
-        android:label="@string/title_new_tree"
-        tools:layout="@layout/fragment_new_tree" />
-    <fragment
-        android:id="@+id/navigation_edit_tree"
-        android:name="com.ocdsb.mapletracker.ui.management.EditTreeFragment"
-        android:label="@string/title_edit_tree"
-        tools:layout="@layout/fragment_edit_tree" />
+<fragment
+android:id="@+id/navigation_new_tree"
+android:name="com.ocdsb.mapletracker.ui.management.NewTreeFragment"
+android:label="@string/title_new_tree"
+tools:layout="@layout/fragment_new_tree"/>
+<fragment
+android:id="@+id/navigation_edit_tree"
+android:name="com.ocdsb.mapletracker.ui.management.EditTreeFragment"
+android:label="@string/title_edit_tree"
+tools:layout="@layout/fragment_edit_tree"/>
 
-    <fragment
-        android:id="@+id/navigation_statistics"
-        android:name="com.ocdsb.mapletracker.ui.statistics.StatisticsFragment"
-        android:label="@string/title_statistics"
-        tools:layout="@layout/fragment_statistics" />
+<fragment
+android:id="@+id/navigation_statistics"
+android:name="com.ocdsb.mapletracker.ui.statistics.StatisticsFragment"
+android:label="@string/title_statistics"
+tools:layout="@layout/fragment_statistics"/>
 </navigation>

@@ -1,81 +1,81 @@
-package com.ocdsb.mapletracker.api;
+packagecom.ocdsb.mapletracker.api;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+importcom.google.gson.JsonObject;
+importcom.google.gson.JsonParser;
 
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
+importorg.w3c.dom.Document;
+importorg.xml.sax.InputSource;
+importorg.xml.sax.SAXException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+importjava.io.BufferedReader;
+importjava.io.IOException;
+importjava.io.InputStreamReader;
+importjava.io.StringReader;
+importjava.net.HttpURLConnection;
+importjava.net.URL;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+importjavax.xml.parsers.DocumentBuilder;
+importjavax.xml.parsers.DocumentBuilderFactory;
+importjavax.xml.parsers.ParserConfigurationException;
 
-public class Parser {
-    public Parser() {}
+publicclassParser{
+publicParser(){}
 
-    public Document getXMLFromURL(String address) {
-        // Parses an XML file online to a Document.
-        try {
-            // Open the connection.
-            URL url = new URL(address);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
+publicDocumentgetXMLFromURL(Stringaddress){
+//ParsesanXMLfileonlinetoaDocument.
+try{
+//Opentheconnection.
+URLurl=newURL(address);
+HttpURLConnectioncon=(HttpURLConnection)url.openConnection();
+con.setRequestMethod("GET");
 
-            // Read.
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(con.getInputStream())
-            );
+//Read.
+BufferedReaderreader=newBufferedReader(
+newInputStreamReader(con.getInputStream())
+);
 
-            StringBuilder content = new StringBuilder();
-            while (true) {
-                String inputLine = reader.readLine();
-                if (inputLine == null)
-                    break;
-                content.append(inputLine);
-            }
-            reader.close();
+StringBuildercontent=newStringBuilder();
+while(true){
+StringinputLine=reader.readLine();
+if(inputLine==null)
+break;
+content.append(inputLine);
+}
+reader.close();
 
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
+DocumentBuilderFactoryfactory=DocumentBuilderFactory.newInstance();
+DocumentBuilderbuilder=factory.newDocumentBuilder();
 
-            // Parse and return a Document.
-            return builder.parse(
-                    new InputSource(
-                            new StringReader(String.valueOf(content))
-                    )
-            );
-        } catch (IOException | SAXException | ParserConfigurationException e) {
-            // In case of any exceptions, we have nothing to return.
-            return null;
-        }
-    }
+//ParseandreturnaDocument.
+returnbuilder.parse(
+newInputSource(
+newStringReader(String.valueOf(content))
+)
+);
+}catch(IOException|SAXException|ParserConfigurationExceptione){
+//Incaseofanyexceptions,wehavenothingtoreturn.
+returnnull;
+}
+}
 
-    public JsonObject getJSONFromURL(String address) {
-        // Parses a JSON document to a JsonObject instance.
-        try {
-            // Open the connection.
-            URL url = new URL(address);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
+publicJsonObjectgetJSONFromURL(Stringaddress){
+//ParsesaJSONdocumenttoaJsonObjectinstance.
+try{
+//Opentheconnection.
+URLurl=newURL(address);
+HttpURLConnectioncon=(HttpURLConnection)url.openConnection();
+con.setRequestMethod("GET");
 
-            // Read.
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(con.getInputStream())
-            );
+//Read.
+BufferedReaderreader=newBufferedReader(
+newInputStreamReader(con.getInputStream())
+);
 
-            // Parse JSON.
-            return JsonParser.parseReader(reader).getAsJsonObject();
-        } catch (IOException e) {
-            // In case of any exceptions, we have nothing to return.
-            return null;
-        }
-    }
+//ParseJSON.
+returnJsonParser.parseReader(reader).getAsJsonObject();
+}catch(IOExceptione){
+//Incaseofanyexceptions,wehavenothingtoreturn.
+returnnull;
+}
+}
 }

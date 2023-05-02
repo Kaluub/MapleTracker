@@ -1,19 +1,19 @@
-package com.ocdsb.mapletracker;
+packagecom.ocdsb.mapletracker;
 
-import com.ocdsb.mapletracker.api.FileManager;
-import com.ocdsb.mapletracker.api.LocationAPI;
-import com.ocdsb.mapletracker.data.StationResult;
-import com.ocdsb.mapletracker.api.WeatherAPI;
+importcom.ocdsb.mapletracker.api.FileManager;
+importcom.ocdsb.mapletracker.api.LocationAPI;
+importcom.ocdsb.mapletracker.data.StationResult;
+importcom.ocdsb.mapletracker.api.WeatherAPI;
 
-public class Config {
-    // Tools and settings.
-    public static final Boolean debugMode = true;
-    public static Boolean useFakeTemperature = false;
-    public static String fileName = "pins";
-    public static String fileSeparator = ",";
-    // Class instances.
-    public static LocationAPI locationAPI = new LocationAPI();
-    public static WeatherAPI weatherAPI = new WeatherAPI();
-    public static FileManager fileManager = new FileManager();
-    public static StationResult stationResult = null;
+publicclassConfig{
+//Toolsandsettings.
+publicstaticfinalBooleandebugMode=true;
+publicstaticBooleanuseFakeTemperature=false;
+publicstaticStringfileName="pins";
+publicstaticStringfileSeparator=",";
+//Classinstances.
+publicstaticLocationAPIlocationAPI=newLocationAPI();
+publicstaticWeatherAPIweatherAPI=newWeatherAPI();
+publicstaticFileManagerfileManager=newFileManager();
+publicstaticStationResultstationResult=null;
 }

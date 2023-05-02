@@ -1,19 +1,19 @@
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+pluginManagement{
+repositories{
+google()
+mavenCentral()
+gradlePluginPortal()
 }
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        //jcenter()
-        mavenCentral()
-        //mavenLocal()
-        //maven { url "https://jitpack.io" }
-    }
 }
-rootProject.name = "Maple Tracker"
-include ':app'
+dependencyResolutionManagement{
+repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+repositories{
+google()
+//jcenter()
+mavenCentral()
+//mavenLocal()
+//maven{url"https://jitpack.io"}
+}
+}
+rootProject.name="MapleTracker"
+include':app'

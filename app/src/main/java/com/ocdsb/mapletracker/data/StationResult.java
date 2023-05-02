@@ -1,14 +1,14 @@
-package com.ocdsb.mapletracker.data;
+packagecom.ocdsb.mapletracker.data;
 
-import java.util.Date;
+importjava.util.Date;
 
-public class StationResult {
-    // Stores the used results from fetching with the WeatherAPI.
-    public Date createdAt = new Date();
-    public double temperature;
-    public double high;
-    public double low;
-    public String stationID;
-    public String provinceCode;
+publicclassStationResult{
+//StorestheusedresultsfromfetchingwiththeWeatherAPI.
+publicDatecreatedAt=newDate();
+publicdoubletemperature;
+publicdoublehigh;
+publicdoublelow;
+publicStringstationID;
+publicStringprovinceCode;
 }
 

@@ -1,29 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="title_home">Accueil</string>
-    <string name="title_management">Modifications</string>
-    <string name="title_statistics">Statistiques</string>
-    <string name="title_new_tree">Nouvelle arbre</string>
-    <string name="app_name">Trackeur d\'érable</string>
-    <string name="title_edit_tree">Modifier une arbre</string>
-    <string name="new_tree">Ajouter une nouvelle arbre</string>
-    <string name="hello">Bonjour</string>
-    <string name="create_tree">Créer une nouvelle arbre</string>
-    <string name="edit_tree">Modifier une arbre</string>
-    <string name="tree_name">Nom d\'arbre</string>
-    <string name="edit_name">Modifier le nom</string>
-    <string name="save">Sauvegarde</string>
-    <string name="syrup_collected">Syrop ramassé</string>
-    <string name="new_name_default">Sans nom</string>
-    <string name="litres">Litres</string>
-    <string-array name="splash_good" tools:ignore="InconsistentArrays">
-        <item>C\'est le propre saison!</item>
-        <item>L\'érable se coule!</item>
-        <item>Les arbres sont prètes!</item>
-    </string-array>
-    <string-array name="splash_bad" tools:ignore="InconsistentArrays">
-        <item>On n\'a pas d\'érable.</item>
-        <item>Les arbres prend leur repos.</item>
-        <item>Ne touche pas les arbres!</item>
-    </string-array>
+<?xmlversion="1.0"encoding="utf-8"?>
+<resourcesxmlns:tools="http://schemas.android.com/tools">
+<stringname="title_home">Accueil</string>
+<stringname="title_management">Modifications</string>
+<stringname="title_statistics">Statistiques</string>
+<stringname="title_new_tree">Nouvellearbre</string>
+<stringname="app_name">Trackeurd\'érable</string>
+<stringname="title_edit_tree">Modifierunearbre</string>
+<stringname="new_tree">Ajouterunenouvellearbre</string>
+<stringname="hello">Bonjour</string>
+<stringname="create_tree">Créerunenouvellearbre</string>
+<stringname="edit_tree">Modifierunearbre</string>
+<stringname="tree_name">Nomd\'arbre</string>
+<stringname="edit_name">Modifierlenom</string>
+<stringname="save">Sauvegarde</string>
+<stringname="syrup_collected">Syropramassé</string>
+<stringname="new_name_default">Sansnom</string>
+<stringname="litres">Litres</string>
+<string-arrayname="splash_good"tools:ignore="InconsistentArrays">
+<item>C\'estlepropresaison!</item>
+<item>L\'érablesecoule!</item>
+<item>Lesarbressontprètes!</item>
+</string-array>
+<string-arrayname="splash_bad"tools:ignore="InconsistentArrays">
+<item>Onn\'apasd\'érable.</item>
+<item>Lesarbresprendleurrepos.</item>
+<item>Netouchepaslesarbres!</item>
+</string-array>
 </resources>
