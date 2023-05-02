@@ -16,7 +16,9 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.google.android.material.button.MaterialButton;
 import com.ocdsb.mapletracker.Config;
@@ -41,6 +43,17 @@ public class EditTreeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentEditTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        //Adding the spinner to the fragment
+        Spinner spinner = root.findViewById(R.id.tree_spinner);
+        //CharSequence Array which the spinner will display to the user
+        CharSequence[] name ={"this","thing","that"};
+        //Initialise the spinner
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item);
+        adapter.addAll(name);
+        //Specify layout used by the spinner
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply adapter to the spinner
+        spinner.setAdapter(adapter);
         //Add the map to the fragment
         //Building the map
         Context ctx = requireActivity().getApplicationContext();

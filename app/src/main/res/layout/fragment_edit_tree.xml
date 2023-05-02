@@ -19,6 +19,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <Spinner
+        android:id="@+id/tree_spinner"
+        style="@style/Theme.MapleTracker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <org.osmdroid.views.MapView
         android:id="@+id/map"
         android:layout_width="300dp"
@@ -34,7 +43,7 @@
         android:id="@+id/editName"
         android:inputType="textCapSentences|textAutoCorrect"
         android:imeOptions="actionSend"
-        android:layout_width="90dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:textSize="20sp"
