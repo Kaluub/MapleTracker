@@ -24,6 +24,7 @@ import com.google.android.material.button.MaterialButton;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
+import com.ocdsb.mapletracker.data.TreePin;
 import com.ocdsb.mapletracker.databinding.FragmentEditTreeBinding;
 
 import org.osmdroid.config.Configuration;
@@ -43,17 +44,6 @@ public class EditTreeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentEditTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        //Adding the spinner to the fragment
-        Spinner spinner = root.findViewById(R.id.tree_spinner);
-        //CharSequence Array which the spinner will display to the user
-        CharSequence[] name ={"this","thing","that"};
-        //Initialise the spinner
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item);
-        adapter.addAll(name);
-        //Specify layout used by the spinner
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply adapter to the spinner
-        spinner.setAdapter(adapter);
         //Add the map to the fragment
         //Building the map
         Context ctx = requireActivity().getApplicationContext();
@@ -76,6 +66,24 @@ public class EditTreeFragment extends Fragment {
             System.out.println("The rad user tapped the cool button");
             System.out.println(editText.getText());
         });
+
+        //Adding the spinner to the fragment
+        Spinner spinner = root.findViewById(R.id.tree_spinner);
+        //CharSequence Array which the spinner will display to the user
+        ArrayList<String> name = new ArrayList<>();
+        mapAPI.loadPins();
+        for (TreePin pin : mapAPI.treePins) {
+            name.add(pin.name);
+        }
+        System.out.println(name);
+        CharSequence[] namer ={"this","thing","that"};
+        //Initialise the spinner
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item);
+        adapter.addAll(name);
+        //Specify layout used by the spinner
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply adapter to the spinner
+        spinner.setAdapter(adapter);
         return root;
     }
     @Override
