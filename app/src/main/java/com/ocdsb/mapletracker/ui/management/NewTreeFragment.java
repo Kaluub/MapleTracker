@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
@@ -84,10 +86,10 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
             }
         };
         map.getOverlays().add(mOverlay);
-        //Add user text input
+        // Add user text input.
         EditText name = root.findViewById(R.id.addName);
         EditText sap = root.findViewById(R.id.add_collected);
-        //Add save button
+        // Add save button.
         MaterialButton button = binding.saveButton2;
         button.setOnClickListener(v -> {
             TreePin treePin = new TreePin();
@@ -98,6 +100,9 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
             treePin.longitude = map.getMapCenter().getLongitude();
             mapAPI.treePins.add(treePin);
             mapAPI.savePins();
+            // Navigate back to main menu.
+            Snackbar.make(root, "Saved your new tree.", Snackbar.LENGTH_SHORT).show();
+            NavHostFragment.findNavController(this).navigate(R.id.navigation_management);
         });
         return root;
     }

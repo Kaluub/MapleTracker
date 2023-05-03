@@ -23,16 +23,15 @@ public class ManagementFragment extends Fragment {
         binding = FragmentManagementBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        MaterialButton button = binding.newTreeButton;
-        button.setOnClickListener(v -> {
-
-            NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_new_tree);
+        MaterialButton newTreeButton = binding.newTreeButton;
+        newTreeButton.setOnClickListener(v -> {
+            NavHostFragment.findNavController(this).navigate(R.id.navigation_new_tree);
             Log.d("BUTTONS", "User tapped the New Tree Button");
         });
-        MaterialButton button2 = binding.editTreeButton;
-        button2.setOnClickListener(v -> {
 
-            NavHostFragment.findNavController(ManagementFragment.this).navigate(R.id.navigation_edit_tree);
+        MaterialButton editTreeButton = binding.editTreeButton;
+        editTreeButton.setOnClickListener(v -> {
+            NavHostFragment.findNavController(this).navigate(R.id.navigation_edit_tree);
             Log.d("BUTTONS", "User tapped the Edit Tree Button");
         });
 

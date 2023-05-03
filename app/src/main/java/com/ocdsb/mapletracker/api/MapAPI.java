@@ -101,12 +101,10 @@ public class MapAPI implements MapEventsReceiver {
     }
 
     public void savePins() {
-        System.out.println("Store Pins Method has been called");
         StringBuilder store = new StringBuilder();
         for (TreePin pin : this.treePins) {
             store.append("\n").append(pin.saveToLine());
         }
-        System.out.println(store.toString());
         Config.fileManager.saveFile(map.getContext(), Config.fileName, store.toString());
     }
 

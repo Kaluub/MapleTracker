@@ -2,6 +2,7 @@ package com.ocdsb.mapletracker.data;
 
 import com.ocdsb.mapletracker.Config;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class TreePin {
@@ -15,6 +16,7 @@ public class TreePin {
     public double sapLitresCollectedResettable = 0;
     public int editsTotal = 0;
     public int editsResettable = 0;
+    public String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 
     public String saveToLine() {
         return createdAt.getTime() +
@@ -33,7 +35,9 @@ public class TreePin {
                 Config.fileSeparator +
                 editsTotal +
                 Config.fileSeparator +
-                editsResettable;
+                editsResettable +
+                Config.fileSeparator +
+                year;
     }
 
     public static TreePin getFromFileLine(String line) {
@@ -48,6 +52,7 @@ public class TreePin {
         pin.sapLitresCollectedResettable = data.length > 6 ? Double.parseDouble(data[6]) : 0.0;
         pin.editsTotal = data.length > 7 ? Integer.parseInt(data[7]) : 0;
         pin.editsResettable = data.length > 8 ? Integer.parseInt(data[8]) : 0;
+        pin.year = data.length > 9 ? data[9] : String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
         return pin;
     }
 }
