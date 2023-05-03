@@ -77,10 +77,10 @@ public class EditTreeFragment extends Fragment {
             name.add(pin.name);
         }
         //Initialise the spinner
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), R.layout.spinner_item);
         adapter.addAll(name);
         //Specify layout used by the spinner
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
         // Apply adapter to the spinner
         spinner.setAdapter(adapter);
         return root;
