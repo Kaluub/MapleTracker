@@ -71,12 +71,11 @@ public class EditTreeFragment extends Fragment {
         Spinner spinner = root.findViewById(R.id.tree_spinner);
         //CharSequence Array which the spinner will display to the user
         ArrayList<String> name = new ArrayList<>();
+        name.add("Select Tree");
         mapAPI.loadPins();
         for (TreePin pin : mapAPI.treePins) {
             name.add(pin.name);
         }
-        System.out.println(name);
-        CharSequence[] namer ={"this","thing","that"};
         //Initialise the spinner
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item);
         adapter.addAll(name);
