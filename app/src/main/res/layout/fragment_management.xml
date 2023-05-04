@@ -13,8 +13,9 @@
         android:layout_height="40dp"
         android:layout_marginTop="104dp"
         android:text="@string/new_tree"
+        android:textColor="@color/white"
         app:cornerRadius="20dp"
-        app:backgroundTint="@color/purple_200"
+        app:backgroundTint="@color/design_default_color_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +27,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="154dp"
         android:text="@string/edit_tree"
+        android:textColor="@color/white"
         app:cornerRadius="20dp"
         app:backgroundTint="@color/design_default_color_primary"
         app:layout_constraintEnd_toEndOf="parent"
