@@ -1,5 +1,6 @@
 package com.ocdsb.mapletracker.ui.statistics;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
 import com.ocdsb.mapletracker.databinding.FragmentStatisticsBinding;
@@ -23,10 +25,12 @@ public class StatisticsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentStatisticsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        Resources resources = getResources();
 
         MapAPI mapAPI = new MapAPI();
         mapAPI.loadPins(requireContext());
         ArrayList<String> statistics = new ArrayList<>();
+        statistics.add(resources.getString(R.string.title_statistics));
 
         int treeCount = mapAPI.treePins.toArray().length;
         double totalSapCollected = 0;
@@ -41,17 +45,17 @@ public class StatisticsFragment extends Fragment {
             resettableEdits += tree.editsResettable;
         }
 
-        statistics.add("Tree count: " + treeCount);
-        statistics.add("Total sap collected: " + totalSapCollected);
-        statistics.add("Average sap per tree: " + totalSapCollected/treeCount);
-        statistics.add("Sap collected this season: " + resettableSapCollected);
-        statistics.add("Average tree yield this season: " + resettableSapCollected/treeCount);
-        statistics.add("Average total maple syrup yield: " + totalSapCollected/treeCount/40);
-        statistics.add("Estimated total maple syrup yield: " + totalSapCollected/40);
-        statistics.add("Estimated season maple yield: " + resettableSapCollected/40);
-        statistics.add("Estimated maple syrup per tree: " + resettableSapCollected/treeCount/40);
-        statistics.add("Taps logged in total: " + totalEdits);
-        statistics.add("Taps logged this season: " + resettableEdits);
+        statistics.add(String.format(resources.getString(R.string.statistics_tree_count), treeCount));
+        statistics.add(String.format(resources.getString(R.string.statistics_total_sap), totalSapCollected));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_sap), totalSapCollected/treeCount));
+        statistics.add(String.format(resources.getString(R.string.statistics_sap_yearly), resettableSapCollected));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_sap_yearly), resettableSapCollected/treeCount));
+        statistics.add(String.format(resources.getString(R.string.statistics_total_syrup), totalSapCollected/40));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup), totalSapCollected/treeCount/40));
+        statistics.add(String.format(resources.getString(R.string.statistics_syrup_yearly), resettableSapCollected/40));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_sap_yearly), resettableSapCollected/treeCount/40));
+        statistics.add(String.format(resources.getString(R.string.statistics_edits), totalEdits));
+        statistics.add(String.format(resources.getString(R.string.statistics_edits_yearly), resettableEdits));
 
         final TextView textView = binding.textStatistics;
         textView.setText(String.join("\n• ", statistics));
