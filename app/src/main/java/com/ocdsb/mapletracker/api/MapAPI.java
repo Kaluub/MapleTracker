@@ -130,6 +130,15 @@ public class MapAPI implements MapEventsReceiver {
         Config.fileManager.saveFile(map.getContext(), Config.fileName, store.toString());
     }
 
+    public void savePins(Context context) {
+        StringBuilder store = new StringBuilder();
+        for (TreePin pin : this.treePins) {
+            store.append("\n").append(pin.saveToLine());
+        }
+        Config.fileManager.saveFile(context, Config.fileName, store.toString());
+    }
+
+
     @Override
     public boolean longPressHelper(GeoPoint p) {
         return false;
