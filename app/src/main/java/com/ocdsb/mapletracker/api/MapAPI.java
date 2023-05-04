@@ -77,6 +77,7 @@ public class MapAPI implements MapEventsReceiver {
     }
 
     public void loadPins() {
+        treePins.clear();
         String store = Config.fileManager.readFile(map.getContext(), Config.fileName);
         if (store == null) {
             System.out.println("Pins is null");
@@ -94,6 +95,27 @@ public class MapAPI implements MapEventsReceiver {
                 Marker marker = new Marker(map);
                 marker.setPosition(geoPoint);
                 map.getOverlays().add(marker);
+            } catch (Exception e) {
+                // The tree could not be read.
+            }
+        }
+    }
+
+    public void loadPins(Context context) {
+        // Used in situations where the map is not loaded (ie. statistics fragment).
+        treePins.clear();
+        String store = Config.fileManager.readFile(context, Config.fileName);
+        if (store == null) {
+            System.out.println("Pins is null");
+            return;
+        }
+        for (String treeData : store.split("\n")) {
+            if (treeData.length() <= 0) {
+                continue;
+            }
+            try {
+                TreePin pin = TreePin.getFromFileLine(treeData);
+                treePins.add(pin);
             } catch (Exception e) {
                 // The tree could not be read.
             }
