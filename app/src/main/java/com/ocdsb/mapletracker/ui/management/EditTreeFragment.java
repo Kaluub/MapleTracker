@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -22,7 +23,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
@@ -30,19 +30,20 @@ import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
 import com.ocdsb.mapletracker.databinding.FragmentEditTreeBinding;
 
-import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class EditTreeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private FragmentEditTreeBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
-    private MapAPI mapAPI = new MapAPI();
+    private final MapAPI mapAPI = new MapAPI();
     private TreePin pin = null;
 
     @Override
@@ -50,52 +51,70 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentEditTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        //Add the map to the fragment
-        //Building the map
         Context ctx = requireActivity().getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         map = root.findViewById(R.id.map);
 
-        //Request Permissions necessary for map to function.
+        // Request Permissions necessary for map to function.
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
+
+        // Build map.
         map = mapAPI.buildMap(map, getContext());
         map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
-        //Adding the spinner to the fragment
+
+        // Load the spinner.
         Spinner spinner = root.findViewById(R.id.tree_spinner);
-        //CharSequence Array which the spinner will display to the user
-        ArrayList<String> name = new ArrayList<>();
-        name.add("Select Tree");
+        ArrayList<String> names = new ArrayList<>();
+        names.add("Select Tree");
+
         mapAPI.loadPins();
         for (TreePin pin : mapAPI.treePins) {
-            name.add(pin.name);
+            names.add(pin.name);
+            Marker marker = new Marker(map);
+            marker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
+            marker.setTextIcon("T");
+            map.getOverlays().add(marker);
         }
-        //Initialise the spinner
+
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), R.layout.spinner_item);
-        adapter.addAll(name);
-        //Specify layout used by the spinner
+        adapter.addAll(names);
         adapter.setDropDownViewResource(R.layout.spinner_item);
-        // Apply adapter to the spinner
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-        //Get text input
-        EditText treeName = root.findViewById(R.id.editName);
-        EditText sap = root.findViewById(R.id.add_collected);
 
-        //Add save button
+        // Add save button.
         MaterialButton button = binding.saveButton;
-        System.out.println(button);
-        button.setOnClickListener(v -> {
-
+        button.setOnClickListener(view -> {
+            if (pin == null) {
+                Snackbar.make(root, "You haven't selected a pin yet!", Snackbar.LENGTH_SHORT).show();
+                return;
+            };
+            // Get EditText elements.
+            EditText treeName = binding.editName;
+            EditText sapChange = binding.editCollected;
+            // Update the pin's variables.
+            pin.latitude = map.getMapCenter().getLatitude();
+            pin.longitude = map.getMapCenter().getLongitude();
+            pin.name = treeName.getText().toString();
+            pin.sapLitresCollectedTotal += Double.parseDouble(sapChange.getText().toString());
+            pin.sapLitresCollectedResettable += Double.parseDouble(sapChange.getText().toString());
+            pin.editedAt = new Date();
+            pin.editsTotal += 1;
+            pin.editsResettable += 1;
+            // Save pins.
+            mapAPI.savePins();
+            Snackbar.make(root, "Saved your changes.", Snackbar.LENGTH_SHORT).show();
+            NavHostFragment.findNavController(this).navigate(R.id.navigation_management);
         });
         return root;
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 
     @Override
     public void onPause() {
@@ -115,18 +134,16 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
         }
     }
     // Method from implemented class, needed to get the spinner to work
-    public void onItemSelected(AdapterView<?> parent,View view, int pos, long id){
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
         if (pos != 0){
-            pin = mapAPI.treePins.get(pos-1);
-            System.out.println(pin);
+            pin = mapAPI.treePins.get(pos - 1);
             EditText treeName = binding.editName;
-            if (pin!= null) {
-                treeName.setText(pin.name);
-                GeoPoint p = new GeoPoint(pin.latitude,pin.longitude);
-                map.getController().animateTo(p);
-            }
+            treeName.setText(pin.name);
+            GeoPoint p = new GeoPoint(pin.latitude,pin.longitude);
+            map.getController().animateTo(p);
         } else Snackbar.make(view,"Please select a tree to edit.",Snackbar.LENGTH_SHORT).show();
     }
+
     // Method from implemented class, unsure of what to do with this
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback

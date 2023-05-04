@@ -53,7 +53,7 @@ public class StatisticsFragment extends Fragment {
         statistics.add(String.format(resources.getString(R.string.statistics_total_syrup), totalSapCollected/40));
         statistics.add(String.format(resources.getString(R.string.statistics_average_syrup), totalSapCollected/treeCount/40));
         statistics.add(String.format(resources.getString(R.string.statistics_syrup_yearly), resettableSapCollected/40));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_sap_yearly), resettableSapCollected/treeCount/40));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup_yearly), resettableSapCollected/treeCount/40));
         statistics.add(String.format(resources.getString(R.string.statistics_edits), totalEdits));
         statistics.add(String.format(resources.getString(R.string.statistics_edits_yearly), resettableEdits));
 
