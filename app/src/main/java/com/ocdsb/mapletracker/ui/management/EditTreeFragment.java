@@ -141,7 +141,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             treeName.setText(pin.name);
             GeoPoint p = new GeoPoint(pin.latitude,pin.longitude);
             map.getController().animateTo(p);
-            map.getController().setZoom(13.0);
+            map.getController().setZoom(18.0);
         } else Snackbar.make(view,"Please select a tree to edit.",Snackbar.LENGTH_SHORT).show();
     }
 

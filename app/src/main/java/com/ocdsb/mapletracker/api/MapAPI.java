@@ -28,6 +28,7 @@ public class MapAPI implements MapEventsReceiver {
         map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
         map.setScrollableAreaLimitLatitude(85, -85, 0);
         map.setMultiTouchControls(true);
+        map.setMinZoomLevel(2.0);
         // Changing the default map location and zoom
         IMapController mapController = map.getController();
         mapController.setZoom(10.0);
