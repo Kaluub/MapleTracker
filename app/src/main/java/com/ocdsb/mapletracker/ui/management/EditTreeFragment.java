@@ -89,7 +89,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             if (pin == null) {
                 Snackbar.make(root, "You haven't selected a pin yet!", Snackbar.LENGTH_SHORT).show();
                 return;
-            };
+            }
             // Get EditText elements.
             EditText treeName = binding.editName;
             EditText sapChange = binding.editCollected;
@@ -141,6 +141,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             treeName.setText(pin.name);
             GeoPoint p = new GeoPoint(pin.latitude,pin.longitude);
             map.getController().animateTo(p);
+            map.getController().setZoom(13.0);
         } else Snackbar.make(view,"Please select a tree to edit.",Snackbar.LENGTH_SHORT).show();
     }
 
