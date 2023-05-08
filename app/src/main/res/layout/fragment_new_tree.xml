@@ -112,8 +112,7 @@
             android:translationY="25dp"
             app:cornerRadius="20dp"
             android:text="@string/save"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/design_default_color_primary"
+            app:backgroundTint="?attr/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
