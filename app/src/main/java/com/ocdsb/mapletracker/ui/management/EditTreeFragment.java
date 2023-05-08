@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,7 +108,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             Snackbar saveSnackbar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(),"Changes Saved", Snackbar.LENGTH_SHORT);
             //saveSnackbar.setAnchorView(R.id.nav_view);
             View snackBarView = saveSnackbar.getView();
-            snackBarView.setTranslationY(-60);
+            snackBarView.setTranslationY(-(convertDpToPixel(48,requireContext())));
             saveSnackbar.show();
             //Snackbar.make(root, "Saved your changes.", Snackbar.LENGTH_SHORT).show();
             NavHostFragment.findNavController(this).navigate(R.id.navigation_management);
@@ -170,5 +171,27 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
                     permissionsToRequest.toArray(new String[0]),
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
+    }
+
+    /**
+     * This method converts dp unit to equivalent pixels, depending on device density.
+     *
+     * @param dp A value in dp (density independent pixels) unit. Which we need to convert into pixels
+     * @param context Context to get resources and device specific display metrics
+     * @return A float value to represent px equivalent to dp depending on device density
+     */
+    public static float convertDpToPixel(float dp, Context context){
+        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+
+    /**
+     * This method converts device specific pixels to density independent pixels.
+     *
+     * @param px A value in px (pixels) unit. Which we need to convert into db
+     * @param context Context to get resources and device specific display metrics
+     * @return A float value to represent dp equivalent to px value
+     */
+    public static float convertPixelsToDp(float px, Context context){
+        return px / ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 }
