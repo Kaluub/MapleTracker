@@ -104,10 +104,11 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             pin.editsResettable += 1;
             // Save pins.
             mapAPI.savePins();
-            //Snackbar saveSnackbar = Snackbar.make(root.findViewById(R.id.edit_tree_layout),"Changes Saved", Snackbar.LENGTH_SHORT);
+            Snackbar saveSnackbar = Snackbar.make(root.findViewById(R.id.edit_tree_layout),"Changes Saved", Snackbar.LENGTH_SHORT);
             //saveSnackbar.setAnchorView(R.id.nav_view);
-            //saveSnackbar.show();
-            Snackbar.make(root, "Saved your changes.", Snackbar.LENGTH_SHORT).show();
+            saveSnackbar.show();
+            //Snackbar.make(root, "Saved your changes.", Snackbar.LENGTH_SHORT).show();
+            System.out.println(saveSnackbar.getAnchorView());
             NavHostFragment.findNavController(this).navigate(R.id.navigation_management);
         });
         return root;
@@ -145,7 +146,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             GeoPoint p = new GeoPoint(pin.latitude,pin.longitude);
             map.getController().animateTo(p);
             map.getController().setZoom(18.0);
-        } else Snackbar.make(view,"Please select a tree to edit.",Snackbar.LENGTH_SHORT).show();
+        } else Snackbar.make(getView(),"Please select a tree to edit.",Snackbar.LENGTH_SHORT).show();
     }
 
     // Method from implemented class, unsure of what to do with this

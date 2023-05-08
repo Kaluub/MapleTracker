@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -101,7 +102,8 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
             mapAPI.treePins.add(treePin);
             mapAPI.savePins();
             // Navigate back to main menu.
-            Snackbar.make(root, "Saved your new tree.", Snackbar.LENGTH_SHORT).show();
+            Snackbar saveSnackBar = Snackbar.make(root, "Saved your new tree.", Snackbar.LENGTH_SHORT);
+            saveSnackBar.show();
             NavHostFragment.findNavController(this).navigate(R.id.navigation_management);
         });
         return root;
