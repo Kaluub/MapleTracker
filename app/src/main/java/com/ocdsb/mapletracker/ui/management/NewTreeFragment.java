@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,32 +16,26 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.preference.PreferenceManager;
 import android.view.Choreographer;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
 import com.ocdsb.mapletracker.databinding.FragmentNewTreeBinding;
 
-import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
-import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.Overlay;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class NewTreeFragment extends Fragment implements MapEventsReceiver {
+public class NewTreeFragment extends Fragment {
     private FragmentNewTreeBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
@@ -53,28 +46,19 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         binding = FragmentNewTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //Request Permissions necessary for map to function.
+        // Request permissions necessary for map to function.
         String [] Permissions = {
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
         requestPermissionsIfNecessary(Permissions);
 
-        //Building the map
+        // Building the map.
         Context ctx = requireActivity().getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         MapAPI mapAPI = new MapAPI();
         map = root.findViewById(R.id.map);
-        map = mapAPI.buildMap(map, getContext());
-        map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
-
-        mapAPI.loadPins();
-        for (TreePin pin : mapAPI.treePins) {
-            Marker treeMarker = new Marker(map);
-            treeMarker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
-            treeMarker.setTextIcon("T");
-            map.getOverlays().add(treeMarker);
-        }
+        map = mapAPI.buildMap(map);
 
         Marker marker = new Marker(map);
         marker.setPosition((GeoPoint) map.getMapCenter());
@@ -151,21 +135,5 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
                     permissionsToRequest.toArray(new String[0]),
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
-    }
-    @Override
-    public boolean singleTapConfirmedHelper(GeoPoint p) {
-        IMapController mapController = map.getController();
-        mapController.animateTo(p);
-        Marker startMarker = new Marker(map);
-        startMarker.setPosition(p);
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-        map.getOverlays().add(startMarker);
-        System.out.println(p);
-        return true;
-    }
-
-    @Override
-    public boolean longPressHelper(GeoPoint p) {
-        return false;
     }
 }

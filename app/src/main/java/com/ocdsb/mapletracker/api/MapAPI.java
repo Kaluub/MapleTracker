@@ -2,7 +2,6 @@ package com.ocdsb.mapletracker.api;
 
 
 import android.content.Context;
-import android.graphics.Rect;
 
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.data.TreePin;
@@ -21,7 +20,7 @@ public class MapAPI implements MapEventsReceiver {
     private MapView map = null;
     public ArrayList<TreePin> treePins = new ArrayList<>();
 
-    public MapView buildMap (MapView m, Context c){
+    public MapView buildMap (MapView m){
         map = m;
         map.setTileSource(TileSourceFactory.MAPNIK);
         // Giving the user the ability to zoom the map
@@ -32,20 +31,29 @@ public class MapAPI implements MapEventsReceiver {
         // Changing the default map location and zoom
         IMapController mapController = map.getController();
         mapController.setZoom(10.0);
+        mapController.setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
+
         loadPins();
+        for (TreePin pin : treePins) {
+            Marker treeMarker = new Marker(map);
+            treeMarker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
+            treeMarker.setTextIcon("T");
+            map.getOverlays().add(treeMarker);
+        }
+
         return map;
     }
 
 
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
-        IMapController mapController = map.getController();
-        mapController.animateTo(p);
-        Marker startMarker = new Marker(map);
-        startMarker.setPosition(p);
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-        map.getOverlays().add(startMarker);
-        savePins();
+//        IMapController mapController = map.getController();
+//        mapController.animateTo(p);
+//        Marker startMarker = new Marker(map);
+//        startMarker.setPosition(p);
+//        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+//        map.getOverlays().add(startMarker);
+//        savePins();
         return true;
     }
 
@@ -109,6 +117,6 @@ public class MapAPI implements MapEventsReceiver {
 
     @Override
     public boolean longPressHelper(GeoPoint p) {
-        return false;
+        return true;
     }
 }
