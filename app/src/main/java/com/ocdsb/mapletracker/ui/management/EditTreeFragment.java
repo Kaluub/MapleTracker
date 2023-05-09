@@ -61,7 +61,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
         requestPermissionsIfNecessary(Permissions);
 
         // Build map.
-        map = mapAPI.buildMap(map, getContext());
+        map = mapAPI.buildMap(map);
         map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
 
         // Load the spinner.
