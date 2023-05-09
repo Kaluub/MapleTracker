@@ -15,12 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.ocdsb.mapletracker.databinding.ActivityMainBinding;
-import com.ocdsb.mapletracker.ui.management.NewTreeFragment;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         ActionBar actionBar;
         actionBar = getSupportActionBar();
-        System.out.println("ActionBar showing: " + actionBar.isShowing());
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         LocationManager service = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
