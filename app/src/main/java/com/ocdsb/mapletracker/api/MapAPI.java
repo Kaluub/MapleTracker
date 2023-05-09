@@ -32,15 +32,7 @@ public class MapAPI implements MapEventsReceiver {
         IMapController mapController = map.getController();
         mapController.setZoom(10.0);
         mapController.setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
-
         loadPins();
-        for (TreePin pin : treePins) {
-            Marker treeMarker = new Marker(map);
-            treeMarker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
-            treeMarker.setTextIcon("T");
-            map.getOverlays().add(treeMarker);
-        }
-
         return map;
     }
 

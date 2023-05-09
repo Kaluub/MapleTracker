@@ -39,6 +39,7 @@ import org.osmdroid.views.overlay.Marker;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 
 public class EditTreeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private FragmentEditTreeBinding binding;
@@ -69,13 +70,22 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
         ArrayList<String> names = new ArrayList<>();
         names.add("Select Tree");
 
-        mapAPI.loadPins();
-        for (TreePin pin : mapAPI.treePins) {
-            names.add(pin.name);
-            Marker marker = new Marker(map);
-            marker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
-            marker.setTextIcon("T");
-            map.getOverlays().add(marker);
+        for (TreePin tPin : mapAPI.treePins) {
+            names.add(tPin.name);
+            Marker treeMarker = new Marker(map);
+            treeMarker.setPosition(new GeoPoint(tPin.latitude, tPin.longitude));
+            treeMarker.setTextIcon("T");
+            treeMarker.setTitle(tPin.name);
+            treeMarker.setOnMarkerClickListener((marker, mapView) -> {
+                pin = tPin;
+                EditText treeName = binding.editName;
+                treeName.setText(tPin.name);
+                GeoPoint p = new GeoPoint(tPin.latitude, tPin.longitude);
+                map.getController().animateTo(treeMarker.getPosition());
+                map.getController().setZoom(18.0);
+                return false;
+            });
+            map.getOverlays().add(treeMarker);
         }
 
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), R.layout.spinner_item);
@@ -148,7 +158,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             GeoPoint p = new GeoPoint(pin.latitude,pin.longitude);
             map.getController().animateTo(p);
             map.getController().setZoom(18.0);
-        } else Snackbar.make(getView(),"Please select a tree to edit.",Snackbar.LENGTH_SHORT).show();
+        } else Snackbar.make(requireView(),"Please select a tree to edit.",Snackbar.LENGTH_SHORT).show();
     }
 
     // Method from implemented class, unsure of what to do with this
