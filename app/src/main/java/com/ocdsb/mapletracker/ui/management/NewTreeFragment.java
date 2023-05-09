@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.preference.PreferenceManager;
+import android.view.Choreographer;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -78,15 +80,15 @@ public class NewTreeFragment extends Fragment implements MapEventsReceiver {
         marker.setPosition((GeoPoint) map.getMapCenter());
         map.getOverlays().add(marker);
 
-        Overlay mOverlay = new Overlay() {
+        // This works, but it might be smarter to instead render the pin externally.
+        Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
             @Override
-            public boolean onScroll(MotionEvent pEvent1, MotionEvent pEvent2, float pDistanceX, float pDistanceY, MapView pMapView) {
-                marker.setPosition(new GeoPoint((float) pMapView.getMapCenter().getLatitude(),
-                        (float) pMapView.getMapCenter().getLongitude()));
-                return super.onScroll(pEvent1, pEvent2, pDistanceX, pDistanceY, pMapView);
+            public void doFrame(long l) {
+                marker.setPosition((GeoPoint) map.getMapCenter());
+                Choreographer.getInstance().postFrameCallback(this);
             }
-        };
-        map.getOverlays().add(mOverlay);
+        });
+
         // Add user text input.
         EditText name = root.findViewById(R.id.addName);
         EditText sap = root.findViewById(R.id.add_collected);
