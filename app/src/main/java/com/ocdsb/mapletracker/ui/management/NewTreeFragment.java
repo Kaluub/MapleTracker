@@ -70,6 +70,7 @@ public class NewTreeFragment extends Fragment {
 
         Marker marker = new Marker(map);
         marker.setPosition((GeoPoint) map.getMapCenter());
+        marker.setInfoWindow(null);
         map.getOverlays().add(marker);
 
         // This works, but it might be smarter to instead render the pin externally.

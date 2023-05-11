@@ -12,7 +12,6 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
 
@@ -36,16 +35,8 @@ public class MapAPI implements MapEventsReceiver {
         return map;
     }
 
-
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
-//        IMapController mapController = map.getController();
-//        mapController.animateTo(p);
-//        Marker startMarker = new Marker(map);
-//        startMarker.setPosition(p);
-//        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-//        map.getOverlays().add(startMarker);
-//        savePins();
         return true;
     }
 

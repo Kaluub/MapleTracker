@@ -20,6 +20,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.ocdsb.mapletracker.databinding.ActivityMainBinding;
 
+import org.osmdroid.config.Configuration;
+
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
     }
     @Override
     public boolean onSupportNavigateUp(){

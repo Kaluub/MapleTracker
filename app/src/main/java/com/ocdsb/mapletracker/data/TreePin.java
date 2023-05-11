@@ -4,6 +4,7 @@ import com.ocdsb.mapletracker.Config;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class TreePin {
     // Represents a tree pin & it's respective data.
@@ -52,7 +53,15 @@ public class TreePin {
         pin.sapLitresCollectedResettable = data.length > 6 ? Double.parseDouble(data[6]) : 0.0;
         pin.editsTotal = data.length > 7 ? Integer.parseInt(data[7]) : 0;
         pin.editsResettable = data.length > 8 ? Integer.parseInt(data[8]) : 0;
-        pin.year = data.length > 9 ? data[9] : String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+
+        String currentYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        pin.year = data.length > 9 ? data[9] : currentYear;
+        if (!Objects.equals(pin.year, currentYear)) {
+            pin.year = currentYear;
+            pin.sapLitresCollectedResettable = 0.0;
+            pin.editsResettable = 0;
+        }
+
         return pin;
     }
 }
