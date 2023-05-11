@@ -31,6 +31,7 @@
     <string name="statistics_edits" translatable="false">Total trees logged: %d</string>
     <string name="statistics_edits_yearly" translatable="false">Trees logged this year: %d</string>
     <string name="splash_default" translatable="false">…</string>
+    <string name="select_tree">Select tree</string>
     <string-array name="splash_good" tools:ignore="InconsistentArrays">
         <item>It\'s prime tapping time!</item>
         <item>The sap is flowing!</item>

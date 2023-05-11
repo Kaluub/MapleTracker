@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -67,11 +68,10 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
         map = mapAPI.buildMap(map);
         map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
 
-        // Load the spinner.
-        Spinner spinner = root.findViewById(R.id.tree_spinner);
-        ArrayList<String> names = new ArrayList<>();
-        names.add("Select Tree");
-
+        //Create array list to store the name of all trees
+        ArrayList<CharSequence> names = new ArrayList<>();
+        names.add(getString(R.string.select_tree));
+        // Add each tree to the map & add it's name to the list of tree names
         for (TreePin tPin : mapAPI.treePins) {
             names.add(tPin.name);
             Marker treeMarker = new Marker(map);
@@ -89,12 +89,11 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             });
             map.getOverlays().add(treeMarker);
         }
-
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), R.layout.spinner_item);
-        adapter.addAll(names);
-        adapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        //Adds the tree names to the dropdown
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item,names);
+        adapter.setDropDownViewResource(R.layout.dropdown_item);
+        binding.treeDropDown.setAdapter(adapter);
+        binding.treeDropDown.setOnItemSelectedListener(this);
 
         // Add save button.
         MaterialButton button = binding.saveButton;
@@ -118,11 +117,9 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             // Save pins.
             mapAPI.savePins();
             Snackbar saveSnackbar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(),"Changes Saved", Snackbar.LENGTH_SHORT);
-            //saveSnackbar.setAnchorView(R.id.nav_view);
             View snackBarView = saveSnackbar.getView();
             snackBarView.setTranslationY(-(convertDpToPixel(48,requireContext())));
             saveSnackbar.show();
-            //Snackbar.make(root, "Saved your changes.", Snackbar.LENGTH_SHORT).show();
             NavHostFragment.findNavController(this).navigate(R.id.navigation_management);
         });
         return root;

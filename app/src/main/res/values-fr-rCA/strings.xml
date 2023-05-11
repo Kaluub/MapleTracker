@@ -16,6 +16,7 @@
     <string name="syrup_collected">Syrop ramassé</string>
     <string name="new_name_default">Sans nom</string>
     <string name="litres">Litres</string>
+    <string name="select_tree">Sélectionner un arbre</string>
     <string-array name="splash_good" tools:ignore="InconsistentArrays">
         <item>C\'est le propre saison!</item>
         <item>L\'érable se coule!</item>
