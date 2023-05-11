@@ -27,6 +27,7 @@ import android.widget.Spinner;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.MainActivity;
 import com.ocdsb.mapletracker.R;
@@ -99,7 +100,11 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
         MaterialButton button = binding.saveButton;
         button.setOnClickListener(view -> {
             if (pin == null) {
-                Snackbar.make(root, "You haven't selected a pin yet!", Snackbar.LENGTH_SHORT).show();
+               Snackbar noSelected = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(), "You haven't selected a pin yet!", Snackbar.LENGTH_SHORT);
+               View  noSelectedView = noSelected.getView();
+               noSelectedView.setTranslationY(-(convertDpToPixel(48,requireContext())));
+               noSelected.show();
+               System.out.println("pin is null");
                 return;
             }
             // Get EditText elements.
@@ -117,8 +122,8 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             // Save pins.
             mapAPI.savePins();
             Snackbar saveSnackbar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(),"Changes Saved", Snackbar.LENGTH_SHORT);
-            View snackBarView = saveSnackbar.getView();
-            snackBarView.setTranslationY(-(convertDpToPixel(48,requireContext())));
+            View saveSnackBarView = saveSnackbar.getView();
+            saveSnackBarView.setTranslationY(-(convertDpToPixel(48,requireContext())));
             saveSnackbar.show();
             NavHostFragment.findNavController(this).navigate(R.id.navigation_management);
         });
@@ -150,6 +155,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
     }
     // Method from implemented class, needed to get the spinner to work
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
+        System.out.println("Item Selected");
         if (pos != 0){
             pin = mapAPI.treePins.get(pos - 1);
             EditText treeName = binding.editName;
