@@ -1,6 +1,5 @@
 package com.ocdsb.mapletracker.ui.management;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -19,17 +18,12 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
 import com.ocdsb.mapletracker.Config;
-import com.ocdsb.mapletracker.MainActivity;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
@@ -43,9 +37,8 @@ import org.osmdroid.views.overlay.Marker;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Objects;
 
-public class EditTreeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class EditTreeFragment extends Fragment {
     private FragmentEditTreeBinding binding;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
@@ -71,7 +64,6 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
 
         //Create array list to store the name of all trees
         ArrayList<CharSequence> names = new ArrayList<>();
-        names.add(getString(R.string.select_tree));
         // Add each tree to the map & add it's name to the list of tree names
         for (TreePin tPin : mapAPI.treePins) {
             names.add(tPin.name);
@@ -80,10 +72,8 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             treeMarker.setTextIcon("T");
             treeMarker.setTitle(tPin.name);
             treeMarker.setOnMarkerClickListener((marker, mapView) -> {
-                pin = tPin;
                 EditText treeName = binding.editName;
                 treeName.setText(tPin.name);
-                GeoPoint p = new GeoPoint(tPin.latitude, tPin.longitude);
                 map.getController().animateTo(treeMarker.getPosition());
                 map.getController().setZoom(18.0);
                 return false;
@@ -94,7 +84,16 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item,names);
         adapter.setDropDownViewResource(R.layout.dropdown_item);
         binding.treeDropDown.setAdapter(adapter);
-        binding.treeDropDown.setOnItemSelectedListener(this);
+
+        binding.treeDropDown.setOnItemClickListener((adapterView, view, i, l) -> {
+            System.out.println("onItemClick where i = " + i);
+            pin = mapAPI.treePins.get(i);
+            EditText treeName = binding.editName;
+            treeName.setText(pin.name);
+            GeoPoint p = new GeoPoint(pin.latitude, pin.longitude);
+            map.getController().animateTo(p);
+            map.getController().setZoom(18.0);
+        });
 
         // Add save button.
         MaterialButton button = binding.saveButton;
@@ -105,7 +104,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
                noSelectedView.setTranslationY(-(convertDpToPixel(48,requireContext())));
                noSelected.show();
                System.out.println("pin is null");
-                return;
+               return;
             }
             // Get EditText elements.
             EditText treeName = binding.editName;
@@ -121,7 +120,7 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
             pin.editsResettable += 1;
             // Save pins.
             mapAPI.savePins();
-            Snackbar saveSnackbar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(),"Changes Saved", Snackbar.LENGTH_SHORT);
+            Snackbar saveSnackbar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(),"Changes saved.", Snackbar.LENGTH_SHORT);
             View saveSnackBarView = saveSnackbar.getView();
             saveSnackBarView.setTranslationY(-(convertDpToPixel(48,requireContext())));
             saveSnackbar.show();
@@ -153,23 +152,6 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
     }
-    // Method from implemented class, needed to get the spinner to work
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
-        System.out.println("Item Selected");
-        if (pos != 0){
-            pin = mapAPI.treePins.get(pos - 1);
-            EditText treeName = binding.editName;
-            treeName.setText(pin.name);
-            GeoPoint p = new GeoPoint(pin.latitude,pin.longitude);
-            map.getController().animateTo(p);
-            map.getController().setZoom(18.0);
-        } else Snackbar.make(requireView(),"Please select a tree to edit.",Snackbar.LENGTH_SHORT).show();
-    }
-
-    // Method from implemented class, unsure of what to do with this
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    }
 
     private void requestPermissionsIfNecessary(String[] permissions) {
         ArrayList<String> permissionsToRequest = new ArrayList<>();
@@ -197,16 +179,5 @@ public class EditTreeFragment extends Fragment implements AdapterView.OnItemSele
      */
     public static float convertDpToPixel(float dp, Context context){
         return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-    }
-
-    /**
-     * This method converts device specific pixels to density independent pixels.
-     *
-     * @param px A value in px (pixels) unit. Which we need to convert into db
-     * @param context Context to get resources and device specific display metrics
-     * @return A float value to represent dp equivalent to px value
-     */
-    public static float convertPixelsToDp(float px, Context context){
-        return px / ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 }
