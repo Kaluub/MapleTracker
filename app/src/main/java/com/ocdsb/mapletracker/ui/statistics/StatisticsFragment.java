@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
@@ -45,32 +46,50 @@ public class StatisticsFragment extends Fragment {
         int totalEdits = 0;
         int resettableEdits = 0;
 
+        String units = getString(R.string.unit_litres);
+        if (Config.useGallons) {
+            units = getString(R.string.unit_gallons);
+        }
+
         for (TreePin tree: mapAPI.treePins) {
             totalSapCollected += tree.sapLitresCollectedTotal;
             resettableSapCollected += tree.sapLitresCollectedResettable;
             totalEdits += tree.editsTotal;
             resettableEdits += tree.editsResettable;
 
+            double displayTotalSap = tree.sapLitresCollectedTotal;
+            double displayResettableSap = tree.sapLitresCollectedResettable;
+
+            if (Config.useGallons) {
+                displayTotalSap /= 3.785;
+                displayResettableSap /= 3.785;
+            }
+
             Marker marker = new Marker(map);
             marker.setTitle(String.format(
                     resources.getString(R.string.statistics_tree_title),
                     tree.name,
-                    tree.sapLitresCollectedTotal,
-                    tree.sapLitresCollectedResettable
+                    String.format(units, displayTotalSap),
+                    String.format(units, displayResettableSap)
             ));
             marker.setPosition(new GeoPoint(tree.latitude, tree.longitude));
             map.getOverlays().add(marker);
         }
 
+        if (Config.useGallons) {
+            totalSapCollected /= 3.785;
+            resettableSapCollected /= 3.785;
+        }
+
         statistics.add(String.format(resources.getString(R.string.statistics_tree_count), treeCount));
-        statistics.add(String.format(resources.getString(R.string.statistics_total_sap), totalSapCollected));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_sap), totalSapCollected/treeCount));
-        statistics.add(String.format(resources.getString(R.string.statistics_sap_yearly), resettableSapCollected));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_sap_yearly), resettableSapCollected/treeCount));
-        statistics.add(String.format(resources.getString(R.string.statistics_total_syrup), totalSapCollected/40));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup), totalSapCollected/treeCount/40));
-        statistics.add(String.format(resources.getString(R.string.statistics_syrup_yearly), resettableSapCollected/40));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup_yearly), resettableSapCollected/treeCount/40));
+        statistics.add(String.format(resources.getString(R.string.statistics_total_sap), String.format(units, totalSapCollected)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_sap), String.format(units, totalSapCollected/treeCount)));
+        statistics.add(String.format(resources.getString(R.string.statistics_sap_yearly), String.format(units, resettableSapCollected)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_sap_yearly), String.format(units, resettableSapCollected/treeCount)));
+        statistics.add(String.format(resources.getString(R.string.statistics_total_syrup), String.format(units, totalSapCollected/40)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup), String.format(units, totalSapCollected/treeCount/40)));
+        statistics.add(String.format(resources.getString(R.string.statistics_syrup_yearly), String.format(units, resettableSapCollected/40)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup_yearly), String.format(units, resettableSapCollected/treeCount/40)));
         statistics.add(String.format(resources.getString(R.string.statistics_edits), totalEdits));
         statistics.add(String.format(resources.getString(R.string.statistics_edits_yearly), resettableEdits));
 

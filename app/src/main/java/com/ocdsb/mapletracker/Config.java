@@ -7,8 +7,9 @@ import com.ocdsb.mapletracker.api.WeatherAPI;
 
 public class Config {
     // Tools and settings.
-    public static final Boolean debugMode = true;
+    public static final Boolean debugMode = false;
     public static Boolean useFakeTemperature = false;
+    public static Boolean useGallons = true;
     public static String fileName = "pins";
     public static String fileSeparator = ",";
     // Class instances.

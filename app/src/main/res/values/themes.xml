@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.MapleTracker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/green_medium</item>
+        <item name="colorPrimaryVariant">@color/green_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -14,11 +14,4 @@
         <!-- Customize your theme here. -->
         <item name="android:dropDownListViewStyle">@style/MySpinner</item>
     </style>
-    <style name="MySpinner" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="android:dividerHeight">2dp</item>
-        <item name="android:divider">#DDDDDD</item>
-        <item name="android:background">#EEEEEE</item>
-        <item name="android:translationZ">20dp</item>
-    </style>
-
 </resources>

@@ -18,16 +18,18 @@
     <string name="new_name_default">No Name</string>
     <string name="litres">Litres</string>
     <string name="default_number" translatable="false">0.0</string>
-    <string name="statistics_tree_title" translatable="false">%s:\nTotal sap: %2$.2fL\nSap this year: %3$.2fL\n</string>
+    <string name="unit_litres" translatable="false">%1$.2f L</string>
+    <string name="unit_gallons" translatable="false">%1$.2f gal</string>
+    <string name="statistics_tree_title" translatable="false">%s:\nTotal sap: %s\nSap this year: %s</string>
     <string name="statistics_tree_count" translatable="false">Tree count: %d</string>
-    <string name="statistics_total_sap" translatable="false">Total sap collected: %1$.2fL</string>
-    <string name="statistics_average_sap" translatable="false">Average sap collected per tree: %1$.2fL</string>
-    <string name="statistics_sap_yearly" translatable="false">Total sap collected this year: %1$.2fL</string>
-    <string name="statistics_average_sap_yearly" translatable="false">Average sap collected per tree this year: %1$.2fL</string>
-    <string name="statistics_total_syrup" translatable="false">Total syrup collected: %1$.2fL</string>
-    <string name="statistics_average_syrup" translatable="false">Average syrup collected per tree: %1$.2fL</string>
-    <string name="statistics_syrup_yearly" translatable="false">Total syrup collected this year: %1$.2fL</string>
-    <string name="statistics_average_syrup_yearly" translatable="false">Average syrup collected per tree this year: %1$.2fL</string>
+    <string name="statistics_total_sap" translatable="false">Total sap collected: %s</string>
+    <string name="statistics_average_sap" translatable="false">Average sap collected per tree: %s</string>
+    <string name="statistics_sap_yearly" translatable="false">Total sap collected this year: %s</string>
+    <string name="statistics_average_sap_yearly" translatable="false">Average sap collected per tree this year: %s</string>
+    <string name="statistics_total_syrup" translatable="false">Total syrup collected: %s</string>
+    <string name="statistics_average_syrup" translatable="false">Average syrup collected per tree: %s</string>
+    <string name="statistics_syrup_yearly" translatable="false">Total syrup collected this year: %s</string>
+    <string name="statistics_average_syrup_yearly" translatable="false">Average syrup collected per tree this year: %s</string>
     <string name="statistics_edits" translatable="false">Total trees logged: %d</string>
     <string name="statistics_edits_yearly" translatable="false">Trees logged this year: %d</string>
     <string name="splash_default" translatable="false">…</string>

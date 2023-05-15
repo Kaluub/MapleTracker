@@ -17,6 +17,8 @@ import com.ocdsb.mapletracker.data.StationResult;
 import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
 import com.ocdsb.mapletracker.interfaces.StationResultCallback;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class HomeFragment extends Fragment {
@@ -30,6 +32,8 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         View root = binding.getRoot();
+
+        binding.dateText.setText(DateFormat.getDateInstance().format(new Date()));
 
         if (Config.debugMode) {
             final Button debugButton = binding.debug;

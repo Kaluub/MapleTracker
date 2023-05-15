@@ -11,12 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
         android:text="@string/temperature_default"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        app:layout_constraintBottom_toTopOf="@+id/splash"
+        android:translationY="30dp"
+        app:layout_constraintBottom_toTopOf="@id/date_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,13 +29,13 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="100dp"
         android:text="Debug"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/splash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperature" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/splash"
@@ -43,11 +44,27 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/splash_default"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:translationY="-30dp"
+        app:layout_constraintBottom_toTopOf="@id/debug"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date_text" />
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
         android:text="@string/splash_default"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/splash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperature" />
+        app:layout_constraintTop_toBottomOf="@id/temperature" />
 </androidx.constraintlayout.widget.ConstraintLayout>

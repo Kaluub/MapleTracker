@@ -30,7 +30,7 @@ public class WeatherAPI {
         // Defaults to Ottawa in case you're not on Earth.
         String bestFeatureId = "s0000430";
         String bestProvinceCode = "ON";
-        // The furthest possible distance should only be 180, so this should always be a bigger distance.
+        // The furthest possible distance should only be sqrt(360^2+180^2), so this should always be a bigger distance.
         double closestDistance = 100000;
 
         for (JsonElement element : featuresArray) {
