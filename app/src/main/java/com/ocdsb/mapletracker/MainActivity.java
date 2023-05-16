@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        Config.loadConfig(getApplicationContext());
+
         LocationManager service = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!enabled) {
