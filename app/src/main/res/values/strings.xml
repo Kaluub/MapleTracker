@@ -52,4 +52,6 @@
         <item>Cut them some slack!</item>
         <item>It\'s their napping season now.</item>
     </string-array>
+    <string name="title_activity_settings" translatable="false">Settings</string>
+    <string name="use_gallons" translatable="false">Use gallons</string>
 </resources>

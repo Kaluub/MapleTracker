@@ -23,6 +23,10 @@ public class Config {
 
     public static void loadConfig(Context context) {
         String contents = Config.fileManager.readFile(context, Config.configFileName);
+        if (contents == null) {
+            return;
+        }
+
         for (String segment : contents.split("\n")) {
             if (segment.length() <= 0) {
                 continue;

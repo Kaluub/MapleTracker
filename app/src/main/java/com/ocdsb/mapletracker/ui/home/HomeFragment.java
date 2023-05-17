@@ -1,5 +1,6 @@
 package com.ocdsb.mapletracker.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
+import com.ocdsb.mapletracker.MainActivity;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.data.StationResult;
 import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
@@ -34,6 +36,10 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         binding.dateText.setText(DateFormat.getDateInstance().format(new Date()));
+
+        binding.settingsButton.setOnClickListener(view -> {
+            startActivity(new Intent(requireContext(), SettingsActivity.class));
+        });
 
         if (Config.debugMode) {
             final Button debugButton = binding.debug;
