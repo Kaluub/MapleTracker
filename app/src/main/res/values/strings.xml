@@ -51,7 +51,11 @@
         <item>Leave the trees alone!</item>
         <item>Cut them some slack!</item>
         <item>It\'s their napping season now.</item>
+        <item>It\'s like the sap is hibernating.</item>
     </string-array>
     <string name="title_activity_settings" translatable="false">Settings</string>
     <string name="use_gallons" translatable="false">Use gallons</string>
+    <string name="use_fahrenheit" translatable="false">Use fahrenheit</string>
+    <string name="use_debug_mode" translatable="false">Use debug mode</string>
+    <string name="debug" translatable="false">Debug</string>
 </resources>

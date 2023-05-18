@@ -10,4 +10,7 @@
     <color name="green_light">#11CC22</color>
     <color name="green_medium">#11AA22</color>
     <color name="green_dark">#118822</color>
+    <color name="autumn_light">#BA7206</color>
+    <color name="autumn_medium">#9C6804</color>
+    <color name="autumn_dark">#7E4D04</color>
 </resources>

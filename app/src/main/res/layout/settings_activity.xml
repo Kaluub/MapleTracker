@@ -9,4 +9,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="@string/use_gallons" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/use_fahrenheit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="@string/use_fahrenheit" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/use_debug_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="@string/use_debug_mode" />
 </LinearLayout>
