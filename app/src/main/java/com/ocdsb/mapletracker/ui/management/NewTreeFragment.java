@@ -110,7 +110,6 @@ public class NewTreeFragment extends Fragment {
         binding = null;
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
