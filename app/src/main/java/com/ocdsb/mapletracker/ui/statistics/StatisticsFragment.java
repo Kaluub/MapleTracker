@@ -19,20 +19,19 @@ import com.ocdsb.mapletracker.databinding.FragmentStatisticsBinding;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.infowindow.MarkerInfoWindow;
 
 import java.util.ArrayList;
 
 public class StatisticsFragment extends Fragment {
 
     private FragmentStatisticsBinding binding;
-    private MapView map;
+    public String units;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentStatisticsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        map = binding.map;
+        MapView map = binding.map;
         Resources resources = getResources();
 
         MapAPI mapAPI = new MapAPI();
@@ -46,7 +45,7 @@ public class StatisticsFragment extends Fragment {
         int totalEdits = 0;
         int resettableEdits = 0;
 
-        String units = getString(R.string.unit_litres);
+        units = getString(R.string.unit_litres);
         if (Config.useGallons) {
             units = getString(R.string.unit_gallons);
         }
@@ -69,8 +68,8 @@ public class StatisticsFragment extends Fragment {
             marker.setTitle(String.format(
                     resources.getString(R.string.statistics_tree_title),
                     tree.name,
-                    String.format(units, displayTotalSap),
-                    String.format(units, displayResettableSap)
+                    formatUnits(displayTotalSap),
+                    formatUnits(displayResettableSap)
             ));
             marker.setPosition(new GeoPoint(tree.latitude, tree.longitude));
             map.getOverlays().add(marker);
@@ -82,14 +81,14 @@ public class StatisticsFragment extends Fragment {
         }
 
         statistics.add(String.format(resources.getString(R.string.statistics_tree_count), treeCount));
-        statistics.add(String.format(resources.getString(R.string.statistics_total_sap), String.format(units, totalSapCollected)));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_sap), String.format(units, totalSapCollected/treeCount)));
-        statistics.add(String.format(resources.getString(R.string.statistics_sap_yearly), String.format(units, resettableSapCollected)));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_sap_yearly), String.format(units, resettableSapCollected/treeCount)));
-        statistics.add(String.format(resources.getString(R.string.statistics_total_syrup), String.format(units, totalSapCollected/40)));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup), String.format(units, totalSapCollected/treeCount/40)));
-        statistics.add(String.format(resources.getString(R.string.statistics_syrup_yearly), String.format(units, resettableSapCollected/40)));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup_yearly), String.format(units, resettableSapCollected/treeCount/40)));
+        statistics.add(String.format(resources.getString(R.string.statistics_total_sap), formatUnits(totalSapCollected)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_sap), formatUnits(totalSapCollected/treeCount)));
+        statistics.add(String.format(resources.getString(R.string.statistics_sap_yearly), formatUnits(resettableSapCollected)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_sap_yearly), formatUnits(resettableSapCollected/treeCount)));
+        statistics.add(String.format(resources.getString(R.string.statistics_total_syrup), formatUnits(totalSapCollected/40)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup), formatUnits(totalSapCollected/treeCount/40)));
+        statistics.add(String.format(resources.getString(R.string.statistics_syrup_yearly), formatUnits(resettableSapCollected/40)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup_yearly), formatUnits(resettableSapCollected/treeCount/40)));
         statistics.add(String.format(resources.getString(R.string.statistics_edits), totalEdits));
         statistics.add(String.format(resources.getString(R.string.statistics_edits_yearly), resettableEdits));
 
@@ -97,6 +96,10 @@ public class StatisticsFragment extends Fragment {
         textView.setText(String.join("\n• ", statistics));
 
         return root;
+    }
+    
+    public String formatUnits(double litres) {
+        return String.format(units, litres);
     }
 
     @Override

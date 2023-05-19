@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
-import com.ocdsb.mapletracker.MainActivity;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.data.StationResult;
 import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
@@ -37,9 +36,7 @@ public class HomeFragment extends Fragment {
 
         binding.dateText.setText(DateFormat.getDateInstance().format(new Date()));
 
-        binding.settingsButton.setOnClickListener(view -> {
-            startActivity(new Intent(requireContext(), SettingsActivity.class));
-        });
+        binding.settingsButton.setOnClickListener(view -> startActivity(new Intent(requireContext(), SettingsActivity.class)));
 
         if (Config.debugMode) {
             final Button debugButton = binding.debug;
@@ -72,6 +69,9 @@ public class HomeFragment extends Fragment {
         final TextView splashText = binding.splash;
         // Format the temperature string properly.
         temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), stationResults.temperature));
+        if (Config.useFahrenheit) {
+            temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace_fahrenheit), 1.8*stationResults.temperature + 32));
+        }
         if (stationResults.low < 0 && stationResults.high > 0) {
             // The weather is good for maple tapping. Use a good splash text.
             String[] splashGood = getResources().getStringArray(R.array.splash_good);

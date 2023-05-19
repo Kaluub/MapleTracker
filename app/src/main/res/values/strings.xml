@@ -7,6 +7,7 @@
     <string name="title_edit_tree">Edit Tree</string>
     <string name="temperature_default" translatable="false">…°C</string>
     <string name="temperature_replace" translatable="false">%1$.1f°C</string>
+    <string name="temperature_replace_fahrenheit" translatable="false">%1$.1f°F</string>
     <string name="new_tree">Add New Tree</string>
     <string name="hello">Hello</string>
     <string name="create_tree">Create New Tree</string>

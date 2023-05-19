@@ -63,7 +63,6 @@ public class NewTreeFragment extends Fragment {
         for (TreePin pin : mapAPI.treePins) {
             Marker treeMarker = new Marker(map);
             treeMarker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
-            treeMarker.setTextIcon("T");
             treeMarker.setTitle(pin.name);
             map.getOverlays().add(treeMarker);
         }

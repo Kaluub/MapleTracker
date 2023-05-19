@@ -69,7 +69,6 @@ public class EditTreeFragment extends Fragment {
             names.add(tPin.name);
             Marker treeMarker = new Marker(map);
             treeMarker.setPosition(new GeoPoint(tPin.latitude, tPin.longitude));
-            treeMarker.setTextIcon("T");
             treeMarker.setTitle(tPin.name);
             treeMarker.setOnMarkerClickListener((marker, mapView) -> {
                 EditText treeName = binding.editName;
