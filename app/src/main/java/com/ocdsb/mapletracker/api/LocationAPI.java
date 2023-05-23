@@ -32,16 +32,13 @@ public class LocationAPI implements LocationListener {
                     longitude = lastKnownLocation.getLongitude();
                     bestLocation = lastKnownLocation;
                 }
-            } catch (SecurityException e) {
-                System.out.println("Provider " + provider + " does not work (SecurityException).");
-            }
+            } catch (SecurityException ignored) {}
         }
     }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
         // Keep the location up-to-date.
-        System.out.println("Location updated.");
         latitude = location.getLatitude();
         longitude = location.getLongitude();
     }

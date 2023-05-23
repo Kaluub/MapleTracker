@@ -27,13 +27,11 @@ public class FileManager {
                     line = reader.readLine();
                 }
             } catch (IOException e) {
-                System.out.println("IO exception while READING file");
                 return null;
             } finally {
                 contents = stringBuilder.toString();
             }
         } catch (IOException e) {
-            System.out.println("IO exception while READING file");
             return null;
         }
         return contents;

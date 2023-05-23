@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             permissions[1] = Manifest.permission.ACCESS_COARSE_LOCATION;
             ActivityCompat.requestPermissions(this, permissions, 0);
         } else {
-            System.out.println("Location API manager updating...");
             Config.locationAPI.updateLocationManager(service);
         }
 

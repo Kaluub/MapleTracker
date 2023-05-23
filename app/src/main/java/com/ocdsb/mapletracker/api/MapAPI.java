@@ -44,7 +44,6 @@ public class MapAPI implements MapEventsReceiver {
         treePins.clear();
         String store = Config.fileManager.readFile(map.getContext(), Config.fileName);
         if (store == null) {
-            System.out.println("Pins is null");
             return;
         }
         for (String treeData : store.split("\n")) {
@@ -65,7 +64,6 @@ public class MapAPI implements MapEventsReceiver {
         treePins.clear();
         String store = Config.fileManager.readFile(context, Config.fileName);
         if (store == null) {
-            System.out.println("Pins is null");
             return;
         }
         for (String treeData : store.split("\n")) {

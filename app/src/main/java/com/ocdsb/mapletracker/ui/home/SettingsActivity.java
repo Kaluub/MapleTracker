@@ -26,6 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
         useGallonsSwitch.setOnCheckedChangeListener((switchView, checked) -> {
             Config.useGallons = checked;
             Config.saveConfig(this);
+            Config.stationResult = null;
         });
 
         SwitchCompat useFahrenheitSwitch = findViewById(R.id.use_fahrenheit);

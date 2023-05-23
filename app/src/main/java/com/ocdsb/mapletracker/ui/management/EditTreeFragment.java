@@ -90,7 +90,6 @@ public class EditTreeFragment extends Fragment {
         binding.treeDropDown.setAdapter(adapter);
 
         binding.treeDropDown.setOnItemClickListener((adapterView, view, i, l) -> {
-            System.out.println("onItemClick where i = " + i);
             pin = mapAPI.treePins.get(i);
             EditText treeName = binding.editName;
             treeName.setText(pin.name);
@@ -107,15 +106,12 @@ public class EditTreeFragment extends Fragment {
                View  noSelectedView = noSelected.getView();
                noSelectedView.setTranslationY(-(convertDpToPixel(48,requireContext())));
                noSelected.show();
-               System.out.println("pin is null");
                return;
             }
             // Get EditText elements.
             EditText treeName = binding.editName;
             EditText sapChange = binding.editCollected;
             // Update the pin's variables.
-            pin.latitude = map.getMapCenter().getLatitude();
-            pin.longitude = map.getMapCenter().getLongitude();
             pin.name = treeName.getText().toString();
             double increment = Double.parseDouble(sapChange.getText().toString());
             if (Config.useGallons) {
