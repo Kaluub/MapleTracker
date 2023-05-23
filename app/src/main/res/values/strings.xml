@@ -18,6 +18,7 @@
     <string name="syrup_collected">Syrup Collected</string>
     <string name="new_name_default">No Name</string>
     <string name="litres">Litres</string>
+    <string name="gallons" translatable="false">Gallons</string>
     <string name="default_number" translatable="false">0.0</string>
     <string name="unit_litres" translatable="false">%1$.2f L</string>
     <string name="unit_gallons" translatable="false">%1$.2f gal</string>

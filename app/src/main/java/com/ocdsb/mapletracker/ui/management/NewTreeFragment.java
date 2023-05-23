@@ -46,6 +46,10 @@ public class NewTreeFragment extends Fragment {
         binding = FragmentNewTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        if (Config.useGallons) {
+            binding.unitsText.setText(getString(R.string.gallons));
+        }
+
         // Request permissions necessary for map to function.
         String [] Permissions = {
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -89,8 +93,12 @@ public class NewTreeFragment extends Fragment {
         button.setOnClickListener(v -> {
             TreePin treePin = new TreePin();
             treePin.name = name.getText().toString();
-            treePin.sapLitresCollectedTotal = Double.parseDouble(sap.getText().toString());
-            treePin.sapLitresCollectedResettable = treePin.sapLitresCollectedTotal;
+            double litres = Double.parseDouble(sap.getText().toString());
+            if (Config.useGallons) {
+                litres *= 3.785;
+            }
+            treePin.sapLitresCollectedTotal = litres;
+            treePin.sapLitresCollectedResettable = litres;
             treePin.latitude = map.getMapCenter().getLatitude();
             treePin.longitude = map.getMapCenter().getLongitude();
             mapAPI.treePins.add(treePin);

@@ -54,6 +54,10 @@ public class EditTreeFragment extends Fragment {
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         map = root.findViewById(R.id.map);
 
+        if (Config.useGallons) {
+            binding.unitsText.setText(getString(R.string.gallons));
+        }
+
         // Request Permissions necessary for map to function.
         String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissionsIfNecessary(Permissions);
@@ -79,7 +83,8 @@ public class EditTreeFragment extends Fragment {
             });
             map.getOverlays().add(treeMarker);
         }
-        //Adds the tree names to the dropdown
+
+        // Adds the tree names to the dropdown
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item,names);
         adapter.setDropDownViewResource(R.layout.dropdown_item);
         binding.treeDropDown.setAdapter(adapter);
@@ -112,8 +117,12 @@ public class EditTreeFragment extends Fragment {
             pin.latitude = map.getMapCenter().getLatitude();
             pin.longitude = map.getMapCenter().getLongitude();
             pin.name = treeName.getText().toString();
-            pin.sapLitresCollectedTotal += Double.parseDouble(sapChange.getText().toString());
-            pin.sapLitresCollectedResettable += Double.parseDouble(sapChange.getText().toString());
+            double increment = Double.parseDouble(sapChange.getText().toString());
+            if (Config.useGallons) {
+                increment *= 3.785;
+            }
+            pin.sapLitresCollectedTotal += increment;
+            pin.sapLitresCollectedResettable += increment;
             pin.editedAt = new Date();
             pin.editsTotal += 1;
             pin.editsResettable += 1;
