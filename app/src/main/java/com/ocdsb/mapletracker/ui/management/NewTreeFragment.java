@@ -22,6 +22,7 @@ import android.widget.EditText;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
@@ -46,7 +47,7 @@ public class NewTreeFragment extends Fragment {
         binding = FragmentNewTreeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        if (Config.useGallons) {
+        if (Config.useGallons ){
             binding.unitsText.setText(getString(R.string.gallons));
         }
 
