@@ -1,5 +1,6 @@
 package com.ocdsb.mapletracker.ui.management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
 import com.ocdsb.mapletracker.databinding.FragmentManagementBinding;
+import com.ocdsb.mapletracker.ui.home.SettingsActivity;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -36,11 +38,7 @@ public class ManagementFragment extends Fragment {
             Log.d("BUTTONS", "User tapped the New Tree Button");
         });
 
-        MaterialButton editTreeButton = binding.editTreeButton;
-        editTreeButton.setOnClickListener(v -> {
-            NavHostFragment.findNavController(this).navigate(R.id.navigation_edit_tree);
-            Log.d("BUTTONS", "User tapped the Edit Tree Button");
-        });
+        binding.editTreeButton.setOnClickListener(view -> startActivity(new Intent(requireContext(), EditTreeActivity.class)));
 
         if (Config.debugMode) {
             Button debugButton = binding.debug;
