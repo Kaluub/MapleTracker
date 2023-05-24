@@ -16,19 +16,7 @@
         android:name="com.ocdsb.mapletracker.ui.management.ManagementFragment"
         android:label="@string/title_management"
         tools:layout="@layout/fragment_management" >
-    <action
-        android:id="@+id/action_Management_to_NewTree"
-        app:destination="@id/navigation_new_tree"
-        />
-
     </fragment>
-
-
-    <fragment
-        android:id="@+id/navigation_new_tree"
-        android:name="com.ocdsb.mapletracker.ui.management.NewTreeFragment"
-        android:label="@string/title_new_tree"
-        tools:layout="@layout/fragment_new_tree" />
 
     <fragment
         android:id="@+id/navigation_statistics"
