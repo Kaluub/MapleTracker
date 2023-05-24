@@ -5,8 +5,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.Manifest;
 import android.content.Context;
@@ -14,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Choreographer;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,8 +21,6 @@ import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
-import com.ocdsb.mapletracker.databinding.ActivityNewTreeBinding;
-import com.ocdsb.mapletracker.databinding.FragmentNewTreeBinding;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
@@ -36,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NewTreeActivity extends AppCompatActivity {
-    private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
 
     @Override
@@ -53,13 +47,6 @@ public class NewTreeActivity extends AppCompatActivity {
             TextView units = findViewById(R.id.units_text);
             units.setText(getString(R.string.gallons));
         }
-
-        // Request permissions necessary for map to function.
-        String [] Permissions = {
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        };
-        //requestPermissionsIfNecessary(Permissions);
 
         // Building the map.
         Context ctx = getApplicationContext();
@@ -125,34 +112,6 @@ public class NewTreeActivity extends AppCompatActivity {
         map.onPause();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        ArrayList<String> permissionsToRequest = new ArrayList<>(Arrays.asList(permissions).subList(0, grantResults.length));
-        if (permissionsToRequest.size() > 0) {
-            ActivityCompat.requestPermissions(
-                    this,
-                    permissionsToRequest.toArray(new String[0]),
-                    REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
-    }
-
-    private void requestPermissionsIfNecessary(String[] permissions) {
-        ArrayList<String> permissionsToRequest = new ArrayList<>();
-        for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(this, permission)
-                    != PackageManager.PERMISSION_GRANTED) {
-                // Permission is not granted
-                permissionsToRequest.add(permission);
-            }
-        }
-        if (permissionsToRequest.size() > 0) {
-            ActivityCompat.requestPermissions(
-                    this,
-                    permissionsToRequest.toArray(new String[0]),
-                    REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
-    }
     @Override
     public boolean onSupportNavigateUp(){
         finish();

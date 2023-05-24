@@ -31,7 +31,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class EditTreeActivity extends AppCompatActivity {
-    //private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private MapView map = null;
     private final MapAPI mapAPI = new MapAPI();
     private TreePin pin = null;
@@ -51,23 +50,24 @@ public class EditTreeActivity extends AppCompatActivity {
             units.setText(getString(R.string.gallons));
         }
 
-        // Request Permissions necessary for map to function.
-        //String [] Permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        //requestPermissionsIfNecessary(Permissions);
-
         // Build map.
         map = mapAPI.buildMap(map);
         map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
 
+        AutoCompleteTextView treeDropDown = findViewById(R.id.tree_dropDown);
         //Create array list to store the name of all trees
         ArrayList<CharSequence> names = new ArrayList<>();
         // Add each tree to the map & add it's name to the list of tree names
+        int n = 0;
         for (TreePin tPin : mapAPI.treePins) {
             names.add(tPin.name);
             Marker treeMarker = new Marker(map);
             treeMarker.setPosition(new GeoPoint(tPin.latitude, tPin.longitude));
             treeMarker.setTitle(tPin.name);
+            int index = n;
             treeMarker.setOnMarkerClickListener((marker, mapView) -> {
+                treeDropDown.setListSelection(index);
+                System.out.println(index);
                 EditText treeName = findViewById(R.id.editName);
                 treeName.setText(tPin.name);
                 map.getController().animateTo(treeMarker.getPosition());
@@ -75,13 +75,12 @@ public class EditTreeActivity extends AppCompatActivity {
                 return false;
             });
             map.getOverlays().add(treeMarker);
+            n += 1;
         }
 
         // Adds the tree names to the dropdown
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(this, R.layout.dropdown_item, names);
         adapter.setDropDownViewResource(R.layout.dropdown_item);
-
-        AutoCompleteTextView treeDropDown = findViewById(R.id.tree_dropDown);
         treeDropDown.setAdapter(adapter);
 
         treeDropDown.setOnItemClickListener((adapterView, view, i, l) -> {

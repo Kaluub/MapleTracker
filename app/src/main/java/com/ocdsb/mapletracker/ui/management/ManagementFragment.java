@@ -33,12 +33,7 @@ public class ManagementFragment extends Fragment {
         View root = binding.getRoot();
 
 
-        MaterialButton newTreeButton = binding.newTreeButton;
-        newTreeButton.setOnClickListener(v -> {
-            NavHostFragment.findNavController(this).navigate(R.id.navigation_new_tree);
-            Log.d("BUTTONS", "User tapped the New Tree Button");
-        });
-
+        binding.newTreeButton.setOnClickListener(view -> startActivity(new Intent(requireContext(), NewTreeActivity.class)));
         binding.editTreeButton.setOnClickListener(view -> startActivity(new Intent(requireContext(), EditTreeActivity.class)));
 
         if (Config.debugMode) {
