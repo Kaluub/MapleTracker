@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        ActionBar actionBar;
-        actionBar = getSupportActionBar();
+        ActionBar actionBar= getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 

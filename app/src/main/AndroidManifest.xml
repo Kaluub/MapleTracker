@@ -18,10 +18,14 @@
         android:theme="@style/Theme.MapleTracker"
         tools:targetApi="31">
         <activity
-            android:name=".ui.home.SettingsActivity"
-            android:theme="@style/Theme.AppCompat.Dialog.Alert"
+            android:name=".ui.management.NewTreeActivity"
             android:exported="false"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_new_tree"/>
+        <activity
+            android:name=".ui.home.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.AppCompat.Dialog.Alert" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

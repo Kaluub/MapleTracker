@@ -28,11 +28,11 @@
     </fragment>
 
 
-    <fragment
+    <activity
         android:id="@+id/navigation_new_tree"
-        android:name="com.ocdsb.mapletracker.ui.management.NewTreeFragment"
+        android:name="com.ocdsb.mapletracker.ui.management.NewTreeActivity"
         android:label="@string/title_new_tree"
-        tools:layout="@layout/fragment_new_tree" />
+        tools:layout="@layout/activity_new_tree" />
     <fragment
         android:id="@+id/navigation_edit_tree"
         android:name="com.ocdsb.mapletracker.ui.management.EditTreeFragment"

@@ -30,6 +30,7 @@ public class ManagementFragment extends Fragment {
         binding = FragmentManagementBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
         MaterialButton newTreeButton = binding.newTreeButton;
         newTreeButton.setOnClickListener(v -> {
             NavHostFragment.findNavController(this).navigate(R.id.navigation_new_tree);
