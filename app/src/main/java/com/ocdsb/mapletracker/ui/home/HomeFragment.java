@@ -2,6 +2,7 @@ package com.ocdsb.mapletracker.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,8 @@ public class HomeFragment extends Fragment {
             int splashIndex = rng.nextInt(splashBad.length);
             splashText.setText(splashBad[splashIndex]);
         }
+        System.out.println(stationResults.forecastHighs);
+        System.out.println(stationResults.forecastLows);
     }
 
     public void updateWeatherElements() {
@@ -99,6 +102,7 @@ public class HomeFragment extends Fragment {
                 callback.onResult(Config.weatherAPI.getStation(stationDetails[0], stationDetails[1]));
             } catch (Exception e) {
                 System.out.println("Exception while fetching the weather.");
+                Log.e("ERROR", "Yikes!", e);
             }
         }).start();
     }

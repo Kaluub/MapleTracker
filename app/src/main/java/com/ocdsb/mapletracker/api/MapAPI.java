@@ -60,7 +60,7 @@ public class MapAPI implements MapEventsReceiver {
     }
 
     public void loadPins(Context context) {
-        // Used in situations where the map is not loaded (ie. statistics fragment).
+        // Used in situations where the map is not loaded.
         treePins.clear();
         String store = Config.fileManager.readFile(context, Config.fileName);
         if (store == null) {

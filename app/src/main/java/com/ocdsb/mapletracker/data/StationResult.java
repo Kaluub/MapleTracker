@@ -1,5 +1,6 @@
 package com.ocdsb.mapletracker.data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class StationResult {
@@ -10,5 +11,7 @@ public class StationResult {
     public double low;
     public String stationID;
     public String provinceCode;
+    public ArrayList<Integer> forecastHighs;
+    public ArrayList<Integer> forecastLows;
 }
 

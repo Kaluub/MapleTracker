@@ -7,8 +7,11 @@ import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.data.StationResult;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class WeatherAPI {
     Parser parser;
@@ -103,6 +106,29 @@ public class WeatherAPI {
         stationResult.low = Double.parseDouble(low);
         stationResult.stationID = stationID;
         stationResult.provinceCode = provinceCode;
+
+        NodeList forecastGroup = doc
+                .getFirstChild()
+                .getChildNodes()
+                .item(13)
+                .getChildNodes();
+
+        int n = 11;
+        while (n < 23) {
+            Node temperatureNode = forecastGroup
+                    .item(n)
+                    .getChildNodes()
+                    .item(9)
+                    .getChildNodes()
+                    .item(3);
+            String forecastType = temperatureNode.getAttributes().getNamedItem("class").getNodeValue();
+            int forecastValue = Integer.parseInt(temperatureNode.getFirstChild().getNodeValue());
+            if (Objects.equals(forecastType, "high"))
+                stationResult.forecastHighs.add(forecastValue);
+            if (Objects.equals(forecastType, "low"))
+                stationResult.forecastLows.add(forecastValue);
+            n += 2;
+        }
 
         if (Config.useFakeTemperature) {
             // Use fake data to simulate prime tapping conditions.
