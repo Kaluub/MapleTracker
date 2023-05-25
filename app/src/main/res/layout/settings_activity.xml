@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="30dp"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.SwitchCompat
@@ -25,10 +26,63 @@
         android:layout_marginStart="30dp"
         android:text="@string/use_debug_mode" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:text="Test"
-        app:cornerRadius="80dp"/>
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/farm_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="1" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/farm_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="2"
+            android:translationX="0dp"
+            android:translationY="0dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/farm_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="3"
+            android:translationX="0dp"
+            android:translationY="0dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/farm_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="4" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/farm_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="5"
+            android:translationX="0dp"
+            android:translationY="0dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/farm_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="6"
+            android:translationX="0dp"
+            android:translationY="0dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </LinearLayout>
