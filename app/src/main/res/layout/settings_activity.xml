@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
     android:layout_height="300dp"
     android:orientation="vertical">
@@ -23,4 +24,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="@string/use_debug_mode" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/new_tree_button"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="104dp"
+        android:text="1"
+        android:textColor="?attr/colorOnPrimary"
+        app:cornerRadius="48dp"
+        app:backgroundTint="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </LinearLayout>

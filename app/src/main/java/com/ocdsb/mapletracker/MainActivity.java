@@ -21,6 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.ocdsb.mapletracker.databinding.ActivityMainBinding;
 
 import org.osmdroid.config.Configuration;
+import org.osmdroid.library.BuildConfig;
 
 public class MainActivity extends AppCompatActivity {
     @Override
