@@ -11,7 +11,7 @@ public class StationResult {
     public double low;
     public String stationID;
     public String provinceCode;
-    public ArrayList<Integer> forecastHighs;
-    public ArrayList<Integer> forecastLows;
+    public ArrayList<Double> forecastHighs = new ArrayList<>();
+    public ArrayList<Double> forecastLows = new ArrayList<>();
 }
 

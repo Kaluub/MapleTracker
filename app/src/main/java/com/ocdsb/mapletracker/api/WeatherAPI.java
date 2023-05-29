@@ -122,7 +122,7 @@ public class WeatherAPI {
                     .getChildNodes()
                     .item(3);
             String forecastType = temperatureNode.getAttributes().getNamedItem("class").getNodeValue();
-            int forecastValue = Integer.parseInt(temperatureNode.getFirstChild().getNodeValue());
+            double forecastValue = Double.parseDouble(temperatureNode.getFirstChild().getNodeValue());
             if (Objects.equals(forecastType, "high"))
                 stationResult.forecastHighs.add(forecastValue);
             if (Objects.equals(forecastType, "low"))
