@@ -45,4 +45,8 @@ public class FileManager {
             System.out.println("IO exception while WRITING file");
         }
     }
+    public void deleteFile(Context context, String fileName){
+        context.deleteFile(fileName);
+        System.out.println("The file " + fileName + " was deleted!");
+    }
 }

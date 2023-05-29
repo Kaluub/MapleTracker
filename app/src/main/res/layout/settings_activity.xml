@@ -25,6 +25,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="@string/use_debug_mode" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Select a farm:" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

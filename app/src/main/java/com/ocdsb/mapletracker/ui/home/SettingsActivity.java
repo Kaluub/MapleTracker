@@ -1,9 +1,12 @@
 package com.ocdsb.mapletracker.ui.home;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import com.ocdsb.mapletracker.Config;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SwitchCompat;
@@ -52,11 +55,21 @@ public class SettingsActivity extends AppCompatActivity {
             Config.fileName ="pins";
             Config.saveConfig(this);
         });
+        farm1.setOnLongClickListener(view -> {
+            System.out.println("Farm one was long pressed");
+            showAlert("pins");
+            return true;
+        });
 
         AppCompatButton farm2 = findViewById(R.id.farm_2);
         farm2.setOnClickListener(view -> {
             Config.fileName ="pins2";
             Config.saveConfig(this);
+        });
+        farm2.setOnLongClickListener(view -> {
+            System.out.println("Farm one was long pressed");
+            showAlert("pins2");
+            return true;
         });
 
         AppCompatButton farm3 = findViewById(R.id.farm_3);
@@ -64,11 +77,21 @@ public class SettingsActivity extends AppCompatActivity {
             Config.fileName ="pins3";
             Config.saveConfig(this);
         });
+        farm3.setOnLongClickListener(view -> {
+            System.out.println("Farm one was long pressed");
+            showAlert("pins3");
+            return true;
+        });
 
         AppCompatButton farm4 = findViewById(R.id.farm_4);
         farm4.setOnClickListener(view -> {
             Config.fileName ="pins4";
             Config.saveConfig(this);
+        });
+        farm4.setOnLongClickListener(view -> {
+            System.out.println("Farm one was long pressed");
+            showAlert("pins4");
+            return true;
         });
 
         AppCompatButton farm5 = findViewById(R.id.farm_5);
@@ -76,14 +99,34 @@ public class SettingsActivity extends AppCompatActivity {
             Config.fileName ="pins5";
             Config.saveConfig(this);
         });
+        farm5.setOnLongClickListener(view -> {
+            System.out.println("Farm one was long pressed");
+            showAlert("pins5");
+            return true;
+        });
 
         AppCompatButton farm6 = findViewById(R.id.farm_6);
         farm6.setOnClickListener(view -> {
             Config.fileName ="pins6";
             Config.saveConfig(this);
         });
+        farm6.setOnLongClickListener(view -> {
+            System.out.println("Farm one was long pressed");
+            showAlert("pins6");
+            return true;
+        });
 
-
+    }
+    public void showAlert(String fileName){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Alert!");
+        alert.setMessage("Are you sure you want to delete this farm?");
+        alert.setPositiveButton("Yes", (dialogInterface, i) -> {
+            Config.fileManager.deleteFile(SettingsActivity.this,fileName);
+            dialogInterface.dismiss();
+        });
+        alert.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
+        alert.show();
     }
 
 }
