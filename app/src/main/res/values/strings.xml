@@ -74,4 +74,11 @@
     <string name="tree_saved">Saved your new tree.</string>
     <string name="none_selected">You haven\'t selected a pin yet!</string>
     <string name="changes_saved">Changes saved.</string>
+    <string name="credits">Credits</string>
+    <string name="credits_text">
+        Developers:\n
+        Zachary Backmeier\n
+        Kaleb MacArthur\n
+        Data Source: Environment and Climate Change Canada
+    </string>
 </resources>

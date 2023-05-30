@@ -1,10 +1,7 @@
 package com.ocdsb.mapletracker.ui.home;
 
-import android.app.Activity;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import com.ocdsb.mapletracker.Config;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,15 +45,15 @@ public class SettingsActivity extends AppCompatActivity {
             Config.debugMode = checked;
             Config.saveConfig(this);
         });
-        //Set an onClickListener to select a farm when the user selects a farm
-        //Set an onLongClickListener to display a prompt confirming the user wishes to delete a farm
+
+        // Set an onClickListener to select a farm when the user selects a farm
+        // Set an onLongClickListener to display a prompt confirming the user wishes to delete a farm
         AppCompatButton farm1 = findViewById(R.id.farm_1);
         farm1.setOnClickListener(view -> {
             Config.fileName ="pins";
             Config.saveConfig(this);
         });
         farm1.setOnLongClickListener(view -> {
-            System.out.println("Farm one was long pressed");
             showAlert("pins");
             return true;
         });
@@ -67,7 +64,6 @@ public class SettingsActivity extends AppCompatActivity {
             Config.saveConfig(this);
         });
         farm2.setOnLongClickListener(view -> {
-            System.out.println("Farm one was long pressed");
             showAlert("pins2");
             return true;
         });
@@ -78,7 +74,6 @@ public class SettingsActivity extends AppCompatActivity {
             Config.saveConfig(this);
         });
         farm3.setOnLongClickListener(view -> {
-            System.out.println("Farm one was long pressed");
             showAlert("pins3");
             return true;
         });
@@ -89,7 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
             Config.saveConfig(this);
         });
         farm4.setOnLongClickListener(view -> {
-            System.out.println("Farm one was long pressed");
+            
             showAlert("pins4");
             return true;
         });
@@ -100,7 +95,7 @@ public class SettingsActivity extends AppCompatActivity {
             Config.saveConfig(this);
         });
         farm5.setOnLongClickListener(view -> {
-            System.out.println("Farm one was long pressed");
+            
             showAlert("pins5");
             return true;
         });
@@ -111,11 +106,13 @@ public class SettingsActivity extends AppCompatActivity {
             Config.saveConfig(this);
         });
         farm6.setOnLongClickListener(view -> {
-            System.out.println("Farm one was long pressed");
+            
             showAlert("pins6");
             return true;
         });
 
+        AppCompatButton credits = findViewById(R.id.credits);
+        credits.setOnClickListener(view -> startActivity(new Intent(this, CreditsActivity.class)));
     }
     public void showAlert(String fileName){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);

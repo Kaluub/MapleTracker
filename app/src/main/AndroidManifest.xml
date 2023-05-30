@@ -19,16 +19,20 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.management.EditTreeActivity"
-            android:label="@string/title_edit_tree"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/title_edit_tree" />
         <activity
             android:name=".ui.management.NewTreeActivity"
             android:exported="false"
-            android:label="@string/title_new_tree"/>
+            android:label="@string/title_new_tree" />
         <activity
             android:name=".ui.home.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.AppCompat.Dialog.Alert" />
+        <activity
+            android:name=".ui.home.CreditsActivity"
+            android:exported="false"
             android:theme="@style/Theme.AppCompat.Dialog.Alert" />
         <activity
             android:name=".MainActivity"

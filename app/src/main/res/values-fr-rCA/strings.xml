@@ -35,4 +35,11 @@
     <string name="tree_saved">Votre nouvel arbre est enregistré.</string>
     <string name="none_selected">Vous n\'avez pas encore selectionné une épingle !</string>
     <string name="changes_saved">Vos changements ont été enregistrés</string>
+    <string name="credits">Credits</string>
+    <string name="credits_text">
+        Developeurs:\n
+        Zachary Backmeier\n
+        Kaleb MacArthur\n
+        Source des donnees : Environment et Changement climatique Canada
+    </string>
 </resources>
