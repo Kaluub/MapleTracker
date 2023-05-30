@@ -95,7 +95,7 @@ public class NewTreeActivity extends AppCompatActivity {
             mapAPI.treePins.add(treePin);
             mapAPI.savePins();
             // Navigate back to main menu.
-            Snackbar saveSnackBar = Snackbar.make(getWindow().getDecorView().getRootView(), "Saved your new tree.", Snackbar.LENGTH_SHORT);
+            Snackbar saveSnackBar = Snackbar.make(getWindow().getDecorView().getRootView(), R.string.tree_saved, Snackbar.LENGTH_SHORT);
             saveSnackBar.show();
             finish();
         });

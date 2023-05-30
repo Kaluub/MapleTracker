@@ -32,7 +32,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:text="Select a farm:" />
+        android:text="@string/select_farm" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -44,13 +44,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
-            android:text="1" />
+            android:text="@string/_1" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/farm_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="2"
+            android:text="@string/_2"
             android:translationX="0dp"
             android:translationY="0dp"/>
 
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="3"
+            android:text="@string/_3"
             android:translationX="0dp"
             android:translationY="0dp"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -74,13 +74,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
-            android:text="4" />
+            android:text="@string/_4" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/farm_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="5"
+            android:text="@string/_5"
             android:translationX="0dp"
             android:translationY="0dp"/>
 
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="6"
+            android:text="@string/_6"
             android:translationX="0dp"
             android:translationY="0dp"/>
     </androidx.appcompat.widget.LinearLayoutCompat>

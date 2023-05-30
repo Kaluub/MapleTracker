@@ -60,4 +60,18 @@
     <string name="use_fahrenheit" translatable="false">Use fahrenheit</string>
     <string name="use_debug_mode" translatable="false">Use debug mode</string>
     <string name="debug" translatable="false">Debug</string>
+    <string name="select_farm">Select a farm:</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="confirm_delete">Are you sure you want to delete this farm?</string>
+    <string name="alert">Alert!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="tree_saved">Saved your new tree.</string>
+    <string name="none_selected">You haven\'t selected a pin yet!</string>
+    <string name="changes_saved">Changes saved.</string>
 </resources>

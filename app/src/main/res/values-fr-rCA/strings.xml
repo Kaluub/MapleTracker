@@ -27,4 +27,12 @@
         <item>Les arbres prend leur repos.</item>
         <item>Ne touche pas les arbres!</item>
     </string-array>
+    <string name="select_farm">Sélectionner une ferme:</string>
+    <string name="confirm_delete">Êtes-vous sûr de vouloir supprimer cette ferme?</string>
+    <string name="alert">Advertisment!</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="tree_saved">Votre nouvel arbre est enregistré.</string>
+    <string name="none_selected">Vous n\'avez pas encore selectionné une épingle !</string>
+    <string name="changes_saved">Vos changements ont été enregistrés</string>
 </resources>

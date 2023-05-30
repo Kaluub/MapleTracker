@@ -96,7 +96,7 @@ public class EditTreeActivity extends AppCompatActivity {
         MaterialButton button = findViewById(R.id.save_button);
         button.setOnClickListener(view -> {
             if (pin == null) {
-                Snackbar noSelected = Snackbar.make(getWindow().getDecorView().getRootView(), "You haven't selected a pin yet!", Snackbar.LENGTH_SHORT);
+                Snackbar noSelected = Snackbar.make(getWindow().getDecorView().getRootView(), R.string.none_selected, Snackbar.LENGTH_SHORT);
                 View noSelectedView = noSelected.getView();
                 noSelectedView.setTranslationY(-(convertDpToPixel(48, this)));
                 noSelected.show();
@@ -118,7 +118,7 @@ public class EditTreeActivity extends AppCompatActivity {
             pin.editsResettable += 1;
             // Save pins.
             mapAPI.savePins();
-            Snackbar saveSnackbar = Snackbar.make(getWindow().getDecorView().getRootView(),"Changes saved.", Snackbar.LENGTH_SHORT);
+            Snackbar saveSnackbar = Snackbar.make(getWindow().getDecorView().getRootView(),R.string.changes_saved, Snackbar.LENGTH_SHORT);
             View saveSnackBarView = saveSnackbar.getView();
             saveSnackBarView.setTranslationY(-(convertDpToPixel(48, this)));
             saveSnackbar.show();

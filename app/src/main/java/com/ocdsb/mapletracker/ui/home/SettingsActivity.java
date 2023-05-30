@@ -119,13 +119,13 @@ public class SettingsActivity extends AppCompatActivity {
     }
     public void showAlert(String fileName){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Alert!");
-        alert.setMessage("Are you sure you want to delete this farm?");
-        alert.setPositiveButton("Yes", (dialogInterface, i) -> {
+        alert.setTitle(R.string.alert);
+        alert.setMessage(R.string.confirm_delete);
+        alert.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
             Config.fileManager.deleteFile(SettingsActivity.this,fileName);
             dialogInterface.dismiss();
         });
-        alert.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
+        alert.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.dismiss());
         alert.show();
     }
 
