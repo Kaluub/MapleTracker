@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -95,8 +96,9 @@ public class NewTreeActivity extends AppCompatActivity {
             mapAPI.treePins.add(treePin);
             mapAPI.savePins();
             // Navigate back to main menu.
-            Snackbar saveSnackBar = Snackbar.make(getWindow().getDecorView().getRootView(), R.string.tree_saved, Snackbar.LENGTH_SHORT);
-            saveSnackBar.show();
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result", true);
+            setResult(NewTreeActivity.RESULT_OK,returnIntent);
             finish();
         });
     }
@@ -114,6 +116,7 @@ public class NewTreeActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp(){
+        setResult(NewTreeActivity.RESULT_CANCELED);
         finish();
         return true;
     }
