@@ -69,10 +69,13 @@ public class HomeFragment extends Fragment {
         final TextView temperatureText = binding.temperature;
         final TextView splashText = binding.splash;
         // Format the temperature string properly.
-        temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace), stationResults.temperature));
+        String units = getString(R.string.temperature_replace);
+        double temperature = stationResults.temperature;
         if (Config.useFahrenheit) {
-            temperatureText.setText(String.format(getResources().getString(R.string.temperature_replace_fahrenheit), 1.8*stationResults.temperature + 32));
+            units = getString(R.string.temperature_replace_fahrenheit);
+            temperature = 1.8*stationResults.temperature + 32;
         }
+        temperatureText.setText(String.format(units, temperature));
         if (stationResults.low < 0 && stationResults.high > 0) {
             // The weather is good for maple tapping. Use a good splash text.
             String[] splashGood = getResources().getStringArray(R.array.splash_good);
@@ -84,8 +87,28 @@ public class HomeFragment extends Fragment {
             int splashIndex = rng.nextInt(splashBad.length);
             splashText.setText(splashBad[splashIndex]);
         }
-        System.out.println(stationResults.forecastHighs);
-        System.out.println(stationResults.forecastLows);
+
+        double high1 = stationResults.forecastHighs.get(0);
+        double high2 = stationResults.forecastHighs.get(1);
+        double high3 = stationResults.forecastHighs.get(2);
+
+        double low1 = stationResults.forecastLows.get(0);
+        double low2 = stationResults.forecastLows.get(1);
+        double low3 = stationResults.forecastLows.get(2);
+
+        if (Config.useFahrenheit) {
+            high1 = 1.8 * high1 + 32;
+            high2 = 1.8 * high2 + 32;
+            high3 = 1.8 * high3 + 32;
+
+            low1 = 1.8 * low1 + 32;
+            low2 = 1.8 * low2 + 32;
+            low3 = 1.8 * low3 + 32;
+        }
+
+        binding.forecastOne.setText(String.format("%s\n%s", String.format(units, high1), String.format(units, low1)));
+        binding.forecastTwo.setText(String.format("%s\n%s", String.format(units, high2), String.format(units, low2)));
+        binding.forecastThree.setText(String.format("%s\n%s", String.format(units, high3), String.format(units, low3)));
     }
 
     public void updateWeatherElements() {
