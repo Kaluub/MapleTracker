@@ -18,8 +18,16 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            android.applicationVariants.all {variant ->
+                variant.outputs.each{
+                    output ->
+                        def name = "Maple_Tracker.apk"
+                        output.outputFileName = name
+                }
+            }
         }
     }
     compileOptions {
