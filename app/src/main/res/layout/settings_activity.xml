@@ -1,34 +1,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="280dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="30dp"
     android:layout_marginBottom="30dp"
+    android:layout_marginEnd="30dp"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/use_gallons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:text="@string/use_gallons" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/use_fahrenheit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:text="@string/use_fahrenheit" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/use_debug_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:text="@string/use_debug_mode" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -43,7 +41,6 @@
             android:id="@+id/farm_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
             android:text="@string/_1" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/farm_2"
@@ -73,7 +70,6 @@
             android:id="@+id/farm_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
             android:text="@string/_4" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/farm_5"
