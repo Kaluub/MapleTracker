@@ -86,21 +86,20 @@ public class ManagementFragment extends Fragment {
     }
     //Handles the result from the new tree or edit tree activity
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);{
-            //If the user was in the new tree activity ands saved their data
-            if (requestCode == LAUNCH_NEW_TREE_ACTIVITY && resultCode == NewTreeActivity.RESULT_OK){
-                Snackbar saveSnackBar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(), R.string.tree_saved, Snackbar.LENGTH_SHORT);
-                View saveSnackBarView = saveSnackBar.getView();
-                saveSnackBarView.setTranslationY(-(convertDpToPixel(48,requireContext())));
-                saveSnackBar.show();
-                //If the user was in the edit tree activity and successfully made changes
-            } else if (requestCode == LAUNCH_EDIT_TREE_ACTIVITY && resultCode == EditTreeActivity.RESULT_OK) {
-                Snackbar saveSnackbar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(),R.string.changes_saved, Snackbar.LENGTH_SHORT);
-                View saveSnackBarView = saveSnackbar.getView();
-                saveSnackBarView.setTranslationY(-(convertDpToPixel(48, requireContext())));
-                saveSnackbar.show();
-            }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //If the user was in the new tree activity ands saved their data
+        if (requestCode == LAUNCH_NEW_TREE_ACTIVITY && resultCode == NewTreeActivity.RESULT_OK){
+            Snackbar saveSnackBar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(), R.string.tree_saved, Snackbar.LENGTH_SHORT);
+            View saveSnackBarView = saveSnackBar.getView();
+            saveSnackBarView.setTranslationY(-(convertDpToPixel(48,requireContext())));
+            saveSnackBar.show();
+            //If the user was in the edit tree activity and successfully made changes
+        } else if (requestCode == LAUNCH_EDIT_TREE_ACTIVITY && resultCode == EditTreeActivity.RESULT_OK) {
+            Snackbar saveSnackbar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(),R.string.changes_saved, Snackbar.LENGTH_SHORT);
+            View saveSnackBarView = saveSnackbar.getView();
+            saveSnackBarView.setTranslationY(-(convertDpToPixel(48, requireContext())));
+            saveSnackbar.show();
         }
     }
     //Method converts display pixels to actual pixels
