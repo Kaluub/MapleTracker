@@ -25,17 +25,19 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ManagementFragment extends Fragment {
     int LAUNCH_NEW_TREE_ACTIVITY = 1;
+    int LAUNCH_EDIT_TREE_ACTIVITY = 2;
     private FragmentManagementBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Intent I = new Intent(requireContext(),NewTreeActivity.class);
+        Intent J = new Intent(requireContext(),EditTreeActivity.class);
         binding = FragmentManagementBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         //Gets a result from the activity when it is closed
         binding.newTreeButton.setOnClickListener(view -> startActivityForResult(I,LAUNCH_NEW_TREE_ACTIVITY));
-        binding.editTreeButton.setOnClickListener(view -> startActivity(new Intent(requireContext(), EditTreeActivity.class)));
+        binding.editTreeButton.setOnClickListener(view -> startActivityForResult(J, LAUNCH_EDIT_TREE_ACTIVITY));
 
         if (Config.debugMode) {
             Button debugButton = binding.debug;
@@ -86,11 +88,18 @@ public class ManagementFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);{
+            //If the user was in the new tree activity ands saved their data
             if (requestCode == LAUNCH_NEW_TREE_ACTIVITY && resultCode == NewTreeActivity.RESULT_OK){
                 Snackbar saveSnackBar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(), R.string.tree_saved, Snackbar.LENGTH_SHORT);
                 View saveSnackBarView = saveSnackBar.getView();
                 saveSnackBarView.setTranslationY(-(convertDpToPixel(48,requireContext())));
                 saveSnackBar.show();
+                //If the user was in the edit tree activity and successfully made changes
+            } else if (requestCode == LAUNCH_EDIT_TREE_ACTIVITY && resultCode == EditTreeActivity.RESULT_OK) {
+                Snackbar saveSnackbar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(),R.string.changes_saved, Snackbar.LENGTH_SHORT);
+                View saveSnackBarView = saveSnackbar.getView();
+                saveSnackBarView.setTranslationY(-(convertDpToPixel(48, requireContext())));
+                saveSnackbar.show();
             }
         }
     }

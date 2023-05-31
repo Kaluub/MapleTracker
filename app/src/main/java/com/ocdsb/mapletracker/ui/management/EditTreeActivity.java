@@ -5,6 +5,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
@@ -98,7 +99,7 @@ public class EditTreeActivity extends AppCompatActivity {
             if (pin == null) {
                 Snackbar noSelected = Snackbar.make(getWindow().getDecorView().getRootView(), R.string.none_selected, Snackbar.LENGTH_SHORT);
                 View noSelectedView = noSelected.getView();
-                noSelectedView.setTranslationY(-(convertDpToPixel(48, this)));
+                noSelectedView.setTranslationY(-(convertDpToPixel(0, this)));
                 noSelected.show();
                 return;
             }
@@ -118,10 +119,10 @@ public class EditTreeActivity extends AppCompatActivity {
             pin.editsResettable += 1;
             // Save pins.
             mapAPI.savePins();
-            Snackbar saveSnackbar = Snackbar.make(getWindow().getDecorView().getRootView(),R.string.changes_saved, Snackbar.LENGTH_SHORT);
-            View saveSnackBarView = saveSnackbar.getView();
-            saveSnackBarView.setTranslationY(-(convertDpToPixel(48, this)));
-            saveSnackbar.show();
+            //Return result to the management fragment
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result", true);
+            setResult(EditTreeActivity.RESULT_OK,returnIntent);
             finish();
         });
     }
@@ -132,6 +133,7 @@ public class EditTreeActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        setResult(EditTreeActivity.RESULT_CANCELED);
         finish();
         return true;
     }
