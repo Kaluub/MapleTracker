@@ -84,7 +84,6 @@ public class SettingsActivity extends AppCompatActivity {
             Config.saveConfig(this);
         });
         farm4.setOnLongClickListener(view -> {
-            
             showAlert("pins4");
             return true;
         });
@@ -95,7 +94,6 @@ public class SettingsActivity extends AppCompatActivity {
             Config.saveConfig(this);
         });
         farm5.setOnLongClickListener(view -> {
-            
             showAlert("pins5");
             return true;
         });
@@ -106,7 +104,6 @@ public class SettingsActivity extends AppCompatActivity {
             Config.saveConfig(this);
         });
         farm6.setOnLongClickListener(view -> {
-            
             showAlert("pins6");
             return true;
         });
@@ -114,12 +111,12 @@ public class SettingsActivity extends AppCompatActivity {
         AppCompatButton credits = findViewById(R.id.credits);
         credits.setOnClickListener(view -> startActivity(new Intent(this, CreditsActivity.class)));
     }
-    public void showAlert(String fileName){
+    public void showAlert(String fileName) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(R.string.alert);
         alert.setMessage(R.string.confirm_delete);
         alert.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-            Config.fileManager.deleteFile(SettingsActivity.this,fileName);
+            Config.fileManager.deleteFile(SettingsActivity.this, fileName);
             dialogInterface.dismiss();
         });
         alert.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.dismiss());

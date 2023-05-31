@@ -28,6 +28,7 @@ public class LocationAPI implements LocationListener {
                     continue;
                 }
                 if (bestLocation == null || lastKnownLocation.getAccuracy() < bestLocation.getAccuracy()) {
+                    // New better location accuracy.
                     latitude = lastKnownLocation.getLatitude();
                     longitude = lastKnownLocation.getLongitude();
                     bestLocation = lastKnownLocation;

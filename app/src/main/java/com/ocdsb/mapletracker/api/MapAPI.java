@@ -59,26 +59,6 @@ public class MapAPI implements MapEventsReceiver {
         }
     }
 
-    public void loadPins(Context context) {
-        // Used in situations where the map is not loaded.
-        treePins.clear();
-        String store = Config.fileManager.readFile(context, Config.fileName);
-        if (store == null) {
-            return;
-        }
-        for (String treeData : store.split("\n")) {
-            if (treeData.length() <= 0) {
-                continue;
-            }
-            try {
-                TreePin pin = TreePin.getFromFileLine(treeData);
-                treePins.add(pin);
-            } catch (Exception e) {
-                // The tree could not be read.
-            }
-        }
-    }
-
     public void savePins() {
         StringBuilder store = new StringBuilder();
         for (TreePin pin : this.treePins) {

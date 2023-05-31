@@ -76,9 +76,6 @@
     <string name="changes_saved">Changes saved.</string>
     <string name="credits">Credits</string>
     <string name="credits_text">
-        Developers:\n
-        Zachary Backmeier\n
-        Kaleb MacArthur\n
-        Data Source: Environment and Climate Change Canada
+        Developers:\n- Zachary Backmeier\n- Kaleb MacArthur\n\nData Source: Environment and Climate Change Canada
     </string>
 </resources>
