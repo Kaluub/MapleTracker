@@ -122,7 +122,7 @@ public class EditTreeActivity extends AppCompatActivity {
             //Return result to the management fragment
             Intent returnIntent = new Intent();
             returnIntent.putExtra("result", true);
-            setResult(EditTreeActivity.RESULT_OK,returnIntent);
+            setResult(EditTreeActivity.RESULT_FIRST_USER,returnIntent);
             finish();
         });
     }
