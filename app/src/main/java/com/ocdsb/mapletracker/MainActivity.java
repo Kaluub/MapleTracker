@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             String[] requestedPermissions = new String[2];
-            permissions[0] = Manifest.permission.ACCESS_FINE_LOCATION;
-            permissions[1] = Manifest.permission.ACCESS_COARSE_LOCATION;
+            requestedPermissions[0] = Manifest.permission.ACCESS_FINE_LOCATION;
+            requestedPermissions[1] = Manifest.permission.ACCESS_COARSE_LOCATION;
             ActivityCompat.requestPermissions(this, requestedPermissions, 1);
         } else {
             LocationManager service = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
