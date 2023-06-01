@@ -3,30 +3,45 @@
     <string name="title_home">Accueil</string>
     <string name="title_management">Modifications</string>
     <string name="title_statistics">Statistiques</string>
-    <string name="title_new_tree">Nouvelle arbre</string>
+    <string name="title_new_tree">Nouvel arbre</string>
     <string name="app_name">Trackeur d\'érable</string>
-    <string name="title_edit_tree">Modifier une arbre</string>
-    <string name="new_tree">Ajouter une nouvelle arbre</string>
+    <string name="title_edit_tree">Modifier un arbre</string>
+    <string name="new_tree">Ajouter un nouvel arbre</string>
     <string name="hello">Bonjour</string>
-    <string name="create_tree">Créer une nouvelle arbre</string>
-    <string name="edit_tree">Modifier une arbre</string>
+    <string name="create_tree">Créer un nouvel arbre</string>
+    <string name="edit_tree">Modifier un arbre</string>
     <string name="tree_name">Nom d\'arbre</string>
     <string name="edit_name">Modifier le nom</string>
     <string name="save">Sauvegarde</string>
-    <string name="syrup_collected">Syrop ramassé</string>
+    <string name="syrup_collected">Ajouter la sève collectée</string>
     <string name="new_name_default">Sans nom</string>
     <string name="litres">Litres</string>
+    <string name="gallons">Gallons</string>
+    <string name="statistics_tree_count">Nombre d\'arbres: %d</string>
+    <string name="statistics_total_sap">Total de sève collectée: %s</string>
+    <string name="statistics_average_sap">Moyenne de sève collectée par arbre: %s</string>
+    <string name="statistics_sap_yearly">Total de sève collectée cette année: %s</string>
+    <string name="statistics_average_sap_yearly">Moyenne de sève collectée par arbre cette année: %</string>
+    <string name="statistics_total_syrup">Total de syrop collectée: %s</string>
+    <string name="statistics_average_syrup">Moyenne de syrop collectée par arbre: %s</string>
+    <string name="statistics_syrup_yearly">Total de syrop collectée cette année: %s</string>
+    <string name="statistics_average_syrup_yearly">Moyenne de syrop collectée par arbre cette année: %s</string>
+    <string name="statistics_edits">Total d\\\'arbre modifier: %d</string>
+    <string name="statistics_edits_yearly">Total d\\\'arbre modifier cette année: %d</string>
     <string name="select_tree">Sélectionner un arbre</string>
     <string-array name="splash_good" tools:ignore="InconsistentArrays">
         <item>C\'est le propre saison!</item>
-        <item>L\'érable se coule!</item>
+        <item>Le sève se coule!</item>
         <item>Les arbres sont prètes!</item>
     </string-array>
     <string-array name="splash_bad" tools:ignore="InconsistentArrays">
-        <item>On n\'a pas d\'érable.</item>
+        <item>On n\'a pas de sève.</item>
         <item>Les arbres prend leur repos.</item>
         <item>Ne touche pas les arbres!</item>
     </string-array>
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="use_gallons">Utiliser des gallon</string>
+    <string name="use_fahrenheit">Utiliser les degrés Fahrenheit</string>
     <string name="select_farm">Sélectionner une ferme:</string>
     <string name="confirm_delete">Êtes-vous sûr de vouloir supprimer cette ferme?</string>
     <string name="alert">Advertisment!</string>
@@ -35,11 +50,11 @@
     <string name="tree_saved">Votre nouvel arbre est enregistré.</string>
     <string name="none_selected">Vous n\'avez pas encore selectionné une épingle !</string>
     <string name="changes_saved">Vos changements ont été enregistrés</string>
-    <string name="credits">Credits</string>
+    <string name="credits">Crédits</string>
     <string name="credits_text">
-        Developeurs:\n
+        Dévelopeurs:\n
         Zachary Backmeier\n
         Kaleb MacArthur\n
-        Source des donnees : Environment et Changement climatique Canada
+        Source des données : Environment et Changement climatique Canada
     </string>
 </resources>
