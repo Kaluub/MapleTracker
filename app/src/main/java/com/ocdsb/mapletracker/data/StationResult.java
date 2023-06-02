@@ -11,6 +11,7 @@ public class StationResult {
     public double low;
     public String stationID;
     public String provinceCode;
+    public String weatherIcon;
     public ArrayList<Double> forecastHighs = new ArrayList<>();
     public ArrayList<Double> forecastLows = new ArrayList<>();
 }

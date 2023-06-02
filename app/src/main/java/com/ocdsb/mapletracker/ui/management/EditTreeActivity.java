@@ -90,7 +90,7 @@ public class EditTreeActivity extends AppCompatActivity {
             treeName.setText(pin.name);
             GeoPoint p = new GeoPoint(pin.latitude, pin.longitude);
             map.getController().animateTo(p);
-            map.getController().setZoom(18.0);
+            map.getController().setZoom(19.0);
         });
 
         // Add save button.

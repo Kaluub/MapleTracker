@@ -1,12 +1,15 @@
 package com.ocdsb.mapletracker.ui.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +22,8 @@ import com.ocdsb.mapletracker.data.StationResult;
 import com.ocdsb.mapletracker.databinding.FragmentHomeBinding;
 import com.ocdsb.mapletracker.interfaces.StationResultCallback;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -86,6 +91,18 @@ public class HomeFragment extends Fragment {
             String[] splashBad = getResources().getStringArray(R.array.splash_bad);
             int splashIndex = rng.nextInt(splashBad.length);
             splashText.setText(splashBad[splashIndex]);
+        }
+
+        // Adding weather icon for the current conditions
+        try {
+            ImageView i = binding.weatherIcon;
+            String url = String.format("https://weather.gc.ca/weathericons/%s.gif", stationResults.weatherIcon);
+            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
+            i.setImageBitmap(bitmap);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error getting the current weather icon.");
         }
 
         double high1 = stationResults.forecastHighs.get(0);

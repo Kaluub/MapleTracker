@@ -29,7 +29,7 @@ public class MapAPI implements MapEventsReceiver {
         map.setMinZoomLevel(2.0);
         // Changing the default map location and zoom
         IMapController mapController = map.getController();
-        mapController.setZoom(10.0);
+        mapController.setZoom(19.0);
         mapController.setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
         loadPins();
         return map;

@@ -78,4 +78,5 @@
     <string name="credits_text">
         Developers:\n- Zachary Backmeier\n- Kaleb MacArthur\n\nData Source: Environment and Climate Change Canada
     </string>
+    <string name="weather_icon">Weather Icon</string>
 </resources>

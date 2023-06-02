@@ -57,4 +57,5 @@
         Kaleb MacArthur\n
         Source des données : Environment et Changement climatique Canada
     </string>
+    <string name="weather_icon">Icône météo</string>
 </resources>

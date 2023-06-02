@@ -100,10 +100,21 @@ public class WeatherAPI {
                 .item(0)
                 .getNodeValue();
 
+        String weatherIcon = doc
+                .getFirstChild()
+                .getChildNodes()
+                .item(11)
+                .getChildNodes()
+                .item(9)
+                .getChildNodes()
+                .item(0)
+                .getNodeValue();
+
         StationResult stationResult = new StationResult();
         stationResult.temperature = Double.parseDouble(temperature);
         stationResult.high = Double.parseDouble(high);
         stationResult.low = Double.parseDouble(low);
+        stationResult.weatherIcon = weatherIcon;
         stationResult.stationID = stationID;
         stationResult.provinceCode = provinceCode;
 
