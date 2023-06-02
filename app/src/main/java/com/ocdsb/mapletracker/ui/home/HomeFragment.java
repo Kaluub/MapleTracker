@@ -66,6 +66,14 @@ public class HomeFragment extends Fragment {
     public void updateFromStationResults(StationResult stationResults) {
         // Prevent crashing if user switches the fragment too early.
         if (binding == null) return;
+        // If permissions aren't enabled after fetch, don't use them!
+        if (Config.permissionsDisabled) {
+            binding.temperature.setText(R.string.permission_error);
+            binding.splash.setText("");
+            binding.forecastHeader.setText("");
+            return;
+        }
+
         final TextView temperatureText = binding.temperature;
         final TextView splashText = binding.splash;
         // Format the temperature string properly.
@@ -114,6 +122,12 @@ public class HomeFragment extends Fragment {
     public void updateWeatherElements() {
         binding.temperature.setText(R.string.temperature_default);
         binding.splash.setText(R.string.splash_default);
+        if (Config.permissionsDisabled) {
+            binding.temperature.setText(R.string.permission_error);
+            binding.splash.setText("");
+            binding.forecastHeader.setText("");
+            return;
+        }
         this.fetchStationResults(stationResults -> requireActivity().runOnUiThread(() -> updateFromStationResults(stationResults)));
     }
 

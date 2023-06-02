@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public boolean onSupportNavigateUp(){
-        Navigation.findNavController(this,R.id.nav_host_fragment_activity_main).navigate(R.id.navigation_management);
+        Navigation.findNavController(this, R.id.nav_host_fragment_activity_main).navigate(R.id.navigation_management);
         return true;
     }
 
@@ -77,10 +77,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            String[] requestedPermissions = new String[2];
-            requestedPermissions[0] = Manifest.permission.ACCESS_FINE_LOCATION;
-            requestedPermissions[1] = Manifest.permission.ACCESS_COARSE_LOCATION;
-            ActivityCompat.requestPermissions(this, requestedPermissions, 1);
+            Config.permissionsDisabled = true;
         } else {
             LocationManager service = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Config.locationAPI.updateLocationManager(service);

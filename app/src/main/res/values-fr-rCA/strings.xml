@@ -26,8 +26,8 @@
     <string name="statistics_average_syrup">Moyenne de syrop collectée par arbre: %s</string>
     <string name="statistics_syrup_yearly">Total de syrop collectée cette année: %s</string>
     <string name="statistics_average_syrup_yearly">Moyenne de syrop collectée par arbre cette année: %s</string>
-    <string name="statistics_edits">Total d\\\'arbre modifier: %d</string>
-    <string name="statistics_edits_yearly">Total d\\\'arbre modifier cette année: %d</string>
+    <string name="statistics_edits">Total d\'arbre modifier: %d</string>
+    <string name="statistics_edits_yearly">Total d\'arbre modifier cette année: %d</string>
     <string name="select_tree">Sélectionner un arbre</string>
     <string-array name="splash_good" tools:ignore="InconsistentArrays">
         <item>C\'est le propre saison!</item>
@@ -57,4 +57,6 @@
         Kaleb MacArthur\n
         Source des données : Environment et Changement climatique Canada
     </string>
+    <string name="permission_error">Pas d\'accès</string>
+    <string name="forecast">Prévisions:</string>
 </resources>

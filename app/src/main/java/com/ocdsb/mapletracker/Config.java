@@ -18,6 +18,7 @@ public class Config {
     public static String fileName = "pins";
     public static String configFileName = "settings";
     public static String fileSeparator = ",";
+    public static Boolean permissionsDisabled = false;
 
     // Class instances.
     public static LocationAPI locationAPI = new LocationAPI();

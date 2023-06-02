@@ -7,7 +7,6 @@ import android.os.Bundle;
 import com.ocdsb.mapletracker.R;
 
 public class CreditsActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
