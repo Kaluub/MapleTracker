@@ -80,15 +80,23 @@ public class HomeFragment extends Fragment {
         }
 
         final TextView temperatureText = binding.temperature;
+        final TextView HighText = binding.todayHigh;
+        final TextView LowText = binding.todayLow;
         final TextView splashText = binding.splash;
         // Format the temperature string properly.
         String units = getString(R.string.temperature_replace);
         double temperature = stationResults.temperature;
+        double high = stationResults.high;
+        double low = stationResults.low;
         if (Config.useFahrenheit) {
             units = getString(R.string.temperature_replace_fahrenheit);
-            temperature = 1.8*stationResults.temperature + 32;
+            temperature = 1.8 * temperature + 32;
+            high = 1.8 * high + 32;
+            low = 1.8 * high +32;
         }
         temperatureText.setText(String.format(units, temperature));
+        HighText.setText((String.format(units, high)));
+        LowText.setText((String.format(units,low)));
         if (stationResults.low < 0 && stationResults.high > 0) {
             // The weather is good for maple tapping. Use a good splash text.
             String[] splashGood = getResources().getStringArray(R.array.splash_good);

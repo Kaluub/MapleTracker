@@ -11,16 +11,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
         android:text="@string/temperature_default"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        android:translationY="30dp"
+        android:translationY="0dp"
         app:layout_constraintBottom_toTopOf="@id/date_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/today_high"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/today_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="-20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toTopOf="@id/temperature"
+        app:layout_constraintStart_toEndOf="@id/temperature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/today_low"/>
+
+    <TextView
+        android:id="@+id/today_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="-20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toBottomOf="@id/today_high"
+        app:layout_constraintStart_toEndOf="@id/temperature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/temperature"/>
 
     <ImageView
         android:id="@+id/weather_icon"
@@ -28,7 +50,8 @@
         android:layout_height="51dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/splash"
+        app:layout_constraintTop_toBottomOf="@id/temperature"
+        app:layout_constraintBottom_toTopOf="@id/date_text"
         android:contentDescription="@string/weather_icon" />
 
     <Button
@@ -75,7 +98,7 @@
         app:layout_constraintBottom_toTopOf="@id/splash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temperature" />
+        app:layout_constraintTop_toBottomOf="@id/weather_icon" />
 
     <ImageButton
         android:id="@+id/settings_button"
