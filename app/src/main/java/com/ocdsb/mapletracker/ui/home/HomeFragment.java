@@ -110,15 +110,16 @@ public class HomeFragment extends Fragment {
         }
 
         // Adding weather icon for the current conditions
-        try {
-            ImageView i = binding.weatherIcon;
-            String url = String.format("https://weather.gc.ca/weathericons/%s.gif", stationResults.weatherIcon);
-            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
-            i.setImageBitmap(bitmap);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error getting the current weather icon.");
+        if (stationResults.weatherIcon != null) {
+            try {
+                ImageView i = binding.weatherIcon;
+                String url = String.format("https://weather.gc.ca/weathericons/%s.gif", stationResults.weatherIcon);
+                Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
+                i.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Error getting the current weather icon.");
+            }
         }
 
         double high1 = stationResults.forecastHighs.get(0);
