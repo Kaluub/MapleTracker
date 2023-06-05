@@ -10,6 +10,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -49,6 +50,7 @@ public class WeatherAPI {
         String[] result = new String[2];
         result[0] = bestFeatureId;
         result[1] = bestProvinceCode;
+        System.out.println(Arrays.toString(result));
         return result;
     }
 
@@ -100,15 +102,21 @@ public class WeatherAPI {
                 .item(0)
                 .getNodeValue();
 
-        String weatherIcon = doc
-                .getFirstChild()
-                .getChildNodes()
-                .item(11)
-                .getChildNodes()
-                .item(9)
-                .getChildNodes()
-                .item(0)
-                .getNodeValue();
+        String weatherIcon = null;
+        try {
+            weatherIcon = doc
+                    .getFirstChild()
+                    .getChildNodes()
+                    .item(11)
+                    .getChildNodes()
+                    .item(9)
+                    .getChildNodes()
+                    .item(0)
+                    .getNodeValue();
+        }
+        catch (Exception e){
+            System.out.println("This weather station does not provide current conditions.");
+        }
 
         StationResult stationResult = new StationResult();
         stationResult.temperature = Double.parseDouble(temperature);
