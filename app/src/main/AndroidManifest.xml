@@ -33,15 +33,18 @@
         <activity
             android:name=".ui.home.CreditsActivity"
             android:exported="false"
+            android:label="@string/credits"
+            android:theme="@style/Theme.AppCompat.Dialog.Alert" />
+        <activity
+            android:name=".ui.home.HelpActivity"
+            android:exported="false"
+            android:label="@string/help"
             android:theme="@style/Theme.AppCompat.Dialog.Alert" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

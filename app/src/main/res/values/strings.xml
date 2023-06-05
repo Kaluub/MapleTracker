@@ -76,9 +76,13 @@
     <string name="changes_saved">Changes saved.</string>
     <string name="credits">Credits</string>
     <string name="credits_text">
-        Developers:\n- Zachary Backmeier\n- Kaleb MacArthur\n\nData Source: Environment and Climate Change Canada
+        Developers:\n- Zachary Backmeier\n- Kaleb MacArthur\n\nData Source: Environment and Climate Change Canada\nData Source: Open Street Map
     </string>
     <string name="permission_error">No permission!</string>
     <string name="forecast">Forecast:</string>
     <string name="weather_icon">Weather Icon</string>
+    <string name="help">Help</string>
+    <string name="help_text" translatable="false">
+        Using the Home menu:\nThe weather is displayed here.
+    </string>
 </resources>

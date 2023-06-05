@@ -60,4 +60,5 @@
     <string name="weather_icon">Icône météo</string>
     <string name="permission_error">Pas d\'accès</string>
     <string name="forecast">Prévisions:</string>
+    <string name="help">Aide</string>
 </resources>
