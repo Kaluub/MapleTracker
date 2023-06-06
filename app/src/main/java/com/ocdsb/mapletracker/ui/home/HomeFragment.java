@@ -148,6 +148,8 @@ public class HomeFragment extends Fragment {
     public void updateWeatherElements() {
         binding.temperature.setText(R.string.temperature_default);
         binding.splash.setText(R.string.splash_default);
+        binding.todayHigh.setText(getString(R.string.temperature_default));
+        binding.todayLow.setText(getString(R.string.temperature_default));
         if (Config.permissionsDisabled) {
             binding.temperature.setText(R.string.permission_error);
             binding.splash.setText("");
