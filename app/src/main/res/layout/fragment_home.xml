@@ -8,15 +8,15 @@
 
     <ImageButton
         android:id="@+id/settings_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="320dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="345dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="680dp"
         android:src="@drawable/ic_settings_black_32dp"
         android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toTopOf="@id/temperature"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toTopOf="@id/date_text"
         app:layout_constraintEnd_toStartOf="@id/today_high"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/today_high"
@@ -94,7 +94,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="0dp"
         android:text="@string/splash_default"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:translationY="-30dp"
@@ -135,7 +135,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/high_layout"
-        app:layout_constraintBottom_toTopOf="@id/low_layout"
+        app:layout_constraintBottom_toTopOf="@id/high_icon_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/forecast_header">
@@ -145,21 +145,66 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_margin="10dp" />
+            android:layout_marginHorizontal="10dp" />
 
         <TextView
             android:id="@+id/high_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_margin="10dp" />
+            android:layout_marginHorizontal="10dp" />
 
         <TextView
             android:id="@+id/high_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_margin="10dp" />
+            android:layout_marginHorizontal="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/high_icon_layout"
+        app:layout_constraintBottom_toTopOf="@id/low_layout"
+        app:layout_constraintEnd_toEndOf="@id/high_layout"
+        app:layout_constraintStart_toStartOf="@id/high_layout"
+        app:layout_constraintTop_toBottomOf="@id/high_layout">
+
+        <ImageView
+            android:id="@+id/high_icon_one"
+            android:layout_width="60dp"
+            android:layout_height="51dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperature"
+            app:layout_constraintBottom_toTopOf="@id/date_text"
+            android:contentDescription="@string/weather_icon" />
+
+        <ImageView
+            android:id="@+id/high_icon_two"
+            android:layout_width="60dp"
+            android:layout_height="51dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperature"
+            app:layout_constraintBottom_toTopOf="@id/date_text"
+            android:contentDescription="@string/weather_icon" />
+
+        <ImageView
+            android:id="@+id/high_icon_three"
+            android:layout_width="60dp"
+            android:layout_height="51dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperature"
+            app:layout_constraintBottom_toTopOf="@id/date_text"
+            android:contentDescription="@string/weather_icon" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -167,31 +212,77 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/low_layout"
-        android:layout_marginBottom="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@id/low_icon_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/high_layout">
+        app:layout_constraintTop_toBottomOf="@id/high_icon_layout">
 
         <TextView
             android:id="@+id/low_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_margin="10dp" />
+            android:layout_marginHorizontal="10dp" />
 
         <TextView
             android:id="@+id/low_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_margin="10dp" />
+            android:layout_marginHorizontal="10dp" />
 
         <TextView
             android:id="@+id/low_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_margin="10dp" />
+            android:layout_marginHorizontal="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:orientation="horizontal"
+        android:id="@+id/low_icon_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/low_layout">
+
+        <ImageView
+            android:id="@+id/low_icon_one"
+            android:layout_width="60dp"
+            android:layout_height="51dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperature"
+            app:layout_constraintBottom_toTopOf="@id/date_text"
+            android:contentDescription="@string/weather_icon" />
+
+        <ImageView
+            android:id="@+id/low_icon_two"
+            android:layout_width="60dp"
+            android:layout_height="51dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperature"
+            app:layout_constraintBottom_toTopOf="@id/date_text"
+            android:contentDescription="@string/weather_icon" />
+
+        <ImageView
+            android:id="@+id/low_icon_three"
+            android:layout_width="60dp"
+            android:layout_height="51dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperature"
+            app:layout_constraintBottom_toTopOf="@id/date_text"
+            android:contentDescription="@string/weather_icon" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -132,6 +132,17 @@ public class WeatherAPI {
                 .item(13)
                 .getChildNodes();
 
+        NodeList nodes = doc.getFirstChild().getChildNodes().item(15).getChildNodes().item(9).getChildNodes();
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Node node = nodes.item(i);
+            NodeList nodeList = node.getChildNodes();
+            System.out.println("(" + i + ") " + node.getNodeName() + ": " + node.getNodeValue());
+            for (int j = 0; j < nodeList.getLength(); j++) {
+                Node jNode = nodeList.item(j);
+                System.out.println("(" + i + ", " + j + ") " + jNode.getNodeName() + ": " + jNode.getNodeValue());
+            }
+        }
+
         int n = 11;
         while (n < 23) {
             Node temperatureNode = forecastGroup
@@ -144,13 +155,17 @@ public class WeatherAPI {
             double forecastValue = Double.parseDouble(temperatureNode.getFirstChild().getNodeValue());
             String forecastIcon = null;
             try {
+
                 forecastIcon = forecastGroup
                         .item(n)
                         .getChildNodes()
                         .item(7)
                         .getChildNodes()
                         .item(1)
+                        .getChildNodes()
+                        .item(0)
                         .getNodeValue();
+                System.out.println("This is what your looking for: " + forecastIcon);
 
             } catch (Exception e){
                 System.out.println("This weather station does not provide current conditions.");
