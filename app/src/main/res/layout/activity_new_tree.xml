@@ -10,15 +10,12 @@
 
     <org.osmdroid.views.MapView
         android:id="@+id/map"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
+        android:layout_width="360dp"
+        android:layout_height="300dp"
         android:layout_gravity="center"
+        android:paddingHorizontal="30dp"
         android:translationX="0dp"
-        android:translationY="150dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:translationY="150dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,11 +24,7 @@
         android:text="@string/tree_name"
         android:textSize="14sp"
         android:translationX= "25dp"
-        android:translationY="-315dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:translationY="-325dp" />
     <EditText
         android:id="@+id/addName"
         android:labelFor="@id/addName"
@@ -40,14 +33,10 @@
         android:layout_width="125dp"
         android:layout_height="48dp"
         android:layout_gravity="start"
-        android:translationY="-315dp"
+        android:translationY="-325dp"
         android:translationX="25dp"
         android:textSize="14sp"
         android:text="@string/new_name_default"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:autofillHints="treeIdentifier" />
 
     <TextView
@@ -57,11 +46,7 @@
         android:text="@string/syrup_collected"
         android:textSize="14sp"
         android:translationX= "25dp"
-        android:translationY="-290dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:translationY="-300dp" />
     <EditText
         android:autofillHints="sapCollected"
         android:id="@+id/add_collected"
@@ -70,14 +55,10 @@
         android:layout_width="125dp"
         android:layout_height="48dp"
         android:layout_gravity="start"
-        android:translationY="-290dp"
+        android:translationY="-300dp"
         android:translationX="25dp"
         android:textSize="14sp"
-        android:text="@string/default_number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/default_number" />
 
     <TextView
         android:id="@+id/units_text"
@@ -88,11 +69,7 @@
         android:textSize="14sp"
         android:translationX="150dp"
         android:layout_marginStart="0dp"
-        android:translationY="-320dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:translationY="-330dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_button2"
@@ -104,9 +81,6 @@
         app:cornerRadius="20dp"
         android:text="@string/save"
         android:textColor="?attr/colorOnPrimary"
-        app:backgroundTint="?attr/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:backgroundTint="?attr/colorPrimary" />
 
 </LinearLayout>

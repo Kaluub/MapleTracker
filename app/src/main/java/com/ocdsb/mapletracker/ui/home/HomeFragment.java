@@ -198,7 +198,7 @@ public class HomeFragment extends Fragment {
             low3 = 1.8 * low3 + 32;
         }
 
-        //Displaying the high and low temperature to the user
+        //Displaying the high and low temperature forecast to the user
         binding.highOne.setText(String.format("%s", String.format(units, high1)));
         binding.highTwo.setText(String.format("%s", String.format(units, high2)));
         binding.highThree.setText(String.format("%s", String.format(units, high3)));
