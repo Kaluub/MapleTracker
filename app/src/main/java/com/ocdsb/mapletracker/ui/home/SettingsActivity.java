@@ -50,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Set an onLongClickListener to display a prompt confirming the user wishes to delete a farm
         AppCompatButton farm1 = findViewById(R.id.farm_1);
         farm1.setOnClickListener(view -> {
-            Config.fileName ="pins";
+            Config.fileName = "pins";
             Config.saveConfig(this);
         });
         farm1.setOnLongClickListener(view -> {
@@ -60,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         AppCompatButton farm2 = findViewById(R.id.farm_2);
         farm2.setOnClickListener(view -> {
-            Config.fileName ="pins2";
+            Config.fileName = "pins2";
             Config.saveConfig(this);
         });
         farm2.setOnLongClickListener(view -> {
@@ -70,7 +70,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         AppCompatButton farm3 = findViewById(R.id.farm_3);
         farm3.setOnClickListener(view -> {
-            Config.fileName ="pins3";
+            Config.fileName = "pins3";
             Config.saveConfig(this);
         });
         farm3.setOnLongClickListener(view -> {
@@ -80,7 +80,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         AppCompatButton farm4 = findViewById(R.id.farm_4);
         farm4.setOnClickListener(view -> {
-            Config.fileName ="pins4";
+            Config.fileName = "pins4";
             Config.saveConfig(this);
         });
         farm4.setOnLongClickListener(view -> {
@@ -90,7 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         AppCompatButton farm5 = findViewById(R.id.farm_5);
         farm5.setOnClickListener(view -> {
-            Config.fileName ="pins5";
+            Config.fileName = "pins5";
             Config.saveConfig(this);
         });
         farm5.setOnLongClickListener(view -> {
@@ -100,7 +100,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         AppCompatButton farm6 = findViewById(R.id.farm_6);
         farm6.setOnClickListener(view -> {
-            Config.fileName ="pins6";
+            Config.fileName = "pins6";
             Config.saveConfig(this);
         });
         farm6.setOnLongClickListener(view -> {
@@ -110,6 +110,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         AppCompatButton credits = findViewById(R.id.credits);
         credits.setOnClickListener(view -> startActivity(new Intent(this, CreditsActivity.class)));
+
+        AppCompatButton help = findViewById(R.id.help);
+        help.setOnClickListener(view -> startActivity(new Intent(this, HelpActivity.class)));
     }
     public void showAlert(String fileName) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);

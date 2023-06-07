@@ -113,8 +113,7 @@ public class WeatherAPI {
                     .getChildNodes()
                     .item(0)
                     .getNodeValue();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("This weather station does not provide current conditions.");
         }
 

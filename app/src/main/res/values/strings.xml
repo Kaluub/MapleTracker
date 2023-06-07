@@ -87,4 +87,5 @@
     </string>
     <string name="delete">Delete</string>
     <string name="confirm_delete_tree">Are you sure you want to delete this tree?</string>
+    <string name="no_trees">You have no trees!</string>
 </resources>

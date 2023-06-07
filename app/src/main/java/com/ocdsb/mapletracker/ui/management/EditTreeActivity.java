@@ -141,10 +141,11 @@ public class EditTreeActivity extends AppCompatActivity {
 
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(R.string.alert);
-            alert.setMessage(R.string.confirm_delete);
+            alert.setMessage(R.string.confirm_delete_tree);
             alert.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                pin = null;
+                mapAPI.treePins.remove(pin);
                 mapAPI.savePins();
+                pin = null;
                 setResult(EditTreeActivity.RESULT_CANCELED);
                 finish();
                 dialogInterface.dismiss();
