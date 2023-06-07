@@ -13,6 +13,8 @@ public class StationResult {
     public String provinceCode;
     public String weatherIcon;
     public ArrayList<Double> forecastHighs = new ArrayList<>();
+    public ArrayList<String> iconHighs = new ArrayList<>();
     public ArrayList<Double> forecastLows = new ArrayList<>();
+    public ArrayList<String> iconLows = new ArrayList<>();
 }
 

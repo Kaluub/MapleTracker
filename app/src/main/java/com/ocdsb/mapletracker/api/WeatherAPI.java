@@ -142,10 +142,28 @@ public class WeatherAPI {
                     .item(3);
             String forecastType = temperatureNode.getAttributes().getNamedItem("class").getNodeValue();
             double forecastValue = Double.parseDouble(temperatureNode.getFirstChild().getNodeValue());
-            if (Objects.equals(forecastType, "high"))
+            String forecastIcon = null;
+            try {
+                forecastIcon = forecastGroup
+                        .item(n)
+                        .getChildNodes()
+                        .item(7)
+                        .getChildNodes()
+                        .item(1)
+                        .getNodeValue();
+
+            } catch (Exception e){
+                System.out.println("This weather station does not provide current conditions.");
+            }
+            if (Objects.equals(forecastType, "high")){
                 stationResult.forecastHighs.add(forecastValue);
-            if (Objects.equals(forecastType, "low"))
+                stationResult.iconHighs.add(forecastIcon);
+            }
+            if (Objects.equals(forecastType, "low")) {
                 stationResult.forecastLows.add(forecastValue);
+                stationResult.iconLows.add((forecastIcon));
+            }
+
             n += 2;
         }
 

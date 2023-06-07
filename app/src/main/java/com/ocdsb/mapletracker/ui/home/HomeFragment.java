@@ -122,10 +122,12 @@ public class HomeFragment extends Fragment {
             }
         }
 
+        //Create variables to store the high temperature for the next three days
         double high1 = stationResults.forecastHighs.get(0);
         double high2 = stationResults.forecastHighs.get(1);
         double high3 = stationResults.forecastHighs.get(2);
 
+        //Create variables to store the low temperature for the next three days
         double low1 = stationResults.forecastLows.get(0);
         double low2 = stationResults.forecastLows.get(1);
         double low3 = stationResults.forecastLows.get(2);
