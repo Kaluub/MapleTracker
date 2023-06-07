@@ -26,6 +26,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ManagementFragment extends Fragment {
     private FragmentManagementBinding binding;
+    private MapAPI mapAPI;
+    private ActivityResultLauncher<Intent> activityResultLauncher;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,9 +35,22 @@ public class ManagementFragment extends Fragment {
         Intent I = new Intent(requireContext(),NewTreeActivity.class);
         Intent J = new Intent(requireContext(),EditTreeActivity.class);
         // Object for getting the result from an activity
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+        activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
+                mapAPI.loadPins(requireContext());
+                if (mapAPI.treePins.size() == 0) {
+                    // The user has no trees, so they can't use the edit tree button!
+                    binding.editTreeButton.setOnClickListener(view -> {
+                        Snackbar snackbar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(), R.string.no_trees, Snackbar.LENGTH_SHORT);
+                        View snackbarView = snackbar.getView();
+                        snackbarView.setTranslationY(-(convertDpToPixel(48, requireContext())));
+                        snackbar.show();
+                    });
+                } else {
+                    binding.editTreeButton.setOnClickListener(view -> activityResultLauncher.launch(J));
+                }
+
                 // If the user was in the new tree activity.
                 if (result.getResultCode() == NewTreeActivity.RESULT_OK) {
                     Snackbar saveSnackBar = Snackbar.make(requireActivity().getWindow().getDecorView().getRootView(), R.string.tree_saved, Snackbar.LENGTH_SHORT);
@@ -53,9 +68,11 @@ public class ManagementFragment extends Fragment {
         binding = FragmentManagementBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //Gets a result from the activity when it is closed
+        // Gets a result from the activity when it is closed
         binding.newTreeButton.setOnClickListener(view -> activityResultLauncher.launch(I));
         binding.editTreeButton.setOnClickListener(view -> activityResultLauncher.launch(J));
+
+        mapAPI = new MapAPI();
 
         if (Config.debugMode) {
             Button debugButton = binding.debug;
@@ -76,7 +93,6 @@ public class ManagementFragment extends Fragment {
                 }
 
                 alert.setItems(names, (dialogInterface, j) -> {
-                    MapAPI mapAPI = new MapAPI();
                     ThreadLocalRandom random = ThreadLocalRandom.current();
                     int i = 0;
                     while (i < j*SKIP) {
@@ -102,6 +118,7 @@ public class ManagementFragment extends Fragment {
 
         return root;
     }
+
     //Method converts display pixels to actual pixels
     public static float convertDpToPixel(float dp, Context context){
         return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
