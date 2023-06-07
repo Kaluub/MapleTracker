@@ -62,4 +62,5 @@
     <string name="forecast">Prévisions:</string>
     <string name="help">Aide</string>
     <string name="delete">Supprimer</string>
+    <string name="confirm_delete_tree">Êtes-vous sûr de vouloir supprimer cet arbre?</string>
 </resources>

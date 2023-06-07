@@ -1,5 +1,6 @@
 package com.ocdsb.mapletracker.ui.management;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -21,6 +22,7 @@ import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
+import com.ocdsb.mapletracker.ui.home.SettingsActivity;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
@@ -125,12 +127,38 @@ public class EditTreeActivity extends AppCompatActivity {
             setResult(EditTreeActivity.RESULT_FIRST_USER,returnIntent);
             finish();
         });
+
+        // Add a button to allow the user to delete a tree
+        MaterialButton delete = findViewById(R.id.delete_button);
+        delete.setOnClickListener(view -> {
+            if (pin == null) {
+                Snackbar noSelected = Snackbar.make(getWindow().getDecorView().getRootView(), R.string.none_selected, Snackbar.LENGTH_SHORT);
+                View noSelectedView = noSelected.getView();
+                noSelectedView.setTranslationY(-(convertDpToPixel(0, this)));
+                noSelected.show();
+                return;
+            }
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle(R.string.alert);
+            alert.setMessage(R.string.confirm_delete);
+            alert.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                pin = null;
+                mapAPI.savePins();
+                setResult(EditTreeActivity.RESULT_CANCELED);
+                dialogInterface.dismiss();
+            });
+            alert.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.dismiss());
+            alert.show();
+        });
     }
 
+    // Convert a display pixel input into real pixels
     public float convertDpToPixel(float dp, Context context){
         return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
+    // Allow the user to use the back button to end the activity and return to the previous page
     @Override
     public boolean onSupportNavigateUp() {
         setResult(EditTreeActivity.RESULT_CANCELED);
