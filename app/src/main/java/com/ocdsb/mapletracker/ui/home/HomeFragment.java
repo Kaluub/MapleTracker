@@ -142,9 +142,13 @@ public class HomeFragment extends Fragment {
             low3 = 1.8 * low3 + 32;
         }
 
-        binding.forecastOne.setText(String.format("%s\n%s", String.format(units, high1), String.format(units, low1)));
-        binding.forecastTwo.setText(String.format("%s\n%s", String.format(units, high2), String.format(units, low2)));
-        binding.forecastThree.setText(String.format("%s\n%s", String.format(units, high3), String.format(units, low3)));
+        //Displaying the high and low temperature to the user
+        binding.highOne.setText(String.format("%s", String.format(units, high1)));
+        binding.highTwo.setText(String.format("%s", String.format(units, high2)));
+        binding.highThree.setText(String.format("%s", String.format(units, high3)));
+        binding.lowOne.setText(String.format("%s", String.format(units, low1)));
+        binding.lowTwo.setText(String.format("%s", String.format(units, low2)));
+        binding.lowThree.setText(String.format("%s", String.format(units, low3)));
     }
 
     public void updateWeatherElements() {

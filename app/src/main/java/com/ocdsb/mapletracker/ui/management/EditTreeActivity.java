@@ -146,6 +146,7 @@ public class EditTreeActivity extends AppCompatActivity {
                 pin = null;
                 mapAPI.savePins();
                 setResult(EditTreeActivity.RESULT_CANCELED);
+                finish();
                 dialogInterface.dismiss();
             });
             alert.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.dismiss());

@@ -6,12 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <ImageButton
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/ic_settings_black_32dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toTopOf="@id/temperature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/title_activity_settings" />
+
     <TextView
         android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
         android:text="@string/temperature_default"
@@ -20,7 +36,7 @@
         app:layout_constraintBottom_toTopOf="@id/date_text"
         app:layout_constraintEnd_toStartOf="@id/today_high"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/settings_button" />
 
     <TextView
         android:id="@+id/today_high"
@@ -56,29 +72,29 @@
         app:layout_constraintBottom_toTopOf="@id/date_text"
         android:contentDescription="@string/weather_icon" />
 
-    <Button
-        android:id="@+id/debug"
+    <TextView
+        android:id="@+id/date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/debug"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/splash"
+        android:layout_marginBottom="10dp"
+        android:text="@string/splash_default"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@id/splash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/weather_icon" />
 
     <TextView
         android:id="@+id/splash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="25dp"
         android:text="@string/splash_default"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:translationY="-30dp"
@@ -87,36 +103,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date_text" />
 
-    <TextView
-        android:id="@+id/date_text"
+    <Button
+        android:id="@+id/debug"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:text="@string/splash_default"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@id/splash"
+        android:layout_marginBottom="25dp"
+        android:text="@string/debug"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/forecast_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weather_icon" />
-
-    <ImageButton
-        android:id="@+id/settings_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="320dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="690dp"
-        android:src="@drawable/ic_settings_black_32dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/title_activity_settings" />
+        app:layout_constraintTop_toBottomOf="@id/splash" />
 
     <TextView
         android:id="@+id/forecast_header"
@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:text="@string/forecast"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toBottomOf="@id/forecast_layout"
+        app:layout_constraintBottom_toBottomOf="@id/high_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/debug" />
@@ -134,28 +134,61 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/forecast_layout"
+        android:id="@+id/high_layout"
+        app:layout_constraintBottom_toTopOf="@id/low_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/forecast_header">
+
+        <TextView
+            android:id="@+id/high_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:id="@+id/high_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:id="@+id/high_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_margin="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/low_layout"
+        android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/debug">
+        app:layout_constraintTop_toBottomOf="@id/high_layout">
 
         <TextView
-            android:id="@+id/forecast_one"
+            android:id="@+id/low_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_margin="10dp" />
 
         <TextView
-            android:id="@+id/forecast_two"
+            android:id="@+id/low_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_margin="10dp" />
 
         <TextView
-            android:id="@+id/forecast_three"
+            android:id="@+id/low_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
