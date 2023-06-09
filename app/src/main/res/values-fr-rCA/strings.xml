@@ -21,7 +21,7 @@
     <string name="statistics_total_sap">Total de sève collectée: %s</string>
     <string name="statistics_average_sap">Moyenne de sève collectée par arbre: %s</string>
     <string name="statistics_sap_yearly">Total de sève collectée cette année: %s</string>
-    <string name="statistics_average_sap_yearly">Moyenne de sève collectée par arbre cette année: %</string>
+    <string name="statistics_average_sap_yearly">Moyenne de sève collectée par arbre cette année: %s</string>
     <string name="statistics_total_syrup">Total de syrop collectée: %s</string>
     <string name="statistics_average_syrup">Moyenne de syrop collectée par arbre: %s</string>
     <string name="statistics_syrup_yearly">Total de syrop collectée cette année: %s</string>
