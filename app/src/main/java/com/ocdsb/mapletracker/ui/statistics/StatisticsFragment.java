@@ -52,6 +52,7 @@ public class StatisticsFragment extends Fragment {
             units = getString(R.string.unit_gallons);
         }
 
+        // Get the tree icon.
         Drawable treeIcon = AppCompatResources.getDrawable(requireContext(), R.drawable.baseline_park);
 
         for (TreePin tree: mapAPI.treePins) {
@@ -80,20 +81,35 @@ public class StatisticsFragment extends Fragment {
             map.getOverlays().add(marker);
         }
 
+        // Since Americans exist we need to account for their problems
         if (Config.useGallons) {
             totalSapCollected /= 3.785;
             resettableSapCollected /= 3.785;
         }
 
+        // Calculate averages.
+        double averageSap = totalSapCollected/treeCount;
+        double averageSapResettable = resettableSapCollected/treeCount;
+        double averageSyrup = totalSapCollected/treeCount/40;
+        double averageSyrupResettable = resettableSapCollected/treeCount/40;
+
+        // Fix the division by zero bug. Technically.
+        if (treeCount == 0) {
+            averageSap = 0;
+            averageSapResettable = 0;
+            averageSyrup = 0;
+            averageSyrupResettable = 0;
+        }
+
         statistics.add(String.format(resources.getString(R.string.statistics_tree_count), treeCount));
         statistics.add(String.format(resources.getString(R.string.statistics_total_sap), formatUnits(totalSapCollected)));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_sap), formatUnits(totalSapCollected/treeCount)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_sap), formatUnits(averageSap)));
         statistics.add(String.format(resources.getString(R.string.statistics_sap_yearly), formatUnits(resettableSapCollected)));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_sap_yearly), formatUnits(resettableSapCollected/treeCount)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_sap_yearly), formatUnits(averageSapResettable)));
         statistics.add(String.format(resources.getString(R.string.statistics_total_syrup), formatUnits(totalSapCollected/40)));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup), formatUnits(totalSapCollected/treeCount/40)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup), formatUnits(averageSyrup)));
         statistics.add(String.format(resources.getString(R.string.statistics_syrup_yearly), formatUnits(resettableSapCollected/40)));
-        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup_yearly), formatUnits(resettableSapCollected/treeCount/40)));
+        statistics.add(String.format(resources.getString(R.string.statistics_average_syrup_yearly), formatUnits(averageSyrupResettable)));
         statistics.add(String.format(resources.getString(R.string.statistics_edits), totalEdits));
         statistics.add(String.format(resources.getString(R.string.statistics_edits_yearly), resettableEdits));
 
