@@ -33,6 +33,7 @@ public class NewTreeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_tree);
 
+        // Adds a back button to the action bar
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -52,20 +53,16 @@ public class NewTreeActivity extends AppCompatActivity {
 
         Drawable treeIcon = AppCompatResources.getDrawable(this, R.drawable.baseline_park);
 
+        // Creates pins showing the existing trees
         for (TreePin pin : mapAPI.treePins) {
             Marker treeMarker = new Marker(map);
             treeMarker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
-            treeMarker.setOnMarkerClickListener((v, n) -> {
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setTitle(pin.name);
-                alert.setNegativeButton("Close", (d, i) -> d.dismiss());
-                alert.show();
-                return true;
-            });
+            treeMarker.setTitle(pin.name);
             treeMarker.setIcon(treeIcon);
             map.getOverlays().add(treeMarker);
         }
 
+        // Adds the trees to a map
         Marker marker = new Marker(map);
         marker.setPosition((GeoPoint) map.getMapCenter());
         marker.setInfoWindow(null);
