@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
             units = getString(R.string.temperature_replace_fahrenheit);
             temperature = 1.8 * temperature + 32;
             high = 1.8 * high + 32;
-            low = 1.8 * high +32;
+            low = 1.8 * low + 32;
         }
         temperatureText.setText(String.format(units, temperature));
         HighText.setText((String.format(units, high)));
