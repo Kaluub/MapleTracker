@@ -41,10 +41,15 @@
             android:label="@string/help"
             android:theme="@style/Theme.AppCompat.Dialog.Alert" />
         <activity
+            android:name=".ui.home.DebugActivity"
+            android:exported="false"
+            android:label="@string/debug" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

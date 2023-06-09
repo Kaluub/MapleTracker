@@ -2,11 +2,11 @@ package com.ocdsb.mapletracker.ui.management;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.appcompat.content.res.AppCompatResources;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
@@ -22,7 +22,6 @@ import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
 import com.ocdsb.mapletracker.data.TreePin;
-import com.ocdsb.mapletracker.ui.home.SettingsActivity;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
@@ -57,20 +56,21 @@ public class EditTreeActivity extends AppCompatActivity {
         map = mapAPI.buildMap(map);
         map.getController().setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
 
+        Drawable treeIcon = AppCompatResources.getDrawable(this, R.drawable.baseline_park);
         AutoCompleteTextView treeDropDown = findViewById(R.id.tree_dropDown);
-        //Create array list to store the name of all trees
+        // Create array list to store the name of all trees.
         ArrayList<CharSequence> names = new ArrayList<>();
-        // Add each tree to the map & add it's name to the list of tree names
+        // Add each tree to the map & add it's name to the list of tree names.
         int n = 0;
         for (TreePin tPin : mapAPI.treePins) {
             names.add(tPin.name);
             Marker treeMarker = new Marker(map);
             treeMarker.setPosition(new GeoPoint(tPin.latitude, tPin.longitude));
             treeMarker.setTitle(tPin.name);
+            treeMarker.setIcon(treeIcon);
             int index = n;
             treeMarker.setOnMarkerClickListener((marker, mapView) -> {
                 treeDropDown.setListSelection(index);
-                System.out.println(index);
                 EditText treeName = findViewById(R.id.editName);
                 treeName.setText(tPin.name);
                 map.getController().animateTo(treeMarker.getPosition());
@@ -121,10 +121,10 @@ public class EditTreeActivity extends AppCompatActivity {
             pin.editsResettable += 1;
             // Save pins.
             mapAPI.savePins();
-            //Return result to the management fragment
+            // Return result to the management fragment.
             Intent returnIntent = new Intent();
             returnIntent.putExtra("result", true);
-            setResult(EditTreeActivity.RESULT_FIRST_USER,returnIntent);
+            setResult(EditTreeActivity.RESULT_FIRST_USER, returnIntent);
             finish();
         });
 

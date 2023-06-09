@@ -1,15 +1,13 @@
 package com.ocdsb.mapletracker.ui.management;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.content.res.AppCompatResources;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Choreographer;
@@ -17,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.ocdsb.mapletracker.Config;
 import com.ocdsb.mapletracker.R;
 import com.ocdsb.mapletracker.api.MapAPI;
@@ -27,9 +24,6 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class NewTreeActivity extends AppCompatActivity {
     private MapView map = null;
@@ -56,16 +50,26 @@ public class NewTreeActivity extends AppCompatActivity {
         map = findViewById(R.id.map);
         map = mapAPI.buildMap(map);
 
+        Drawable treeIcon = AppCompatResources.getDrawable(this, R.drawable.baseline_park);
+
         for (TreePin pin : mapAPI.treePins) {
             Marker treeMarker = new Marker(map);
             treeMarker.setPosition(new GeoPoint(pin.latitude, pin.longitude));
-            treeMarker.setTitle(pin.name);
+            treeMarker.setOnMarkerClickListener((v, n) -> {
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle(pin.name);
+                alert.setNegativeButton("Close", (d, i) -> d.dismiss());
+                alert.show();
+                return true;
+            });
+            treeMarker.setIcon(treeIcon);
             map.getOverlays().add(treeMarker);
         }
 
         Marker marker = new Marker(map);
         marker.setPosition((GeoPoint) map.getMapCenter());
         marker.setInfoWindow(null);
+        marker.setIcon(treeIcon);
         map.getOverlays().add(marker);
 
         // This works, but it might be smarter to instead render the pin externally.
@@ -98,7 +102,7 @@ public class NewTreeActivity extends AppCompatActivity {
             // Navigate back to main menu.
             Intent returnIntent = new Intent();
             returnIntent.putExtra("result", true);
-            setResult(NewTreeActivity.RESULT_OK,returnIntent);
+            setResult(NewTreeActivity.RESULT_OK, returnIntent);
             finish();
         });
     }

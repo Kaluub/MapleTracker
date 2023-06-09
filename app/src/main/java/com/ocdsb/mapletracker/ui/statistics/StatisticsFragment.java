@@ -1,6 +1,7 @@
 package com.ocdsb.mapletracker.ui.statistics;
 
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 
 import com.ocdsb.mapletracker.Config;
@@ -50,6 +52,8 @@ public class StatisticsFragment extends Fragment {
             units = getString(R.string.unit_gallons);
         }
 
+        Drawable treeIcon = AppCompatResources.getDrawable(requireContext(), R.drawable.baseline_park);
+
         for (TreePin tree: mapAPI.treePins) {
             totalSapCollected += tree.sapLitresCollectedTotal;
             resettableSapCollected += tree.sapLitresCollectedResettable;
@@ -71,6 +75,7 @@ public class StatisticsFragment extends Fragment {
                     formatUnits(displayTotalSap),
                     formatUnits(displayResettableSap)
             ));
+            marker.setIcon(treeIcon);
             marker.setPosition(new GeoPoint(tree.latitude, tree.longitude));
             map.getOverlays().add(marker);
         }
