@@ -23,6 +23,7 @@
         android:id="@+id/use_debug_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:text="@string/use_debug_mode" />
 
     <TextView
