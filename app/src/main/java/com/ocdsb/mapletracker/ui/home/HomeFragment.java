@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Random;
 
 public class HomeFragment extends Fragment {
@@ -111,15 +112,7 @@ public class HomeFragment extends Fragment {
 
         // Adding weather icon for the current conditions
         if (stationResults.weatherIcon != null) {
-            try {
-                ImageView i = binding.weatherIcon;
-                String url = String.format("https://weather.gc.ca/weathericons/%s.gif", stationResults.weatherIcon);
-                Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
-                i.setImageBitmap(bitmap);
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Error getting the current weather icon.");
-            }
+            updateWeatherIcon(R.id.weather_icon, stationResults.weatherIcon);
         }
 
         // Create variables to store the high temperature for the next three days
@@ -131,61 +124,26 @@ public class HomeFragment extends Fragment {
         String highIcon1 = stationResults.iconHighs.get(0);
         String highIcon2 = stationResults.iconHighs.get(1);
         String highIcon3 = stationResults.iconHighs.get(2);
-        System.out.println(highIcon1 + ", " + highIcon2 + ", " + highIcon3);
 
-        // Create variables to store the low temperature for the next three days
+        // Create variables to store the low temperature for the next three highs
         double low1 = stationResults.forecastLows.get(0);
         double low2 = stationResults.forecastLows.get(1);
         double low3 = stationResults.forecastLows.get(2);
 
-        // Create variables to store the icon codes for the next three nights
+        // Create variables to store the icon codes for the next three lows
         String lowIcon1 = stationResults.iconLows.get(0);
         String lowIcon2 = stationResults.iconLows.get(1);
         String lowIcon3 = stationResults.iconLows.get(2);
-        System.out.println(lowIcon1 + ", " + lowIcon2 + ", " + lowIcon3);
 
         // Display icons for the next three days & nights
         if (stationResults.weatherIcon != null) {
-            try {
+            updateWeatherIcon(R.id.high_icon_one, highIcon1);
+            updateWeatherIcon(R.id.high_icon_two, highIcon2);
+            updateWeatherIcon(R.id.high_icon_three, highIcon3);
 
-                ImageView h1 = binding.highIconOne;
-                String urlH1 = String.format("https://weather.gc.ca/weathericons/%s.gif", highIcon1);
-                Bitmap bitmapH1 = BitmapFactory.decodeStream((InputStream) new URL(urlH1).getContent());
-                h1.setImageBitmap(bitmapH1);
-
-
-                ImageView l1 = binding.lowIconOne;
-                String urlL1 = String.format("https://weather.gc.ca/weathericons/%s.gif", lowIcon1);
-                Bitmap bitmapL1 = BitmapFactory.decodeStream((InputStream) new URL(urlL1).getContent());
-                l1.setImageBitmap(bitmapL1);
-
-                ImageView h2 = binding.highIconTwo;
-                String urlH2 = String.format("https://weather.gc.ca/weathericons/%s.gif", highIcon2);
-                Bitmap bitmapH2 = BitmapFactory.decodeStream((InputStream) new URL(urlH2).getContent());
-                h2.setImageBitmap(bitmapH2);
-
-
-                ImageView l2 = binding.lowIconTwo;
-                String urlL2 = String.format("https://weather.gc.ca/weathericons/%s.gif", lowIcon2);
-                Bitmap bitmapL2 = BitmapFactory.decodeStream((InputStream) new URL(urlL2).getContent());
-                l2.setImageBitmap(bitmapL2);
-
-                ImageView h3 = binding.highIconThree;
-                String urlH3 = String.format("https://weather.gc.ca/weathericons/%s.gif", highIcon3);
-                Bitmap bitmapH3 = BitmapFactory.decodeStream((InputStream) new URL(urlH3).getContent());
-                h3.setImageBitmap(bitmapH3);
-
-
-                ImageView l3 = binding.lowIconThree;
-                String urlL3 = String.format("https://weather.gc.ca/weathericons/%s.gif", lowIcon3);
-                Bitmap bitmapL3 = BitmapFactory.decodeStream((InputStream) new URL(urlL3).getContent());
-                l3.setImageBitmap(bitmapL3);
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Error getting the current weather icon.");
-            }
+            updateWeatherIcon(R.id.low_icon_one, lowIcon1);
+            updateWeatherIcon(R.id.low_icon_two, lowIcon2);
+            updateWeatherIcon(R.id.low_icon_three, lowIcon3);
         }
 
         if (Config.useFahrenheit) {
@@ -230,6 +188,24 @@ public class HomeFragment extends Fragment {
             } catch (Exception e) {
                 System.out.println("Exception while fetching the weather.");
                 Log.e("ERROR", "Yikes!", e);
+            }
+        }).start();
+    }
+
+    private void updateWeatherIcon(int resId, String iconCode) {
+        new Thread(() -> {
+            try {
+                String url = String.format("https://weather.gc.ca/weathericons/%s.gif", iconCode);
+                Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
+                if (binding != null) {
+                    requireActivity().runOnUiThread(() -> {
+                        ImageView imageView = requireView().findViewById(resId);
+                        imageView.setImageBitmap(bitmap);
+                    });
+                }
+            } catch (Exception e) {
+                System.out.println("Exception while fetching a weather icon.");
+                Log.e("ERROR", "Result:", e);
             }
         }).start();
     }
