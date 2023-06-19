@@ -26,7 +26,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Random;
 
 public class HomeFragment extends Fragment {

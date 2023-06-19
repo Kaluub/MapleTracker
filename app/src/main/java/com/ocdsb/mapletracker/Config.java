@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.ocdsb.mapletracker.api.FileManager;
 import com.ocdsb.mapletracker.api.LocationAPI;
-import com.ocdsb.mapletracker.data.StationResult;
 import com.ocdsb.mapletracker.api.WeatherAPI;
+import com.ocdsb.mapletracker.data.StationResult;
 
 import java.util.Arrays;
 
