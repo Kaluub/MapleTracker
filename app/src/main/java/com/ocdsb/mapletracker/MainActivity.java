@@ -30,14 +30,16 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        // Load the app config.
         Config.loadConfig(getApplicationContext());
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        ActionBar actionBar= getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        // Create location API service manager.
         LocationManager service = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!enabled) {
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             Config.locationAPI.updateLocationManager(service);
         }
 
-        // Passing each menu ID as a set of Ids because each
+        // Passing each menu ID as a set of IDs because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_management, R.id.navigation_statistics)
@@ -66,14 +68,17 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
     }
+
     @Override
     public boolean onSupportNavigateUp(){
+        // Add support for going back through fragments.
         Navigation.findNavController(this, R.id.nav_host_fragment_activity_main).navigate(R.id.navigation_management);
         return true;
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // Handle receiving permissions from the user.
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

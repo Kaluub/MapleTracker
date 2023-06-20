@@ -19,11 +19,13 @@ public class MapAPI implements MapEventsReceiver {
     private MapView map = null;
     public ArrayList<TreePin> treePins = new ArrayList<>();
 
-    public MapView buildMap (MapView m){
+    public MapView buildMap (MapView m) {
+        // Apply global modifications to the map.
         map = m;
         map.setTileSource(TileSourceFactory.MAPNIK);
-        // Giving the user the ability to zoom the map
+        // Give the user the ability to zoom the map.
         map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
+        // Limit the map to the bounds of the planet.
         map.setScrollableAreaLimitLatitude(85, -85, 0);
         map.setMultiTouchControls(true);
         map.setMinZoomLevel(2.0);
@@ -31,6 +33,7 @@ public class MapAPI implements MapEventsReceiver {
         IMapController mapController = map.getController();
         mapController.setZoom(19.0);
         mapController.setCenter(new GeoPoint(Config.locationAPI.latitude, Config.locationAPI.longitude));
+        // This function fills in the "treePins" ArrayList but does not actually render the pins.
         loadPins();
         return map;
     }
@@ -41,6 +44,7 @@ public class MapAPI implements MapEventsReceiver {
     }
 
     public void loadPins() {
+        // Fill the "treePins" ArrayList with all of the pins in the selected farm.
         treePins.clear();
         String store = Config.fileManager.readFile(map.getContext(), Config.fileName);
         if (store == null) {
@@ -50,12 +54,8 @@ public class MapAPI implements MapEventsReceiver {
             if (treeData.length() <= 0) {
                 continue;
             }
-            try {
-                TreePin pin = TreePin.getFromFileLine(treeData);
-                treePins.add(pin);
-            } catch (Exception e) {
-                // The tree could not be read.
-            }
+            TreePin pin = TreePin.getFromFileLine(treeData);
+            treePins.add(pin);
         }
     }
 
@@ -70,16 +70,13 @@ public class MapAPI implements MapEventsReceiver {
             if (treeData.length() <= 0) {
                 continue;
             }
-            try {
-                TreePin pin = TreePin.getFromFileLine(treeData);
-                treePins.add(pin);
-            } catch (Exception e) {
-                // The tree could not be read.
-            }
+            TreePin pin = TreePin.getFromFileLine(treeData);
+            treePins.add(pin);
         }
     }
 
     public void savePins() {
+        // Convert local "treePins" object to the file format & save.
         StringBuilder store = new StringBuilder();
         for (TreePin pin : this.treePins) {
             store.append("\n").append(pin.saveToLine());
@@ -88,6 +85,7 @@ public class MapAPI implements MapEventsReceiver {
     }
 
     public void savePins(Context context) {
+        // For contexts without a map on screen.
         StringBuilder store = new StringBuilder();
         for (TreePin pin : this.treePins) {
             store.append("\n").append(pin.saveToLine());
@@ -98,6 +96,7 @@ public class MapAPI implements MapEventsReceiver {
 
     @Override
     public boolean longPressHelper(GeoPoint p) {
+        // Prevent default action.
         return true;
     }
 }

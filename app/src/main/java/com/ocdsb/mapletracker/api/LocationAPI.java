@@ -13,11 +13,13 @@ public class LocationAPI implements LocationListener {
     public double longitude;
 
     public LocationAPI() {
+        // Initialise the class.
         latitude = 0.0;
         longitude = 0.0;
     }
 
     public void updateLocationManager(LocationManager manager) {
+        // Update the weather from a location manager.
         List<String> providers = manager.getAllProviders();
         Location bestLocation = null;
         for (String provider : providers) {

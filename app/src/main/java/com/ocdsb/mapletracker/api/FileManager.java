@@ -34,6 +34,7 @@ public class FileManager {
         } catch (IOException e) {
             return null;
         }
+        // Return the contents.
         return contents;
     }
 
@@ -45,7 +46,9 @@ public class FileManager {
             System.out.println("IO exception while WRITING file");
         }
     }
-    public void deleteFile(Context context, String fileName){
+
+    public void deleteFile(Context context, String fileName) {
+        // Delete a file from the internal Android storage. Used when clearing all trees.
         context.deleteFile(fileName);
         System.out.println("The file " + fileName + " was deleted!");
     }

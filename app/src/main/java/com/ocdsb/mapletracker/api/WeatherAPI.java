@@ -102,6 +102,7 @@ public class WeatherAPI {
                 .item(0)
                 .getNodeValue();
 
+        // Try fetching the weather icon.
         String weatherIcon = null;
         try {
             weatherIcon = doc
@@ -117,6 +118,7 @@ public class WeatherAPI {
             System.out.println("This weather station does not provide current conditions.");
         }
 
+        // Extract results.
         StationResult stationResult = new StationResult();
         stationResult.temperature = Double.parseDouble(temperature);
         stationResult.high = Double.parseDouble(high);
