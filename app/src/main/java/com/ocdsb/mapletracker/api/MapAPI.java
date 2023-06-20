@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class MapAPI implements MapEventsReceiver {
     private MapView map = null;
-    public ArrayList<TreePin> treePins = new ArrayList<>();
+    public final ArrayList<TreePin> treePins = new ArrayList<>();
 
     public MapView buildMap (MapView m) {
         // Apply global modifications to the map.

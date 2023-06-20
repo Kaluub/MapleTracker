@@ -10,8 +10,8 @@ android {
         applicationId "com.ocdsb.mapletracker"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,11 +56,11 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     // Google GSON for the JsonParser.
     implementation 'com.google.code.gson:gson:2.10.1'
-    //Add OSM dependencies
+    // Add OSM dependencies
     implementation 'org.osmdroid:osmdroid-android:6.1.8'
 
     constraints {
-        //fixes error by only allowing latest version of kotlin
+        // Fixes error by only allowing latest version of kotlin
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
             because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
         }

@@ -129,7 +129,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/debug" />
 
-
+    <!-- Create nested linear layout to allow for high temperatures to appear beside each other horizontally-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -162,6 +162,7 @@
             android:layout_marginHorizontal="10dp" />
     </LinearLayout>
 
+    <!-- Create nested linear layout to allow for weather icons to appear beside each other horizontally-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -207,6 +208,7 @@
 
     </LinearLayout>
 
+    <!-- Create nested linear layout to allow for low temperatures to appear beside each other horizontally-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -240,6 +242,7 @@
             android:layout_marginHorizontal="10dp" />
     </LinearLayout>
 
+    <!-- Create nested linear layout to allow for weather icons to appear beside each other horizontally-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
