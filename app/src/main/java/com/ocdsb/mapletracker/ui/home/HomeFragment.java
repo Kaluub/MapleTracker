@@ -45,6 +45,7 @@ public class HomeFragment extends Fragment {
         binding.settingsButton.setOnClickListener(view -> startActivity(new Intent(requireContext(), SettingsActivity.class)));
 
         if (Config.debugMode) {
+            // Adds debug options if debug mode is enabled
             final Button debugButton = binding.debug;
             debugButton.setVisibility(View.VISIBLE);
             debugButton.setOnClickListener(view -> {
@@ -79,6 +80,7 @@ public class HomeFragment extends Fragment {
             return;
         }
 
+        // Initialises text views to display information to the users
         final TextView temperatureText = binding.temperature;
         final TextView HighText = binding.todayHigh;
         final TextView LowText = binding.todayLow;
@@ -146,6 +148,7 @@ public class HomeFragment extends Fragment {
         }
 
         if (Config.useFahrenheit) {
+            // Converts temperatures from Celsius to Fahrenheit if the user has enable use Fahrenheit
             high1 = 1.8 * high1 + 32;
             high2 = 1.8 * high2 + 32;
             high3 = 1.8 * high3 + 32;
